@@ -1,13 +1,14 @@
 'use client'
 
 import { addTurn } from '@/actions/add-turn';
+import { Debate } from '@prisma/client';
 import { useFormState } from 'react-dom'
 
 const initialState = {
   message: '',
 }
 
-export default function NewTurn({ debateId }: { debateId: string }) {
+export default function NewTurn({ debate }: { debate: Debate }) {
   const [state, formAction] = useFormState(addTurn, initialState)
 
   return (
@@ -24,7 +25,7 @@ export default function NewTurn({ debateId }: { debateId: string }) {
         aria-hidden
         required
         disabled
-        value={debateId} />
+        value={debate.id} />
       <button type="submit">Finish Your Turn</button>
     </form>
   )
