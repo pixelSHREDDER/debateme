@@ -1,17 +1,21 @@
-'use client'
+import { TDebate, TTurn } from '@/lib/prisma-types'
+import React, { Suspense } from "react"
+import Turn from "./Turn"
 
-import { Debate, Turn } from "@prisma/client"
-//import React, { Suspense } from "react"
-
-export default function Turns(props: {debate: Debate}) {
-  /*const turns = React.useMemo(() => {
-    !!props.debate.turn ? JSON.parse(props.debate.turn) : []
-  }, [props.debate])
+export default function Turns({ debate }: {debate: TDebate}) {
+  const turns = React.useMemo(() => debate.turn?.length ? debate.turn : [], [debate])
 
   return (
-    <Suspense>
-      {turns.map((turn: Turn) => <li>{turn.body}</li>)}
+    <Suspense fallback="Now Loading....">
+      <ul>
+        {turns.map((turn: TTurn) => (
+          <Turn key={turn.id}>
+            {turn.body &&
+              <div dangerouslySetInnerHTML={{__html: turn.body}}/>
+            }
+          </Turn>
+        ))}
+      </ul>
     </Suspense>
-  )*/
-  return null
+  )
 }

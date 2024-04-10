@@ -16,8 +16,8 @@ model Debate {
 }
 
 model Turn {
-  id       Int      @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   body     Json?
   debateId Int
-  debate   Debate   @relation(fields: [debateId], references: [id])
+  debate   Debate @relation(fields: [debateId], references: [id])
 }

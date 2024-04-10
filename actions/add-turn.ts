@@ -11,16 +11,15 @@ export async function addTurn(
   formData: FormData,
 ) {
   const schema = z.object({
-    body: z.string().min(1),
-    debateId: z.number().min(1)
+    body: z.number().min(1),
+    debateId: z.string().min(1)
   })
   const parse = schema.safeParse({
     body: formData.get('body'),
     debateId: formData.get('debateId'),
   })
-
   if (!parse.success) {
-    return { message: 'Failed to create turn' }
+    return { message: `Please fix the following errors: ${parse.error.errors.map(error => error.message)}`}
   }
 
   const data = parse.data
@@ -30,13 +29,13 @@ export async function addTurn(
     await prisma.turn.create({
       data: {
         body: bodyJSON,
-        debateId: data.debateId
+        debateId: parseInt(data.debateId)
       },
     })
 
     revalidatePath('/')
     return { message: `Created turn for debate ${data.debateId}` }
-  } catch (e) {
-    return { message: 'Failed to create turn' }
+  } catch (e: any) {
+    return { message: `Failed to create turn: ${e.message}` }
   }
 }

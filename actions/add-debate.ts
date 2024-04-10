@@ -1,6 +1,7 @@
 'use server'
 
 import prisma from '@/lib/prisma'
+import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
@@ -18,7 +19,7 @@ export async function addDebate(
   })
 
   if (!parse.success) {
-    return { message: 'Failed to create debate' }
+    return { message: `Please fix the following errors: ${parse.error.errors.map(error => error.message)}`}
   }
 
   const data = parse.data
@@ -31,8 +32,10 @@ export async function addDebate(
     })
 
     revalidatePath('/')
-    return { message: `Added debate ${data.topic}` }
-  } catch (e) {
-    return { message: 'Failed to create debate' }
+  } catch (e: any) {
+    return { message: `Failed to create debate: ${e.message}` }
   }
+
+  // redirect(`/debate/${data.id}`)
+  redirect(`/debate/1`)
 }
