@@ -11,11 +11,11 @@ export async function addTurn(
   formData: FormData,
 ) {
   const schema = z.object({
-    body: z.number().min(1),
+    body: z.string().min(1),
     debateId: z.string().min(1)
   })
   const parse = schema.safeParse({
-    body: formData.get('body'),
+    body: formData.get('bodyString'),
     debateId: formData.get('debateId'),
   })
   if (!parse.success) {
@@ -25,7 +25,7 @@ export async function addTurn(
   const data = parse.data
 
   try {
-    const bodyJSON = JSON.stringify(data.body)
+    const bodyJSON = data.body
     await prisma.turn.create({
       data: {
         body: bodyJSON,
