@@ -1,8 +1,7 @@
-import NewTurn from '@/components/Turn/NewTurn'
 import { notFound } from 'next/navigation'
 import prisma from '@/lib/prisma'
 import { TDebate } from '@/lib/prisma-types'
-import Turns from '@/components/Turn/Turns'
+import Debate from '@/components/Debate/Debate'
 
 interface IDebate {
   params: { slug: string }
@@ -23,14 +22,8 @@ async function getDebate(id: number) {
   }
 }
 
-export default async function Debate({ params }: IDebate) {
+export default async function DebatePage({ params }: IDebate) {
   const debate: TDebate = await getDebate(parseInt(params.slug))
 
-  return (
-    <section>
-      <h1>{debate.topic}</h1>
-      <Turns debate={debate} />
-      <NewTurn debate={debate} />
-    </section>
-  )
+  return <Debate debate={debate} />
 }
