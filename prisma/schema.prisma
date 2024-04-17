@@ -19,6 +19,6 @@ model Turn {
   id        Int      @id @default(autoincrement())
   body      Json?
   debateId  Int
-  debate    Debate   @relation(fields: [debateId], references: [id])
   createdAt DateTime @default(now()) @db.Timestamp(6)
+  debate    Debate   @relation(fields: [debateId], references: [id])
 }
