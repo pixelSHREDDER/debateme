@@ -12,10 +12,12 @@ export async function addDebate(
   formData: FormData,
 ) {
   const schema = z.object({
-    topic: z.string().min(1)
+    topic: z.string().min(1),
+    creatorId: z.number().min(1)
   })
   const parse = schema.safeParse({
     topic: formData.get('topic'),
+    creatorId: formData.get('creatorId'),
   })
 
   if (!parse.success) {
@@ -28,6 +30,11 @@ export async function addDebate(
     await prisma.debate.create({
       data: {
         topic: data.topic,
+        creator: {
+          connect: {
+            id: data.creatorId,
+          },
+        }
       },
     })
 

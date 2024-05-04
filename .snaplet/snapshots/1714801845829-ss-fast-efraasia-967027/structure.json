@@ -1,0 +1,686 @@
+{
+  "schemas": [
+    "public"
+  ],
+  "tables": [
+    {
+      "id": "public.Debate",
+      "name": "Debate",
+      "schema": "public",
+      "partitioned": false,
+      "rows": null,
+      "bytes": 8192,
+      "columns": [
+        {
+          "id": "public.Debate.id",
+          "name": "id",
+          "type": "int4",
+          "typeId": "pg_catalog.int4",
+          "table": "Debate",
+          "schema": "public",
+          "nullable": false,
+          "default": "nextval('\"Debate_id_seq\"'::regclass)",
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "N",
+          "constraints": [
+            "p"
+          ]
+        },
+        {
+          "id": "public.Debate.topic",
+          "name": "topic",
+          "type": "varchar",
+          "typeId": "pg_catalog.varchar",
+          "table": "Debate",
+          "schema": "public",
+          "nullable": false,
+          "default": null,
+          "generated": "NEVER",
+          "maxLength": 255,
+          "identity": null,
+          "typeCategory": "S",
+          "constraints": []
+        },
+        {
+          "id": "public.Debate.createdAt",
+          "name": "createdAt",
+          "type": "timestamp",
+          "typeId": "pg_catalog.timestamp",
+          "table": "Debate",
+          "schema": "public",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "D",
+          "constraints": []
+        },
+        {
+          "id": "public.Debate.creatorId",
+          "name": "creatorId",
+          "type": "int4",
+          "typeId": "pg_catalog.int4",
+          "table": "Debate",
+          "schema": "public",
+          "nullable": false,
+          "default": null,
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "N",
+          "constraints": [
+            "f"
+          ]
+        },
+        {
+          "id": "public.Debate.opponentId",
+          "name": "opponentId",
+          "type": "int4",
+          "typeId": "pg_catalog.int4",
+          "table": "Debate",
+          "schema": "public",
+          "nullable": true,
+          "default": null,
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "N",
+          "constraints": [
+            "f"
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "Debate_creatorId_fkey",
+          "fkTable": "public.Debate",
+          "keys": [
+            {
+              "fkColumn": "creatorId",
+              "fkType": "int4",
+              "targetColumn": "id",
+              "targetType": "int4",
+              "nullable": false
+            }
+          ],
+          "targetTable": "public.User"
+        },
+        {
+          "id": "Debate_opponentId_fkey",
+          "fkTable": "public.Debate",
+          "keys": [
+            {
+              "fkColumn": "opponentId",
+              "fkType": "int4",
+              "targetColumn": "id",
+              "targetType": "int4",
+              "nullable": true
+            }
+          ],
+          "targetTable": "public.User"
+        }
+      ],
+      "children": [
+        {
+          "id": "Turn_debateId_fkey",
+          "fkTable": "public.Turn",
+          "keys": [
+            {
+              "fkColumn": "debateId",
+              "fkType": "int4",
+              "targetColumn": "id",
+              "targetType": "int4",
+              "nullable": false
+            }
+          ],
+          "targetTable": "public.Debate"
+        }
+      ],
+      "primaryKeys": {
+        "tableId": "public.Debate",
+        "schema": "public",
+        "table": "Debate",
+        "dirty": false,
+        "keys": [
+          {
+            "name": "id",
+            "type": "int4"
+          }
+        ]
+      },
+      "constraints": [
+        {
+          "tableId": "public.Debate",
+          "schema": "public",
+          "table": "Debate",
+          "dirty": false,
+          "name": "Debate_pkey",
+          "columns": [
+            "id"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "public.Turn",
+      "name": "Turn",
+      "schema": "public",
+      "partitioned": false,
+      "rows": null,
+      "bytes": 8192,
+      "columns": [
+        {
+          "id": "public.Turn.id",
+          "name": "id",
+          "type": "int4",
+          "typeId": "pg_catalog.int4",
+          "table": "Turn",
+          "schema": "public",
+          "nullable": false,
+          "default": "nextval('\"Turn_id_seq\"'::regclass)",
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "N",
+          "constraints": [
+            "p"
+          ]
+        },
+        {
+          "id": "public.Turn.body",
+          "name": "body",
+          "type": "jsonb",
+          "typeId": "pg_catalog.jsonb",
+          "table": "Turn",
+          "schema": "public",
+          "nullable": true,
+          "default": null,
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "U",
+          "constraints": []
+        },
+        {
+          "id": "public.Turn.debateId",
+          "name": "debateId",
+          "type": "int4",
+          "typeId": "pg_catalog.int4",
+          "table": "Turn",
+          "schema": "public",
+          "nullable": false,
+          "default": null,
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "N",
+          "constraints": [
+            "f"
+          ]
+        },
+        {
+          "id": "public.Turn.createdAt",
+          "name": "createdAt",
+          "type": "timestamp",
+          "typeId": "pg_catalog.timestamp",
+          "table": "Turn",
+          "schema": "public",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "D",
+          "constraints": []
+        },
+        {
+          "id": "public.Turn.userId",
+          "name": "userId",
+          "type": "int4",
+          "typeId": "pg_catalog.int4",
+          "table": "Turn",
+          "schema": "public",
+          "nullable": false,
+          "default": null,
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "N",
+          "constraints": [
+            "f"
+          ]
+        }
+      ],
+      "parents": [
+        {
+          "id": "Turn_debateId_fkey",
+          "fkTable": "public.Turn",
+          "keys": [
+            {
+              "fkColumn": "debateId",
+              "fkType": "int4",
+              "targetColumn": "id",
+              "targetType": "int4",
+              "nullable": false
+            }
+          ],
+          "targetTable": "public.Debate"
+        },
+        {
+          "id": "Turn_userId_fkey",
+          "fkTable": "public.Turn",
+          "keys": [
+            {
+              "fkColumn": "userId",
+              "fkType": "int4",
+              "targetColumn": "id",
+              "targetType": "int4",
+              "nullable": false
+            }
+          ],
+          "targetTable": "public.User"
+        }
+      ],
+      "children": [],
+      "primaryKeys": {
+        "tableId": "public.Turn",
+        "schema": "public",
+        "table": "Turn",
+        "dirty": false,
+        "keys": [
+          {
+            "name": "id",
+            "type": "int4"
+          }
+        ]
+      },
+      "constraints": [
+        {
+          "tableId": "public.Turn",
+          "schema": "public",
+          "table": "Turn",
+          "dirty": false,
+          "name": "Turn_pkey",
+          "columns": [
+            "id"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "public.User",
+      "name": "User",
+      "schema": "public",
+      "partitioned": false,
+      "rows": null,
+      "bytes": 8192,
+      "columns": [
+        {
+          "id": "public.User.id",
+          "name": "id",
+          "type": "int4",
+          "typeId": "pg_catalog.int4",
+          "table": "User",
+          "schema": "public",
+          "nullable": false,
+          "default": "nextval('\"User_id_seq\"'::regclass)",
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "N",
+          "constraints": [
+            "p"
+          ]
+        },
+        {
+          "id": "public.User.email",
+          "name": "email",
+          "type": "text",
+          "typeId": "pg_catalog.text",
+          "table": "User",
+          "schema": "public",
+          "nullable": false,
+          "default": null,
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "S",
+          "constraints": []
+        },
+        {
+          "id": "public.User.createdAt",
+          "name": "createdAt",
+          "type": "timestamp",
+          "typeId": "pg_catalog.timestamp",
+          "table": "User",
+          "schema": "public",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "D",
+          "constraints": []
+        }
+      ],
+      "parents": [],
+      "children": [
+        {
+          "id": "Debate_creatorId_fkey",
+          "fkTable": "public.Debate",
+          "keys": [
+            {
+              "fkColumn": "creatorId",
+              "fkType": "int4",
+              "targetColumn": "id",
+              "targetType": "int4",
+              "nullable": false
+            }
+          ],
+          "targetTable": "public.User"
+        },
+        {
+          "id": "Debate_opponentId_fkey",
+          "fkTable": "public.Debate",
+          "keys": [
+            {
+              "fkColumn": "opponentId",
+              "fkType": "int4",
+              "targetColumn": "id",
+              "targetType": "int4",
+              "nullable": true
+            }
+          ],
+          "targetTable": "public.User"
+        },
+        {
+          "id": "Turn_userId_fkey",
+          "fkTable": "public.Turn",
+          "keys": [
+            {
+              "fkColumn": "userId",
+              "fkType": "int4",
+              "targetColumn": "id",
+              "targetType": "int4",
+              "nullable": false
+            }
+          ],
+          "targetTable": "public.User"
+        }
+      ],
+      "primaryKeys": {
+        "tableId": "public.User",
+        "schema": "public",
+        "table": "User",
+        "dirty": false,
+        "keys": [
+          {
+            "name": "id",
+            "type": "int4"
+          }
+        ]
+      },
+      "constraints": [
+        {
+          "tableId": "public.User",
+          "schema": "public",
+          "table": "User",
+          "dirty": false,
+          "name": "User_pkey",
+          "columns": [
+            "id"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "public._prisma_migrations",
+      "name": "_prisma_migrations",
+      "schema": "public",
+      "partitioned": false,
+      "rows": null,
+      "bytes": 8192,
+      "columns": [
+        {
+          "id": "public._prisma_migrations.id",
+          "name": "id",
+          "type": "varchar",
+          "typeId": "pg_catalog.varchar",
+          "table": "_prisma_migrations",
+          "schema": "public",
+          "nullable": false,
+          "default": null,
+          "generated": "NEVER",
+          "maxLength": 36,
+          "identity": null,
+          "typeCategory": "S",
+          "constraints": [
+            "p"
+          ]
+        },
+        {
+          "id": "public._prisma_migrations.checksum",
+          "name": "checksum",
+          "type": "varchar",
+          "typeId": "pg_catalog.varchar",
+          "table": "_prisma_migrations",
+          "schema": "public",
+          "nullable": false,
+          "default": null,
+          "generated": "NEVER",
+          "maxLength": 64,
+          "identity": null,
+          "typeCategory": "S",
+          "constraints": []
+        },
+        {
+          "id": "public._prisma_migrations.finished_at",
+          "name": "finished_at",
+          "type": "timestamptz",
+          "typeId": "pg_catalog.timestamptz",
+          "table": "_prisma_migrations",
+          "schema": "public",
+          "nullable": true,
+          "default": null,
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "D",
+          "constraints": []
+        },
+        {
+          "id": "public._prisma_migrations.migration_name",
+          "name": "migration_name",
+          "type": "varchar",
+          "typeId": "pg_catalog.varchar",
+          "table": "_prisma_migrations",
+          "schema": "public",
+          "nullable": false,
+          "default": null,
+          "generated": "NEVER",
+          "maxLength": 255,
+          "identity": null,
+          "typeCategory": "S",
+          "constraints": []
+        },
+        {
+          "id": "public._prisma_migrations.logs",
+          "name": "logs",
+          "type": "text",
+          "typeId": "pg_catalog.text",
+          "table": "_prisma_migrations",
+          "schema": "public",
+          "nullable": true,
+          "default": null,
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "S",
+          "constraints": []
+        },
+        {
+          "id": "public._prisma_migrations.rolled_back_at",
+          "name": "rolled_back_at",
+          "type": "timestamptz",
+          "typeId": "pg_catalog.timestamptz",
+          "table": "_prisma_migrations",
+          "schema": "public",
+          "nullable": true,
+          "default": null,
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "D",
+          "constraints": []
+        },
+        {
+          "id": "public._prisma_migrations.started_at",
+          "name": "started_at",
+          "type": "timestamptz",
+          "typeId": "pg_catalog.timestamptz",
+          "table": "_prisma_migrations",
+          "schema": "public",
+          "nullable": false,
+          "default": "now()",
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "D",
+          "constraints": []
+        },
+        {
+          "id": "public._prisma_migrations.applied_steps_count",
+          "name": "applied_steps_count",
+          "type": "int4",
+          "typeId": "pg_catalog.int4",
+          "table": "_prisma_migrations",
+          "schema": "public",
+          "nullable": false,
+          "default": "0",
+          "generated": "NEVER",
+          "maxLength": null,
+          "identity": null,
+          "typeCategory": "N",
+          "constraints": []
+        }
+      ],
+      "parents": [],
+      "children": [],
+      "primaryKeys": {
+        "tableId": "public._prisma_migrations",
+        "schema": "public",
+        "table": "_prisma_migrations",
+        "dirty": false,
+        "keys": [
+          {
+            "name": "id",
+            "type": "varchar"
+          }
+        ]
+      },
+      "constraints": [
+        {
+          "tableId": "public._prisma_migrations",
+          "schema": "public",
+          "table": "_prisma_migrations",
+          "dirty": false,
+          "name": "_prisma_migrations_pkey",
+          "columns": [
+            "id"
+          ]
+        }
+      ]
+    }
+  ],
+  "extensions": [],
+  "enums": [],
+  "server": {
+    "version": "16.2"
+  },
+  "indexes": [
+    {
+      "schema": "public",
+      "table": "Debate",
+      "index": "Debate_pkey",
+      "definition": "CREATE UNIQUE INDEX \"Debate_pkey\" ON public.\"Debate\" USING btree (id)",
+      "type": "btree",
+      "indexColumns": [
+        "id"
+      ]
+    },
+    {
+      "schema": "public",
+      "table": "Turn",
+      "index": "Turn_pkey",
+      "definition": "CREATE UNIQUE INDEX \"Turn_pkey\" ON public.\"Turn\" USING btree (id)",
+      "type": "btree",
+      "indexColumns": [
+        "id"
+      ]
+    },
+    {
+      "schema": "public",
+      "table": "User",
+      "index": "User_email_key",
+      "definition": "CREATE UNIQUE INDEX \"User_email_key\" ON public.\"User\" USING btree (email)",
+      "type": "btree",
+      "indexColumns": [
+        "email"
+      ]
+    },
+    {
+      "schema": "public",
+      "table": "User",
+      "index": "User_pkey",
+      "definition": "CREATE UNIQUE INDEX \"User_pkey\" ON public.\"User\" USING btree (id)",
+      "type": "btree",
+      "indexColumns": [
+        "id"
+      ]
+    },
+    {
+      "schema": "public",
+      "table": "_prisma_migrations",
+      "index": "_prisma_migrations_pkey",
+      "definition": "CREATE UNIQUE INDEX _prisma_migrations_pkey ON public._prisma_migrations USING btree (id)",
+      "type": "btree",
+      "indexColumns": [
+        "id"
+      ]
+    }
+  ],
+  "sequences": {
+    "public": [
+      {
+        "schema": "public",
+        "name": "Debate_id_seq",
+        "start": 1,
+        "min": 1,
+        "max": 2147483647,
+        "current": 5,
+        "interval": 1
+      },
+      {
+        "schema": "public",
+        "name": "Turn_id_seq",
+        "start": 1,
+        "min": 1,
+        "max": 2147483647,
+        "current": 9,
+        "interval": 1
+      },
+      {
+        "schema": "public",
+        "name": "User_id_seq",
+        "start": 1,
+        "min": 1,
+        "max": 2147483647,
+        "current": 9,
+        "interval": 1
+      }
+    ]
+  }
+}

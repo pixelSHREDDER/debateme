@@ -9,16 +9,31 @@ datasource db {
 }
 
 model Debate {
-  id        Int      @id @default(autoincrement())
-  topic     String   @db.VarChar(255)
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  turn      Turn[]
+  id         Int      @id @default(autoincrement())
+  topic      String   @db.VarChar(255)
+  creatorId  Int
+  opponentId Int?
+  createdAt  DateTime @default(now()) @db.Timestamp(6)
+  creator    User     @relation(fields: [creatorId], name: "debate_creator", references: [id])
+  opponent   User?    @relation(fields: [opponentId], name: "debate_opponent", references: [id])
+  turn       Turn[]
 }
 
 model Turn {
   id        Int      @id @default(autoincrement())
   body      Json?
+  userId    Int
   debateId  Int
   createdAt DateTime @default(now()) @db.Timestamp(6)
+  user      User     @relation(fields: [userId], references: [id])
   debate    Debate   @relation(fields: [debateId], references: [id])
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  email          String   @unique
+  debatesCreated Debate[] @relation(name: "debate_creator")
+  debatesOpposed Debate[] @relation(name: "debate_opponent")
+  turn           Turn[]
+  createdAt      DateTime @default(now())
 }

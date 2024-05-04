@@ -1,0 +1,30 @@
+[
+  {
+    "schemaName": "public",
+    "tableName": "Debate",
+    "predictions": [
+      {
+        "input": "public debate topic",
+        "column": "topic",
+        "shape": "DATABASE_COLUMN",
+        "confidence": 0.6959853768348694,
+        "context": "GENERAL",
+        "confidenceContext": 0
+      }
+    ]
+  },
+  {
+    "schemaName": "public",
+    "tableName": "User",
+    "predictions": [
+      {
+        "input": "public user email",
+        "column": "email",
+        "shape": "EMAIL",
+        "confidence": 0.99404376745224,
+        "context": "GENERAL",
+        "confidenceContext": 0
+      }
+    ]
+  }
+]

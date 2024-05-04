@@ -1,0 +1,49 @@
+{
+  "date": "2024-05-04T05:50:45.829Z",
+  "name": "ss-fast-efraasia-967027",
+  "snapshotId": "clvropvpi2fixlyd8g7jsdqv3",
+  "tags": [
+    "onboarding"
+  ],
+  "origin": "CLOUD",
+  "tables": [
+    {
+      "bytes": 115,
+      "table": "Debate",
+      "schema": "public",
+      "filename": "public.Debate.csv",
+      "copiedRows": 2,
+      "timeToDump": 151,
+      "timeToCompress": 0
+    },
+    {
+      "bytes": 230,
+      "table": "Turn",
+      "schema": "public",
+      "filename": "public.Turn.csv",
+      "copiedRows": 4,
+      "timeToDump": 142,
+      "timeToCompress": 0
+    },
+    {
+      "bytes": 153,
+      "table": "User",
+      "schema": "public",
+      "filename": "public.User.csv",
+      "copiedRows": 2,
+      "timeToDump": 145,
+      "timeToCompress": 0
+    },
+    {
+      "bytes": 0,
+      "table": "_prisma_migrations",
+      "schema": "public",
+      "filename": "public._prisma_migrations.csv",
+      "copiedRows": 0,
+      "timeToDump": 0,
+      "timeToCompress": 0
+    }
+  ],
+  "totalSize": 71740,
+  "isSupabaseConnection": false
+}
