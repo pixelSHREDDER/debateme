@@ -4,11 +4,13 @@ const prisma = new PrismaClient()
 
 const userData: Prisma.UserCreateInput[] = [
   {
-    email: 'alice@prisma.io',
+    email: 'jennyfer.renner47078@excellent-parser.name',
+    sub: 'auth0|6635d49d275a3f8f52dbf13e'
   },
   {
-    email: 'nilu@prisma.io',
-  },
+    email: 'ronald.swanson90210@excellent-parser.name',
+    sub: 'auth0|66481e16bfb70c6924743524'
+  }
 ]
 
 async function main() {
@@ -28,12 +30,12 @@ async function main() {
     {
       creator: {
         connect: {
-          id: users[0].id,
+          sub: users[0].sub,
         },
       },
       opponent: {
         connect: {
-          id: users[1].id,
+          sub: users[1].sub,
         },
       },
       topic: 'Fool me once',
@@ -41,15 +43,15 @@ async function main() {
     {
       creator: {
         connect: {
-          id: users[1].id,
+          sub: users[1].sub,
         },
       },
       opponent: {
         connect: {
-          id: users[0].id,
+          sub: users[0].sub,
         },
       },
-      topic: 'Join the Prisma Discord',
+      topic: 'Parks & Recreation: Yes or No?',
     },
   ]
 
@@ -70,7 +72,7 @@ async function main() {
       },
       user: {
         connect: {
-          email: 'alice@prisma.io',
+          sub: users[0].sub,
         },
       },
       body: 'Shame on you',
@@ -83,7 +85,7 @@ async function main() {
       },
       user: {
         connect: {
-          email: 'nilu@prisma.io',
+          sub: users[1].sub,
         },
       },
       body: 'Fool me twice',
@@ -96,7 +98,7 @@ async function main() {
       },
       user: {
         connect: {
-          email: 'alice@prisma.io',
+          sub: users[0].sub,
         },
       },
       body: 'Shame on glue',
@@ -109,7 +111,7 @@ async function main() {
       },
       user: {
         connect: {
-          email: 'alice@prisma.io',
+          sub: users[0].sub,
         },
       },
       body: 'Lorem Ipsum',

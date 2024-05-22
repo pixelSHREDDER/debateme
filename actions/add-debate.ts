@@ -4,6 +4,7 @@ import prisma from '@/lib/prisma'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
+import getCreatedDebateId from '@/actions/get-created-debate-id'
 
 export async function addDebate(
   prevState: {
@@ -13,11 +14,11 @@ export async function addDebate(
 ) {
   const schema = z.object({
     topic: z.string().min(1),
-    creatorId: z.number().min(1)
+    creatorSub: z.string().min(1)
   })
   const parse = schema.safeParse({
     topic: formData.get('topic'),
-    creatorId: formData.get('creatorId'),
+    creatorSub: formData.get('creatorSub'),
   })
 
   if (!parse.success) {
@@ -25,6 +26,7 @@ export async function addDebate(
   }
 
   const data = parse.data
+  let debateId
 
   try {
     await prisma.debate.create({
@@ -32,17 +34,21 @@ export async function addDebate(
         topic: data.topic,
         creator: {
           connect: {
-            id: data.creatorId,
+            sub: data.creatorSub,
           },
         }
       },
     })
-
-    revalidatePath('/')
+    revalidatePath('/debate')
   } catch (e: any) {
     return { message: `Failed to create debate: ${e.message}` }
   }
 
-  // redirect(`/debate/${data.id}`)
-  redirect(`/debate/1`)
+  try {
+    debateId = await getCreatedDebateId(data.creatorSub)
+  } catch (e: any) {
+    return { message: `Failed to find newly created debate: ${e.message}` }
+  }
+
+  redirect(`/debate/${debateId}`)
 }
