@@ -14,10 +14,12 @@ export async function addDebate(
 ) {
   const schema = z.object({
     topic: z.string().min(1),
+    cooldownMins: z.coerce.number().min(0).default(60),
     creatorSub: z.string().min(1)
   })
   const parse = schema.safeParse({
     topic: formData.get('topic'),
+    cooldownMins: formData.get('cooldownMins'),
     creatorSub: formData.get('creatorSub'),
   })
 
@@ -32,6 +34,7 @@ export async function addDebate(
     await prisma.debate.create({
       data: {
         topic: data.topic,
+        cooldownMins: data.cooldownMins,
         creator: {
           connect: {
             sub: data.creatorSub,

@@ -7,8 +7,6 @@ import Turns from '@/components/Turn/Turns'
 import getDebateTurns from '@/actions/get-debate-turns'
 import { useState, useEffect, useMemo, useCallback } from 'react'
 
-const COOLDOWN_MINS = 60
-
 export default function Debate({ debateId }: { debateId: number }) {
   const { user, error, isLoading } = useUser()
   const [debateData, setDebateData] = useState<TDebate | null>(null)
@@ -30,7 +28,7 @@ export default function Debate({ debateId }: { debateId: number }) {
       return false
     }
 
-    return (Date.now() - new Date(lastTurn.createdAt).getTime() < (COOLDOWN_MINS * 100_000))
+    return (Date.now() - new Date(lastTurn.createdAt).getTime() < (debateData.cooldownMins * 100_000))
   }, [debateData, user?.sub])
 
   const isItYourTurn = useMemo(() => {
