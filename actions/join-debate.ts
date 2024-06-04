@@ -2,6 +2,7 @@
 
 import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 export default async function joinDebate(
@@ -43,4 +44,6 @@ export default async function joinDebate(
   } catch (e: any) {
     return { message: `Failed to join debate: ${e.message}` }
   }
+
+  redirect(`/debate/${data.debateId}`)
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { addDebate } from '@/actions/add-debate'
+import addDebate from '@/actions/add-debate'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { useFormState } from 'react-dom'
 import FormSubmitButton from '../Forms/FormSubmitButton'

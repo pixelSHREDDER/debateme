@@ -1,6 +1,6 @@
 'use client'
 
-import { addTurn } from '@/actions/add-turn'
+import addTurn from '@/actions/add-turn'
 import { TDebate } from '@/lib/prisma-types'
 import { useFormState } from 'react-dom'
 import Editor from '../Editor/Editor'

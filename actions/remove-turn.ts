@@ -8,7 +8,7 @@ let sql = postgres(process.env.DATABASE_URL || process.env.POSTGRES_URL!, {
   ssl: 'allow',
 })
 
-export async function deleteTurnFromDebate(
+export default async function deleteTurnFromDebate(
   prevState: {
     message: string;
   },

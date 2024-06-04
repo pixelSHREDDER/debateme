@@ -5,9 +5,9 @@ import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import getCreatedDebateId from '@/actions/get-created-debate-id'
-import { addInvite } from './add-invite'
+import addInvite from './add-invite'
 
-export async function addDebate(
+export default async function addDebate(
   prevState: {
     message: string
   },

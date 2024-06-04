@@ -2,7 +2,7 @@
 
 import prisma from '@/lib/prisma'
 
-export async function addInvite(debateId: number) {
+export default async function addInvite(debateId: number) {
   try {
     await prisma.invite.create({
       data: {

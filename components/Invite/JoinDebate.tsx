@@ -11,7 +11,7 @@ const initialState = {
 
 export default function JoinDebate({ debateId }: { debateId: number }) {
   const { user, error, isLoading } = useUser()
-  const [state, formAction] = useFormState(joinDebate, initialState)
+  const [ state, formAction ] = useFormState(joinDebate, initialState)
 
   if (isLoading) { return 'loading user...' }
   if (error) { return JSON.stringify(error) }

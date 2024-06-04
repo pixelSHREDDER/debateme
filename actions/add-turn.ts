@@ -4,7 +4,7 @@ import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
-export async function addTurn(
+export default async function addTurn(
   prevState: {
     message: string
   },
