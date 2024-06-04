@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import getCreatedDebateId from '@/actions/get-created-debate-id'
+import { addInvite } from './add-invite'
 
 export async function addDebate(
   prevState: {
@@ -51,6 +52,14 @@ export async function addDebate(
     debateId = await getCreatedDebateId(data.creatorSub)
   } catch (e: any) {
     return { message: `Failed to find newly created debate: ${e.message}` }
+  }
+
+  try {
+    if (!!debateId) {
+      await addInvite(debateId)
+    }
+  } catch (e: any) {
+    return { message: `Failed to create invite for newly created debate: ${e.message}` }
   }
 
   redirect(`/debate/${debateId}`)

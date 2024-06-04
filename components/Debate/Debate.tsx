@@ -6,15 +6,18 @@ import { TDebate } from '@/lib/prisma-types'
 import Turns from '@/components/Turn/Turns'
 import getDebateTurns from '@/actions/get-debate-turns'
 import { useState, useEffect, useMemo, useCallback } from 'react'
+import JoinDebate from '../Invite/JoinDebate'
+import Invite from '../Invite/Invite'
 
 export default function Debate({ debateId }: { debateId: number }) {
   const { user, error, isLoading } = useUser()
   const [debateData, setDebateData] = useState<TDebate | null>(null)
 
   const updateDebateData = useCallback(() => {
-    if (!!user && !!user.sub ) {
-      getDebateTurns(debateId, user.sub).then(d => setDebateData(d))
+    if (!user || !user.sub ) {
+      return
     }
+    getDebateTurns(debateId, user.sub).then(d => setDebateData(d))
   }, [debateId, user])
 
   const isCooldownActive = useMemo(() => {
@@ -53,11 +56,28 @@ export default function Debate({ debateId }: { debateId: number }) {
     return <NewTurn debate={debateData} onSubmit={updateDebateData} />
   }, [debateData, isCooldownActive, isItYourTurn, updateDebateData])
 
-  useEffect(() => updateDebateData(), [debateId, updateDebateData, user])
+  useEffect(() => {
+    if (isLoading) {
+      return
+    }
+    if (!!user && !!user.sub ) {
+      updateDebateData()
+    } else {
+      // return <signin/register flow>
+      console.log('no user')
+    }
+  }, [debateId, isLoading, updateDebateData, user])
 
   if (isLoading) { return 'loading user...' }
   if (error) { return JSON.stringify(error) }
+  if (!user) { return 'please login' }
   if (!debateData) { return 'Debate not found' }
+  if (!debateData.opponentSub && (debateData.creatorSub === user.sub)) {
+    return <Invite debateId={debateId} />
+  }
+  if (!debateData.opponentSub) {
+    return <JoinDebate debateId={debateId} />
+  }
 
   return (
       <section>

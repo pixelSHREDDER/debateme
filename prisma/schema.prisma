@@ -16,8 +16,16 @@ model Debate {
   creatorSub   String
   opponentSub  String?
   creator      User     @relation("debate_creator", fields: [creatorSub], references: [sub])
+  invite       Invite?  @relation("debate_invite_id")
   opponent     User?    @relation("debate_opponent", fields: [opponentSub], references: [sub])
   turn         Turn[]
+}
+
+model Invite {
+  id         String   @id @default(uuid())
+  debateId   Int      @unique
+  createdAt  DateTime @default(now()) @db.Timestamp(6)
+  debate     Debate   @relation("debate_invite_id", fields: [debateId], references: [id])
 }
 
 model Turn {
