@@ -6,7 +6,7 @@ export default async function getDebateTurns(debateId: number, userSub: string) 
   let debateData = null
 
   try {
-    debateData = await prisma.debate.findUnique({
+    debateData = await prisma.debate.findUniqueOrThrow({
       where: {
         id: Number(debateId),
         AND: {
@@ -19,7 +19,7 @@ export default async function getDebateTurns(debateId: number, userSub: string) 
       include: { turn: true }
     })
   } catch (error: any) {
-    throw new Error(error)
+    return error
   }
 
   return debateData
