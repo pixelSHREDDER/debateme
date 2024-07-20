@@ -8,7 +8,10 @@
     "postinstall": "prisma generate",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest"
+    "test:unit": "vitest -c ./vitest.config.unit.js",
+    "test:unit:ui": "vitest -c ./vitest.config.unit.js --ui",
+    "test:int": "./scripts/run-integration.sh",
+    "test:int:ui": "./scripts/run-integration.sh --ui"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.5.0",
@@ -35,6 +38,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@vitejs/plugin-react": "^4.3.0",
+    "@vitest/ui": "^1.6.0",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
