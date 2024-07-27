@@ -11,7 +11,9 @@
     "test:unit": "vitest -c ./vitest.config.unit.js",
     "test:unit:ui": "vitest -c ./vitest.config.unit.js --ui",
     "test:int": "./scripts/run-integration.sh",
-    "test:int:ui": "./scripts/run-integration.sh --ui"
+    "test:int:ui": "./scripts/run-integration.sh --ui",
+    "test:e2e": "./scripts/run-e2e.sh",
+    "test:e2e:headed": "./scripts/run-e2e.sh --headed"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.5.0",
@@ -30,6 +32,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.45.3",
     "@snaplet/copycat": "^5.0.0",
     "@snaplet/seed": "^0.97.8",
     "@testing-library/dom": "^10.1.0",
