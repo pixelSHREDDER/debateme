@@ -1,27 +1,61 @@
 'use client'
 
-import { useUser } from "@auth0/nextjs-auth0/client"
-import Link from "next/link"
+import { useUser } from '@auth0/nextjs-auth0/client'
+import { Container, Group, Burger, Anchor } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import classes from './TopBar.module.css'
+import { ColorSchemeToggle } from '../ColorSchemeToggle/ColorSchemeToggle'
+import { useState } from 'react'
+
+const links = [
+  { link: '/', label: 'Home' },
+  { link: '/debate', label: 'Debates' },
+];
 
 export default function TopBar() {
   const { error, isLoading, user } = useUser()
+  const [opened, { toggle }] = useDisclosure(false)
+  const [active, setActive] = useState(links[0].link)
+
+  const items = links.map((link) => (
+    <Anchor<'a'>
+      href={link.link}
+      key={link.label}
+      className={classes.link}
+      data-active={active === link.link || undefined}
+      onClick={(event) => {
+        event.preventDefault()
+        setActive(link.link)
+      }}
+    >
+      {link.label}
+    </Anchor>
+  ))
 
 const userChunk = () => {
   if (isLoading) return 'loading user....'
   if (error) return 'error'
   if (user) return (
     <>
-      <a href="/user/profile">Hi, {user.name}!</a>&nbsp;|&nbsp;<a href="/api/auth/logout">Logout</a>
+      <Anchor<'a'> href="/user/profile">Hi, {user.name}!</Anchor>&nbsp;|&nbsp;<a href="/api/auth/logout">Logout</a>
     </>
   )
-  return <a href="/api/auth/login">Login</a>
+  return <Anchor<'a'> href="/api/auth/login">Login</Anchor>
 }
 
   return (
-    <nav className="w-full h-8 sticky bg-black text-white mb-1 p-1 z-50">
-      <Link href="/">Home</Link>&nbsp;|&nbsp;
-      <Link href="/debate">Debates</Link>&nbsp;|&nbsp;
-      {userChunk()}
-    </nav>
+    <header className={classes.header}>
+      <Container size="md" className={classes.inner}>
+        {/*<MantineLogo size={28} />*/}
+        <Group gap={5} visibleFrom="xs">
+          {items}
+        </Group>
+      <Group justify="right" visibleFrom="xs">
+        <ColorSchemeToggle />
+        {userChunk()}
+      </Group>
+        <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
+      </Container>
+    </header>
   )
 }

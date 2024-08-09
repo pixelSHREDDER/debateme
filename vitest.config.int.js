@@ -12,7 +12,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     include: ['src/tests/**/*.test.ts'],
-    setupFiles: ['src/tests/helpers/setup.ts'],
+    setupFiles: ['tests/helpers/setup-int.ts'],
     threads: false
   },
 })

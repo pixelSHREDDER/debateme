@@ -10,11 +10,19 @@ export default defineConfig({
     }
   },
   test: {
+    coverage: {
+      include: [
+        '**/*.test.ts',
+        '**/*.test.tsx',
+        '!tests'
+      ],
+      reporter: ['text', 'json', 'html'],
+    },
     environment: 'jsdom',
     include: [
       '**/*.test.ts',
-      '**/*.test.tsx',
-      '!tests'
-    ]
+      '**/*.test.tsx'
+    ],
+    setupFiles: ['tests/helpers/setup-unit.ts']
   },
 })
