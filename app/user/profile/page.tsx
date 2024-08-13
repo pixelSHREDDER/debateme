@@ -1,7 +1,7 @@
 import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0'
 import Image from 'next/image'
 
-export default withPageAuthRequired(async function UserProfile() {
+export default withPageAuthRequired(async () => {
   const session = await getSession()
 
   return (

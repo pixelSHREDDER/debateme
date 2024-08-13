@@ -3,14 +3,14 @@
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { Container, Group, Burger, Anchor } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
+import { useState } from 'react'
 import classes from './TopBar.module.css'
 import { ColorSchemeToggle } from '../ColorSchemeToggle/ColorSchemeToggle'
-import { useState } from 'react'
 
 const links = [
   { link: '/', label: 'Home' },
   { link: '/debate', label: 'Debates' },
-];
+]
 
 export default function TopBar() {
   const { error, isLoading, user } = useUser()
@@ -35,11 +35,13 @@ export default function TopBar() {
 const userChunk = () => {
   if (isLoading) return 'loading user....'
   if (error) return 'error'
-  if (user) return (
+  if (user) {
+return (
     <>
       <Anchor<'a'> href="/user/profile">Hi, {user.name}!</Anchor>&nbsp;|&nbsp;<a href="/api/auth/logout">Logout</a>
     </>
   )
+}
   return <Anchor<'a'> href="/api/auth/login">Login</Anchor>
 }
 

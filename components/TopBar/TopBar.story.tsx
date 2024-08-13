@@ -1,7 +1,10 @@
+import type { Meta } from '@storybook/react'
 import TopBar from './TopBar'
 
-export default {
+const meta: Meta<typeof TopBar> = {
   title: 'Top Bar',
 }
+
+export default meta
 
 export const Usage = () => <TopBar />

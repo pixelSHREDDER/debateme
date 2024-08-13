@@ -2,7 +2,7 @@
 
 import './editor.scss'
 
-import ListItem from '@tiptap/extension-list-item'
+//import ListItem from '@tiptap/extension-list-item'
 import { EditorProvider, useCurrentEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 
@@ -69,13 +69,13 @@ const MenuBar = () => {
       </button>
       <button
         onClick={() => editor.chain().focus().unsetAllMarks().run()}
-        className={`border m-1 p-1`}
+        className="border m-1 p-1"
       >
         clear marks
       </button>
       <button
         onClick={() => editor.chain().focus().clearNodes().run()}
-        className={`border m-1 p-1`}
+        className="border m-1 p-1"
       >
         clear nodes
       </button>
@@ -147,13 +147,13 @@ const MenuBar = () => {
       </button>
       <button
         onClick={() => editor.chain().focus().setHorizontalRule().run()}
-        className={`border m-1 p-1`}
+        className="border m-1 p-1"
       >
         horizontal rule
       </button>
       <button
         onClick={() => editor.chain().focus().setHardBreak().run()}
-        className={`border m-1 p-1`}
+        className="border m-1 p-1"
       >
         hard break
       </button>
@@ -166,7 +166,7 @@ const MenuBar = () => {
             .undo()
             .run()
         }
-        className={`border m-1 p-1`}
+        className="border m-1 p-1"
       >
         undo
       </button>
@@ -179,7 +179,7 @@ const MenuBar = () => {
             .redo()
             .run()
         }
-        className={`border m-1 p-1`}
+        className="border m-1 p-1"
       >
         redo
       </button>
@@ -207,16 +207,15 @@ interface IEditor {
 }
 
 export default function Editor(
-  {id, onUpdate, required }: IEditor,
-  { children }: { children: React.ReactNode}
+  { id, onUpdate, required }: IEditor,
+  { children }: { children: React.ReactNode }
 ) {
-
   return (
     <EditorProvider
-      editorProps={{attributes: {id: id, required: required}}}
+      editorProps={{ attributes: { id, required } }}
       slotBefore={<MenuBar />}
       extensions={extensions}
-      content={''}
+      content=""
       onUpdate={e => onUpdate(e.editor.getHTML())}>
       {children}
     </EditorProvider>

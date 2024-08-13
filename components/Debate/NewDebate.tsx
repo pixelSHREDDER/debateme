@@ -34,7 +34,7 @@ export default function NewDebate() {
       <p aria-live="polite">
         {state?.message}
       </p>
-      <FormSubmitButton label='Start Debating!' />
+      <FormSubmitButton label="Start Debating!" />
     </form> :
   'login'
 }

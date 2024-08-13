@@ -14,7 +14,7 @@ export default function Debate({ debateId }: { debateId: number }) {
   const [debateData, setDebateData] = useState<TDebate | null>(null)
 
   const updateDebateData = useCallback(() => {
-    if (!user || !user.sub ) {
+    if (!user || !user.sub) {
       return
     }
     getDebateTurns(debateId, user.sub).then(d => setDebateData(d))
@@ -25,13 +25,20 @@ export default function Debate({ debateId }: { debateId: number }) {
       return false
     }
 
-    let lastTurn = debateData.turn?.at(-1)
+    const lastTurn = debateData.turn?.at(-1)
 
-    if (!debateData.turn || !debateData.turn.length || !lastTurn || lastTurn.userSub === user?.sub) {
+    if (
+      !debateData.turn ||
+      !debateData.turn.length ||
+      !lastTurn ||
+      lastTurn.userSub === user?.sub
+    ) {
       return false
     }
 
-    return (Date.now() - new Date(lastTurn.createdAt).getTime() < (debateData.cooldownMins * 100_000))
+    return (
+      Date.now() - new Date(lastTurn.createdAt).getTime() < (debateData.cooldownMins * 100_000)
+    )
   }, [debateData, user?.sub])
 
   const isItYourTurn = useMemo(() => {
@@ -39,7 +46,7 @@ export default function Debate({ debateId }: { debateId: number }) {
       return false
     }
 
-    let lastTurn = debateData.turn?.at(-1)
+    const lastTurn = debateData.turn?.at(-1)
 
     if (!debateData.turn || !debateData.turn.length || !lastTurn) {
       return debateData.creatorSub === user.sub
@@ -60,11 +67,11 @@ export default function Debate({ debateId }: { debateId: number }) {
     if (isLoading) {
       return
     }
-    if (!!user && !!user.sub ) {
+    if (!!user && !!user.sub) {
       updateDebateData()
     } else {
       // return <signin/register flow>
-      console.log('no user')
+      //console.log('no user')
     }
   }, [debateId, isLoading, updateDebateData, user])
 

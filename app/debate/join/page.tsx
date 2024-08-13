@@ -1,9 +1,9 @@
 'use client'
 
-import getInviteDebateId from "@/actions/get-invite-debate-id"
-import removeInvite from "@/actions/remove-invite"
-import { redirect, useSearchParams } from "next/navigation"
-import { useCallback, useEffect } from "react"
+import getInviteDebateId from '@/actions/get-invite-debate-id'
+import removeInvite from '@/actions/remove-invite'
+import { redirect, useSearchParams } from 'next/navigation'
+import { useCallback, useEffect } from 'react'
 
 export default function JoinDebatePage() {
   const searchParams = useSearchParams()
@@ -20,5 +20,5 @@ export default function JoinDebatePage() {
     }
   }, [inviteId])
 
-  useEffect(() => { if (!!inviteId) { redirectToInviteUrl } }, [inviteId, redirectToInviteUrl])
+  useEffect(() => { if (inviteId) { redirectToInviteUrl } }, [inviteId, redirectToInviteUrl])
 }

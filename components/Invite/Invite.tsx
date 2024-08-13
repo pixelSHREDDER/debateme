@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 'use client'
 
 import getInviteId from '@/actions/get-invite-id'

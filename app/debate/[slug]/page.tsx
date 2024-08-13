@@ -5,5 +5,5 @@ interface IDebate {
 }
 
 export default async function DebatePage({ params }: IDebate) {
-  return <Debate debateId={parseInt(params.slug)} />
+  return <Debate debateId={parseInt(params.slug, 10)} />
 }

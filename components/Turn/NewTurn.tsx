@@ -3,9 +3,9 @@
 import addTurn from '@/actions/add-turn'
 import { TDebate } from '@/lib/prisma-types'
 import { useFormState } from 'react-dom'
-import Editor from '../Editor/Editor'
 import { useRef } from 'react'
 import { useUser } from '@auth0/nextjs-auth0/client'
+import Editor from '../Editor/Editor'
 import FormSubmitButton from '../Forms/FormSubmitButton'
 
 const initialState = {
@@ -23,7 +23,7 @@ const onUpdate = (newBody: string) => {
 
 const onTurnSubmit = async (payload: FormData) => {
   await formAction(payload)
-  if (!!onSubmit) {
+  if (onSubmit) {
     onSubmit()
   }
 }
@@ -50,7 +50,7 @@ return user && user.sub ?
       <p aria-live="polite">
         {state?.message}
       </p>
-      <FormSubmitButton label='Finish Your Turn' />
+      <FormSubmitButton label="Finish Your Turn" />
     </form> :
   'login'
 }

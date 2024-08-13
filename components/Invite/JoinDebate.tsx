@@ -1,9 +1,9 @@
 'use client'
 
 import joinDebate from '@/actions/join-debate'
-import FormSubmitButton from '../Forms/FormSubmitButton'
 import { useFormState } from 'react-dom'
 import { useUser } from '@auth0/nextjs-auth0/client'
+import FormSubmitButton from '../Forms/FormSubmitButton'
 
 const initialState = {
   message: '',
@@ -11,7 +11,7 @@ const initialState = {
 
 export default function JoinDebate({ debateId }: { debateId: number }) {
   const { user, error, isLoading } = useUser()
-  const [ state, formAction ] = useFormState(joinDebate, initialState)
+  const [state, formAction] = useFormState(joinDebate, initialState)
 
   if (isLoading) { return 'loading user...' }
   if (error) { return JSON.stringify(error) }
@@ -24,10 +24,10 @@ export default function JoinDebate({ debateId }: { debateId: number }) {
           <p>You have been invited to join this debate. Click below to join.</p>
           <form action={formAction}>
           <input
-              type="hidden"
-              id="debateId"
-              name="debateId"
-              value={debateId} />
+            type="hidden"
+            id="debateId"
+            name="debateId"
+            value={debateId} />
             <input
               type="hidden"
               id="opponentSub"
@@ -36,7 +36,7 @@ export default function JoinDebate({ debateId }: { debateId: number }) {
             <p aria-live="polite">
               {state?.message}
             </p>
-            <FormSubmitButton label='Join' />
+            <FormSubmitButton label="Join" />
           </form>
       </section>
     )

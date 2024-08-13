@@ -11,8 +11,10 @@ module.exports = {
     project: './tsconfig.json',
   },
   rules: {
+    'consistent-return': 'off',
+    'react/button-has-type': 'off',
     'react/react-in-jsx-scope': 'off',
     'import/extensions': 'off',
-    'semi': [2, 'never'],
+    '@typescript-eslint/semi': ['error', 'never'],
   },
-};
+}
