@@ -1,5 +1,5 @@
-import DebateList from '@/components/Debate/DebateList'
-import NewDebate from '@/components/Debate/NewDebate'
+import DebateList from '@/components/Debates/DebateList'
+import NewDebate from '@/components/Debates/NewDebate'
 
 export default function Debates() {
   return (

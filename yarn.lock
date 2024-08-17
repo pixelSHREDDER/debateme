@@ -8091,7 +8091,7 @@ __metadata:
     jsdom: "npm:^24.1.0"
     next: "npm:14.1.4"
     postcss: "npm:^8"
-    postcss-preset-mantine: "npm:1.17.0"
+    postcss-preset-mantine: "npm:^1.17.0"
     postcss-simple-vars: "npm:^7.0.1"
     postgres: "npm:^3.4.4"
     prettier: "npm:^3.3.2"
@@ -14211,7 +14211,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-preset-mantine@npm:1.17.0":
+"postcss-preset-mantine@npm:^1.17.0":
   version: 1.17.0
   resolution: "postcss-preset-mantine@npm:1.17.0"
   dependencies:

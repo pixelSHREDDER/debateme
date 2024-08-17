@@ -4,16 +4,11 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --background-start-rgb: 82, 34, 141;
   --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --dark-foreground-rgb: 255, 255, 255;
+  --dark-background-start-rgb: 50, 40, 61;
+  --dark-background-end-rgb: 0, 0, 0;
 }
 
 body {
@@ -24,6 +19,16 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+
+  @mixin dark {
+    color: rgb(var(--dark-foreground-rgb));
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgb(var(--dark-background-end-rgb))
+      )
+      rgb(var(--dark-background-start-rgb));
+  }
 }
 
 @layer utilities {

@@ -8,42 +8,40 @@ import classes from './TopBar.module.css'
 import { ColorSchemeToggle } from '../ColorSchemeToggle/ColorSchemeToggle'
 
 const links = [
-  { link: '/', label: 'Home' },
-  { link: '/debate', label: 'Debates' },
+  { link: '/', label: 'Home', logOutHide: false },
+  { link: '/debate', label: 'Debates', logOutHide: true },
 ]
 
 export default function TopBar() {
   const { error, isLoading, user } = useUser()
   const [opened, { toggle }] = useDisclosure(false)
   const [active, setActive] = useState(links[0].link)
+  const visibleLinks = user ? links : links.filter(link => !link.logOutHide)
 
-  const items = links.map((link) => (
+  const items = visibleLinks.map((link) => (
     <Anchor<'a'>
       href={link.link}
       key={link.label}
       className={classes.link}
       data-active={active === link.link || undefined}
-      onClick={(event) => {
-        event.preventDefault()
-        setActive(link.link)
-      }}
+      onClick={() => setActive(link.link)}
     >
       {link.label}
     </Anchor>
   ))
 
-const userChunk = () => {
-  if (isLoading) return 'loading user....'
-  if (error) return 'error'
-  if (user) {
-return (
-    <>
-      <Anchor<'a'> href="/user/profile">Hi, {user.name}!</Anchor>&nbsp;|&nbsp;<a href="/api/auth/logout">Logout</a>
-    </>
-  )
-}
-  return <Anchor<'a'> href="/api/auth/login">Login</Anchor>
-}
+  const userChunk = () => {
+    if (isLoading) return 'loading user....'
+    if (error) return 'error'
+    if (user) {
+      return (
+        <>
+          <Anchor<'a'> href="/user/profile">Hi, {user.name}!</Anchor>&nbsp;|&nbsp;<a href="/api/auth/logout">Logout</a>
+        </>
+      )
+    }
+    return <Anchor<'a'> href="/api/auth/login">Login</Anchor>
+  }
 
   return (
     <header className={classes.header}>

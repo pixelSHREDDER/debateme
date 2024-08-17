@@ -1,0 +1,27 @@
+.card {
+  /*background-color: light-dark(var(--mantine-color-marble-2), var(--mantine-color-marble-light));
+  background: url(marble);*/
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+  }
+
+.link {
+  color: light-dark(var(--mantine-primary-color-9), var(--mantine-primary-color-1));
+  /*padding: rem(7px) var(--mantine-spacing-sm);*/
+  font-weight: 700;
+  /*border-bottom: rem(2px) solid transparent;
+  transition:
+    border-color 100ms ease,
+    color 100ms ease;*/
+
+  @mixin hover {
+    color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+    /*text-decoration: none;*/
+  }
+
+  &[data-active] {
+    color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+    border-bottom-color: var(--mantine-primary-color-6);
+  }
+}

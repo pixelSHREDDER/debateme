@@ -82,7 +82,7 @@
     "eslint-plugin-testing-library": "^6.2.2",
     "jsdom": "^24.1.0",
     "postcss": "^8",
-    "postcss-preset-mantine": "1.17.0",
+    "postcss-preset-mantine": "^1.17.0",
     "postcss-simple-vars": "^7.0.1",
     "prettier": "^3.3.2",
     "prisma": "^5.14.0",
