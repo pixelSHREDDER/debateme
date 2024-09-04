@@ -4,32 +4,28 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 import NewTurn from '@/components/Turn/NewTurn'
 import { TDebate } from '@/lib/prisma-types'
 import Turns from '@/components/Turn/Turns'
-import getDebateTurns from '@/actions/get-debate-turns'
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useMemo } from 'react'
 import JoinDebate from '../Invite/JoinDebate'
 import Invite from '../Invite/Invite'
 
-export default function Debate({ debateId }: { debateId: number }) {
-  const { user, error, isLoading } = useUser()
-  const [debateData, setDebateData] = useState<TDebate | null>(null)
+interface IDebate {
+  debate: TDebate | null,
+  updateDebate: Function
+}
 
-  const updateDebateData = useCallback(() => {
-    if (!user || !user.sub) {
-      return
-    }
-    getDebateTurns(debateId, user.sub).then(d => setDebateData(d))
-  }, [debateId, user])
+export default function Debate({ debate, updateDebate }: IDebate) {
+  const { user, error, isLoading } = useUser()
 
   const isCooldownActive = useMemo(() => {
-    if (!debateData) {
+    if (!debate) {
       return false
     }
 
-    const lastTurn = debateData.turn?.at(-1)
+    const lastTurn = debate.turn?.at(-1)
 
     if (
-      !debateData.turn ||
-      !debateData.turn.length ||
+      !debate.turn ||
+      !debate.turn.length ||
       !lastTurn ||
       lastTurn.userSub === user?.sub
     ) {
@@ -37,62 +33,75 @@ export default function Debate({ debateId }: { debateId: number }) {
     }
 
     return (
-      Date.now() - new Date(lastTurn.createdAt).getTime() < (debateData.cooldownMins * 100_000)
+      Date.now() - new Date(lastTurn.createdAt).getTime() < (debate.cooldownMins * 100_000)
     )
-  }, [debateData, user?.sub])
+  }, [debate, user?.sub])
 
   const isItYourTurn = useMemo(() => {
-    if (!debateData || !user) {
+    if (!debate || !user) {
       return false
     }
 
-    const lastTurn = debateData.turn?.at(-1)
+    const lastTurn = debate.turn?.at(-1)
 
-    if (!debateData.turn || !debateData.turn.length || !lastTurn) {
-      return debateData.creatorSub === user.sub
+    if (!debate.turn || !debate.turn.length || !lastTurn) {
+      return debate.creatorSub === user.sub
     }
 
     return (lastTurn.userSub !== user.sub)
-  }, [debateData, user])
+  }, [debate, user])
 
   const renderNewTurn = useMemo(() => {
-    if (!debateData) { return }
+    if (!debate) { return }
     if (isCooldownActive) { return 'wait for cooldown' }
     if (!isItYourTurn) { return 'wait for your opponent' }
 
-    return <NewTurn debate={debateData} onSubmit={updateDebateData} />
-  }, [debateData, isCooldownActive, isItYourTurn, updateDebateData])
+    return <NewTurn debate={debate} onSubmit={updateDebate} />
+  }, [debate, isCooldownActive, isItYourTurn, updateDebate])
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (isLoading) {
       return
     }
     if (!!user && !!user.sub) {
-      updateDebateData()
+      updateDebate()
     } else {
       // return <signin/register flow>
       //console.log('no user')
     }
-  }, [debateId, isLoading, updateDebateData, user])
+  }, [isLoading, updateDebate, user])*/
 
-  if (isLoading) { return 'loading user...' }
+  if (isLoading) { return 'loading....' }
+  if (error) {
+    console.error(error)
+    return 'error'
+  }
+  if (!user) { return 'user not found' }
+  if (!debate) { return 'debate not found' }
+  /*if (isLoading) { return 'loading user...' }
   if (error) { return JSON.stringify(error) }
   if (!user) { return 'please login' }
-  if (!debateData) { return 'Debate not found' }
-  if (!debateData.opponentSub && (debateData.creatorSub === user.sub)) {
-    return <Invite debateId={debateId} />
+  if (!debate) { return 'Debate not found' }*/
+  /*if (!debate.opponentSub && (debate.creatorSub === user.sub)) {
+    return <Invite debateId={debate.id} />
   }
-  if (!debateData.opponentSub) {
-    return <JoinDebate debateId={debateId} />
+  if (!debate.opponentSub) {
+    return <JoinDebate debateId={debate.id} />
+  }*/
+
+  if (debate.opponentSub === null && debate.creatorSub === user.sub) {
+    return <Invite debateId={debate.id} />
+  }
+  if (!debate.opponentSub && (debate.creatorSub !== user.sub)) {
+    return <JoinDebate debateId={debate.id} />
+    return
   }
 
   return (
-      <section>
-        <>
-          <h1>{debateData.topic}</h1>
-          <Turns debate={debateData} />
-          { renderNewTurn }
-        </>
-      </section>
-    )
+    <section data-testid="debate-section">
+      <h1>{debate.topic}</h1>
+      <Turns debate={debate} />
+      { renderNewTurn }
+    </section>
+  )
 }

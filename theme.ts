@@ -1,6 +1,9 @@
 'use client'
 
 import { createTheme, MantineColorsTuple } from '@mantine/core'
+import { Alegreya } from '@next/font/google'
+
+const alegreya = Alegreya({ subsets: ['latin'] })
 
 const marble: MantineColorsTuple = [
   '#faf7ea',
@@ -30,4 +33,5 @@ const purple: MantineColorsTuple = [
 export const theme = createTheme({
   primaryColor: 'marble',
   colors: { marble, purple },
+  fontFamily: alegreya.style.fontFamily,
 })

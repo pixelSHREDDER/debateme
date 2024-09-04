@@ -19,7 +19,7 @@ export default function JoinDebate({ debateId }: { debateId: number }) {
   if (!debateId) { return 'Debate not found' }
 
   return (
-      <section>
+      <section data-testid="join-section">
           <h2>Join this Debate</h2>
           <p>You have been invited to join this debate. Click below to join.</p>
           <form action={formAction}>

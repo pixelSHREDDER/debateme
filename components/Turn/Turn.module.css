@@ -1,0 +1,14 @@
+.card {
+  background-color: light-dark(var(--mantine-color-marble-2), var(--mantine-color-marble-light));
+  margin-inline: min(40px, 3rem) 0;
+  box-shadow: 3px 5px 4px light-dark(rgba(0,0,0,0.6), rgba(255,255,255,0.3));
+
+  mark {
+    background-color: light-dark(rgba(255, 255, 0, 1), rgba(255, 255, 0, 0.6));
+  }
+}
+
+.opponentCard {
+  background-color: light-dark(var(--mantine-color-purple-1), var(--mantine-color-purple-light));
+  margin-inline: 0 min(40px, 3rem);
+}

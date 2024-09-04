@@ -6,19 +6,23 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, '.')
-    }
+      '@': path.resolve(__dirname, '.'),
+      '@next/font/(.*)': require.resolve('next/dist/build/jest/__mocks__/nextFontMock.js'),
+    },
   },
   test: {
     coverage: {
       include: [
-        '**/*.test.ts',
-        '**/*.test.tsx',
-        '!tests'
+        '**/*.ts',
+        '**/*.tsx',
+        '!tests',
+        '!**/*.story.ts',
+        '!**/*.story.tsx'
       ],
       reporter: ['text', 'json', 'html'],
     },
     environment: 'jsdom',
+    globals: true,
     include: [
       '**/*.test.ts',
       '**/*.test.tsx'

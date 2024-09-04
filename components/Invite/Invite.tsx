@@ -30,7 +30,7 @@ export default function Invite({ debateId }: { debateId: number }) {
   if (!debateId) { return 'Debate not found' }
 
   return (
-    <section>
+    <section data-testid="invite-section">
       <h2>Invite Your Opponent to Join this Debate</h2>
       <p>Share the link below with your opponent, so they can join and start the debate! NOTE: Invite link will expire after use.</p>
       { inviteLink.length ?
