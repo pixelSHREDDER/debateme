@@ -1,7 +1,7 @@
 'use client'
 
 import { createTheme, MantineColorsTuple } from '@mantine/core'
-import { Alegreya } from '@next/font/google'
+import { Alegreya } from 'next/font/google'
 
 const alegreya = Alegreya({ subsets: ['latin'] })
 

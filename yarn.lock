@@ -3421,15 +3421,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/font@npm:^14.2.6":
-  version: 14.2.6
-  resolution: "@next/font@npm:14.2.6"
-  peerDependencies:
-    next: "*"
-  checksum: 10c0/7723c6decf2dff2f336c9616381b917130d61748b0e1aaa79b0b0045ef2ef8c1de98d0de7451296bb3cd707339258794f368bff802a6b01ea8261a226678a97a
-  languageName: node
-  linkType: hard
-
 "@next/swc-darwin-arm64@npm:14.1.4":
   version: 14.1.4
   resolution: "@next/swc-darwin-arm64@npm:14.1.4"
@@ -8184,7 +8175,6 @@ __metadata:
     "@mantine/hooks": "npm:7.11.2"
     "@next/bundle-analyzer": "npm:^14.2.4"
     "@next/eslint-plugin-next": "npm:^14.2.4"
-    "@next/font": "npm:^14.2.6"
     "@playwright/test": "npm:^1.45.3"
     "@prisma/client": "npm:^5.14.0"
     "@snaplet/copycat": "npm:^5.0.0"

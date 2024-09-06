@@ -15,7 +15,7 @@ Object.defineProperty(window, 'matchMedia', {
 })
 
 beforeAll(() => {
-  vi.mock('@next/font/google', () => ({
+  vi.mock('next/font/google', () => ({
     Alegreya: () => ({
       style: {
         fontFamily: 'mocked',

@@ -4,13 +4,19 @@ import { render, screen } from '@testing-library/react'
 import ProviderWrapper from '@/tests/helpers/ProviderWrapper'
 import { getUsers } from '@/mocks/users'
 import { createDebates } from '@/mocks/debates'
+import * as reactDom from 'react-dom'
 import NewTurn from './NewTurn'
 
 const debates = createDebates()
 const users: auth0Hooks.UserProfile[] = getUsers()
 
 describe('New Turn component', () => {
-  const useFormStateSpy = vi.spyOn(auth0Hooks, 'useUser')
+  /*vi.mock('react-dom', () => ({
+      ...vi.requireActual('react-dom'),
+      useFormStatus: vi.fn(),
+    }))*/
+
+  const useFormStateSpy = vi.spyOn(reactDom, 'useFormState')
   const useUserSpy = vi.spyOn(auth0Hooks, 'useUser')
 
   beforeEach(() => {
@@ -20,6 +26,7 @@ describe('New Turn component', () => {
       isLoading: false,
       user: users[0],
     })
+    useFormStateSpy.mockImplementation(() => ([{}, vi.fn(), false]))
   })
 
   afterEach(() => {
