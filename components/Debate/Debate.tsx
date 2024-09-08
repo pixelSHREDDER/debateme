@@ -89,12 +89,10 @@ export default function Debate({ debate, updateDebate }: IDebate) {
     return <JoinDebate debateId={debate.id} />
   }*/
 
-  if (debate.opponentSub === null && debate.creatorSub === user.sub) {
-    return <Invite debateId={debate.id} />
-  }
-  if (!debate.opponentSub && (debate.creatorSub !== user.sub)) {
-    return <JoinDebate debateId={debate.id} />
-    return
+  if (debate.opponentSub === null) {
+    return (debate.creatorSub === user.sub) ?
+    <Invite debateId={debate.id} /> :
+    <JoinDebate debateId={debate.id} />
   }
 
   return (

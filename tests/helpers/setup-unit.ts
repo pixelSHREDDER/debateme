@@ -22,4 +22,10 @@ beforeAll(() => {
       },
     }),
   }))
+
+  vi.mock('react-dom', () => ({
+    ...vi.importActual('react-dom'),
+    useFormState: () => [{ message: '' }, vi.fn()],
+    useFormStatus: () => [false],
+  }))
 })

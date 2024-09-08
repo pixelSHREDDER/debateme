@@ -7,7 +7,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '.'),
-      '@next/font/(.*)': require.resolve('next/dist/build/jest/__mocks__/nextFontMock.js'),
     },
   },
   test: {

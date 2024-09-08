@@ -28,8 +28,12 @@ const onTurnSubmit = async (payload: FormData) => {
   }
 }
 
-return user && user.sub ?
-    <form action={onTurnSubmit}>
+if (!user || !user.sub) {
+  return ''
+}
+
+return (
+    <form action={onTurnSubmit} data-testid="new-turn-form">
       <input
         type="hidden"
         id="debateId"
@@ -46,11 +50,11 @@ return user && user.sub ?
         id="bodyString"
         name="bodyString" />
       <label htmlFor="body">Text</label>
-      <Editor id="body" onUpdate={onUpdate} required="true"></Editor>
+      <Editor id="body" onUpdate={onUpdate} required="true" testid="new-turn-editor"></Editor>
       <p aria-live="polite">
         {state?.message}
       </p>
       <FormSubmitButton label="Finish Your Turn" />
-    </form> :
-  'login'
+    </form>
+  )
 }

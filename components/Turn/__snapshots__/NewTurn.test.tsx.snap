@@ -1,0 +1,38 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`New Turn component > New Turn > renders correctly 1`] = `
+<form
+  data-testid="new-turn-form"
+>
+  <input
+    id="debateId"
+    name="debateId"
+    type="hidden"
+    value="1"
+  />
+  <input
+    id="userSub"
+    name="userSub"
+    type="hidden"
+    value="auth0|1234567890abcdefghij1234"
+  />
+  <input
+    id="bodyString"
+    name="bodyString"
+    type="hidden"
+  />
+  <label
+    for="body"
+  >
+    Text
+  </label>
+  <p
+    aria-live="polite"
+  />
+  <button
+    type="submit"
+  >
+    Finish Your Turn
+  </button>
+</form>
+`;

@@ -5,7 +5,7 @@ import { TUserDebates } from '@/lib/prisma-types'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { Container, Grid } from '@mantine/core'
 import { Debate } from '@prisma/client'
-import Link from 'next/link'
+// import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import DebateCard from './DebateCard'
 

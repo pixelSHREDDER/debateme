@@ -41,6 +41,14 @@ describe('Debate component', () => {
     expect(screen.getByTestId('invite-section')).toMatchSnapshot()
   })
 
+  test('renders join debate screen correctly', () => {
+    render(
+      <Debate debate={debates[4]} updateDebate={vi.fn()} />,
+      { wrapper: ProviderWrapper },
+    )
+    expect(screen.getByTestId('join-section')).toMatchSnapshot()
+  })
+
   test('hides New Turn and renders cooldown message correctly', () => {
     render(
       <Debate debate={debates[2]} updateDebate={vi.fn()} />,

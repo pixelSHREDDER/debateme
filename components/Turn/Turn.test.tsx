@@ -19,7 +19,7 @@ describe('Turn component', () => {
     test('renders correctly', () => {
       const { container } = render(
         <Turn createdAt={turns[0].createdAt} isOpponent={false}>
-          <div dangerouslySetInnerHTML={{ __html: turns[0].body }} />
+          <div dangerouslySetInnerHTML={{ __html: turns[0].body as any }} />
         </Turn>,
         { wrapper: ProviderWrapper },
       )
@@ -30,8 +30,8 @@ describe('Turn component', () => {
   describe('Opponent\'s turn', () => {
     test('renders correctly', () => {
       const { container } = render(
-        <Turn createdAt={turns[0].createdAt} isOpponent={true}>
-          <div dangerouslySetInnerHTML={{ __html: turns[0].body }} />
+        <Turn createdAt={turns[0].createdAt} isOpponent>
+          <div dangerouslySetInnerHTML={{ __html: turns[0].body as any }} />
         </Turn>,
         { wrapper: ProviderWrapper },
     )

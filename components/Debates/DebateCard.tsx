@@ -25,7 +25,7 @@ interface IDebateCard {
   topic: string
 }
 
-export default function DebateCard({ creatorSub, id, opponentSub, topic }: IDebateCard) {
+export default function DebateCard({ /* creatorSub, */ id, opponentSub, topic }: IDebateCard) {
   return (
     <Card className={cx(classes.card, marble.marble)} radius="sm">
       <Card.Section p="lg" pb="">
@@ -59,7 +59,7 @@ export default function DebateCard({ creatorSub, id, opponentSub, topic }: IDeba
             }
           </Avatar.Group>
           <ActionIcon variant="default" size="lg" radius="md">
-            {!!opponentSub ?
+            {opponentSub ?
               <IconPencil size="1.1rem" /> :
               <IconUserPlus size="1.1rem" />
             }

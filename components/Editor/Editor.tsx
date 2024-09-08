@@ -1,7 +1,6 @@
 'use client'
 
 import './editor.scss'
-
 //import ListItem from '@tiptap/extension-list-item'
 import { EditorProvider, useCurrentEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
@@ -203,21 +202,22 @@ const extensions = [
 interface IEditor {
   id: string,
   onUpdate: Function,
-  required: string
+  required: string,
+  testid: string,
 }
 
 export default function Editor(
-  { id, onUpdate, required }: IEditor,
+  { id, onUpdate, required, testid }: IEditor,
   { children }: { children: React.ReactNode }
 ) {
   return (
-    <EditorProvider
-      editorProps={{ attributes: { id, required } }}
-      slotBefore={<MenuBar />}
-      extensions={extensions}
-      content=""
-      onUpdate={e => onUpdate(e.editor.getHTML())}>
-      {children}
-    </EditorProvider>
+      <EditorProvider
+        editorProps={{ attributes: { id, required, testid } }}
+        slotBefore={<MenuBar />}
+        extensions={extensions}
+        content=""
+        onUpdate={e => onUpdate(e.editor.getHTML())}>
+        {children}
+      </EditorProvider>
   )
 }
