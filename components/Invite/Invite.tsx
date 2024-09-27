@@ -4,7 +4,10 @@
 
 import getInviteId from '@/actions/get-invite-id'
 import { useUser } from '@auth0/nextjs-auth0/client'
+import { Alert, Skeleton, TextInput } from '@mantine/core'
 import { useCallback, useEffect, useState } from 'react'
+import { theme } from '@/theme'
+import FormAlert from '../Forms/FormAlert'
 
 export default function Invite({ debateId }: { debateId: number }) {
   const { user, error, isLoading } = useUser()
@@ -24,22 +27,39 @@ export default function Invite({ debateId }: { debateId: number }) {
     getInviteLink()
   }, [getInviteLink, user])
 
-  if (isLoading) { return 'loading user...' }
-  if (error) { return JSON.stringify(error) }
-  if (!user || !user.sub) { return 'please login' }
-  if (!debateId) { return 'Debate not found' }
+  if (error) {
+    return (
+      <>
+        <h2>Invite Your Opponent to Join this Debate</h2>
+        <FormAlert
+          message={error.message || '....but we do not know what. Try reloading and check again.'}
+          title="Something went wrong"
+          type={2} />
+      </>
+    )
+  }
 
   return (
     <section data-testid="invite-section">
       <h2>Invite Your Opponent to Join this Debate</h2>
-      <p>Share the link below with your opponent, so they can join and start the debate! NOTE: Invite link will expire after use.</p>
-      { inviteLink.length ?
-        <input
-          type="text"
-          id="inviteId"
-          name="inviteId"
+      <Skeleton mb={6} visible={isLoading || !user || !user.sub}>
+        <p>Share the link below with your opponent, so they can join and start the debate!</p>
+      </Skeleton>
+      <Skeleton mb={6} height="55" visible={isLoading || !user || !user.sub}>
+        <Alert
+          variant="light"
+          color={theme.colors?.purple?.[6] || 'purple'}
+          radius="lg"
+          my={20}>
+            Remember, this invite link will expire after being used once.
+        </Alert>
+      </Skeleton>
+      {!!debateId && inviteLink.length ?
+        <TextInput
+          aria-label="Invite link"
+          readOnly
           value={inviteLink} /> :
-        'loading invite link....'
+        <Skeleton height={36} radius="sm" />
       }
     </section>
   )

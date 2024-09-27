@@ -54,3 +54,12 @@
     margin: 2rem 0;
   }
 }
+
+.ProseMirror {
+  background-color: var(--mantine-color-body);
+  border: 2px ridge light-dark(var(--mantine-primary-color-4), var(--mantine-primary-color-6));
+  border-radius: var(--mantine-radius-sm) var(--mantine-radius-lg);
+  box-shadow: 3px 4px 6px inset light-dark(rgba(0,0,0,0.3), rgba(255,255,255,0.3));
+  margin-block: 1em;
+  padding-inline: 1em;
+}

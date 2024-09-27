@@ -3,27 +3,25 @@ import { http, HttpResponse, delay } from 'msw'
 import { UserProfile } from '@auth0/nextjs-auth0/client'
 import { createDebates } from '@/mocks/debates'
 import { getUsers } from '@/mocks/users'
-import Debate from './Debate'
+import Invite from './Invite'
 
-const meta: Meta<typeof Debate> = {
-  title: 'Debate',
-  component: Debate,
+const meta: Meta<typeof Invite> = {
+  title: 'Invite',
+  component: Invite,
 }
 
 export default meta
 
-type Story = StoryObj<typeof Debate>
+type Story = StoryObj<typeof Invite>
 
 const UserData: UserProfile = getUsers()[0]
 const debates = createDebates()
-const updateDebate = () => {}
 
 const loginHandler = http.get('http://localhost:6006/api/auth/me', () => HttpResponse.json(UserData))
 
-export const YourTurn: Story = {
+export const InviteYourOpponent: Story = {
   args: {
-    debate: debates[0],
-    updateDebate,
+    debateId: debates[0].id,
   },
   parameters: {
     msw: {
@@ -34,40 +32,8 @@ export const YourTurn: Story = {
   },
 }
 
-export const OpponentsTurn: Story = {
-  args: {
-    debate: debates[1],
-    updateDebate,
-  },
-  parameters: YourTurn.parameters,
-}
-
-export const WaitForCooldown: Story = {
-  args: {
-    debate: debates[2],
-    updateDebate,
-  },
-  parameters: YourTurn.parameters,
-}
-
-export const NoOpponent: Story = {
-  args: {
-    debate: debates[3],
-    updateDebate,
-  },
-  parameters: YourTurn.parameters,
-}
-
-export const InvitedToJoin: Story = {
-  args: {
-    debate: debates[4],
-    updateDebate,
-  },
-  parameters: YourTurn.parameters,
-}
-
 export const Loading: Story = {
-  args: YourTurn.args,
+  args: InviteYourOpponent.args,
   parameters: {
     msw: {
       handlers: [
@@ -80,7 +46,7 @@ export const Loading: Story = {
 }
 
 export const Error: Story = {
-  args: YourTurn.args,
+  args: InviteYourOpponent.args,
   parameters: {
     msw: {
       handlers: [
@@ -95,14 +61,13 @@ export const Error: Story = {
 
 export const NotFound: Story = {
   args: {
-    debate: null,
-    updateDebate,
+    debateId: -1,
   },
-  parameters: YourTurn.parameters,
+  parameters: InviteYourOpponent.parameters,
 }
 
 export const LoggedOut: Story = {
-  args: YourTurn.args,
+  args: InviteYourOpponent.args,
   parameters: {
     msw: {
       handlers: [

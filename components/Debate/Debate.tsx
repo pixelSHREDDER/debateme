@@ -5,8 +5,11 @@ import NewTurn from '@/components/Turn/NewTurn'
 import { TDebate } from '@/lib/prisma-types'
 import Turns from '@/components/Turn/Turns'
 import { useMemo } from 'react'
+import { theme } from '@/theme'
+import { Alert, Skeleton } from '@mantine/core'
 import JoinDebate from '../Invite/JoinDebate'
 import Invite from '../Invite/Invite'
+import FormAlert from '../Forms/FormAlert'
 
 interface IDebate {
   debate: TDebate | null,
@@ -53,8 +56,34 @@ export default function Debate({ debate, updateDebate }: IDebate) {
 
   const renderNewTurn = useMemo(() => {
     if (!debate) { return }
-    if (isCooldownActive) { return 'wait for cooldown' }
-    if (!isItYourTurn) { return 'wait for your opponent' }
+    if (isCooldownActive) {
+      const lastTurn = debate.turn?.at(-1)
+      const turnTime = (
+        lastTurn ?
+        `You can start your next turn at ${new Date(Date.now() - lastTurn.createdAt.getSeconds()).toLocaleTimeString()}. In the meantime, why not read over the previous turns? You never know what you might've missed!` :
+        'But we don&apos;t know when your next turn will start. Try refreshing the page.'
+      )
+      return (
+        <Alert
+          variant="light"
+          color={theme.colors?.purple?.[6] || 'purple'}
+          radius="lg"
+          my={20}>
+            The cooldown period is active. {turnTime}
+        </Alert>
+      )
+    }
+    if (!isItYourTurn) {
+      return (
+        <Alert
+          variant="light"
+          color={theme.colors?.purple?.[6] || 'purple'}
+          radius="lg"
+          my={20}>
+            It&apos;s your opponent&apos;s turn, please wait....
+        </Alert>
+      )
+    }
 
     return <NewTurn debate={debate} onSubmit={updateDebate} />
   }, [debate, isCooldownActive, isItYourTurn, updateDebate])
@@ -71,23 +100,42 @@ export default function Debate({ debate, updateDebate }: IDebate) {
     }
   }, [isLoading, updateDebate, user])*/
 
-  if (isLoading) { return 'loading....' }
+  if (isLoading) {
+    return (
+      <>
+        <Skeleton width="auto" ml="3rem" height={300} radius="lg" />
+        <Skeleton width="auto" mt="2em" mr="3rem" height={300} radius="lg" />
+      </>
+    )
+  }
+
   if (error) {
     console.error(error)
-    return 'error'
+    return (
+      <FormAlert
+        message={error.message || '....but we do not know what. Try reloading and check again.'}
+        title="Something went wrong"
+        type={2} />
+    )
   }
-  if (!user) { return 'user not found' }
-  if (!debate) { return 'debate not found' }
-  /*if (isLoading) { return 'loading user...' }
-  if (error) { return JSON.stringify(error) }
-  if (!user) { return 'please login' }
-  if (!debate) { return 'Debate not found' }*/
-  /*if (!debate.opponentSub && (debate.creatorSub === user.sub)) {
-    return <Invite debateId={debate.id} />
+
+  if (!user) {
+    return (
+      <FormAlert
+        message="Try logging in again."
+        title="Something went wrong"
+        type={2} />
+    )
   }
-  if (!debate.opponentSub) {
-    return <JoinDebate debateId={debate.id} />
-  }*/
+
+  if (!debate) {
+    return (
+      <FormAlert
+        message="Sorry, we couldn't find that debate."
+        title="Something went wrong"
+        type={2} />
+    )
+  }
 
   if (debate.opponentSub === null) {
     return (debate.creatorSub === user.sub) ?
