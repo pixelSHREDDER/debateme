@@ -4,7 +4,7 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 import NewTurn from '@/components/Turn/NewTurn'
 import { TDebate } from '@/lib/prisma-types'
 import Turns from '@/components/Turn/Turns'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { theme } from '@/theme'
 import { Alert, Skeleton } from '@mantine/core'
 import JoinDebate from '../Invite/JoinDebate'
@@ -88,7 +88,7 @@ export default function Debate({ debate, updateDebate }: IDebate) {
     return <NewTurn debate={debate} onSubmit={updateDebate} />
   }, [debate, isCooldownActive, isItYourTurn, updateDebate])
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (isLoading) {
       return
     }
@@ -96,9 +96,9 @@ export default function Debate({ debate, updateDebate }: IDebate) {
       updateDebate()
     } else {
       // return <signin/register flow>
-      //console.log('no user')
+      console.log('no user')
     }
-  }, [isLoading, updateDebate, user])*/
+  }, [isLoading, updateDebate, user])
 
   if (isLoading) {
     return (

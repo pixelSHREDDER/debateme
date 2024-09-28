@@ -37,7 +37,7 @@ export default function NewTurn({ debate, onSubmit }: { debate: TDebate, onSubmi
 
   return (
     <form action={onTurnSubmit} data-testid="new-turn-form">
-      <Fieldset mt={20} mx={0} radius="lg" variant="filled" legend="It's your turn!">
+      <Fieldset mt={30} mx={0} radius="lg" variant="filled" legend="It's your turn!">
         <input
           type="hidden"
           id="debateId"

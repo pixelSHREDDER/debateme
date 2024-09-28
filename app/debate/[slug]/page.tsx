@@ -6,8 +6,8 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 import { TDebate } from '@/lib/prisma-types'
 import getDebateTurns from '@/actions/get-debate-turns'
 import { useState, useCallback } from 'react'
-import JoinDebate from '@/components/Invite/JoinDebate'
-import Invite from '@/components/Invite/Invite'
+//import JoinDebate from '@/components/Invite/JoinDebate'
+//import Invite from '@/components/Invite/Invite'
 
 interface IDebatePage {
   params: { slug: string }
@@ -93,13 +93,13 @@ export default function DebatePage({ params }: IDebatePage) {
     if (isLoading) { return 'loading user...' }
     if (error) { return JSON.stringify(error) }
     if (!user) { return 'please login' }
-    if (!debateData) { return 'Debate not found' }
+    /*if (!debateData) { return 'Debate not found' }
     if (!debateData.opponentSub && (debateData.creatorSub === user.sub)) {
       return <Invite debateId={debateId} />
     }
     if (!debateData.opponentSub) {
       return <JoinDebate debateId={debateId} />
-    }
+    }*/
     return <Debate debate={debateData} updateDebate={updateDebateData} />
   //return <Debate debateId={parseInt(params.slug, 10)} />
   /*return (
