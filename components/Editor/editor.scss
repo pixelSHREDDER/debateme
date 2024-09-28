@@ -56,6 +56,7 @@
 }
 
 .ProseMirror {
+  min-height: 16ch;
   background-color: var(--mantine-color-body);
   border: 2px ridge light-dark(var(--mantine-primary-color-4), var(--mantine-primary-color-6));
   border-radius: var(--mantine-radius-sm) var(--mantine-radius-lg);

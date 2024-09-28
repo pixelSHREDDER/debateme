@@ -3,7 +3,9 @@
 import cx from 'clsx'
 import { ActionIcon, Group, Tooltip } from '@mantine/core'
 import './editor.scss'
-//import ListItem from '@tiptap/extension-list-item'
+import Link from '@tiptap/extension-link'
+import Subscript from '@tiptap/extension-subscript'
+import Superscript from '@tiptap/extension-superscript'
 import { EditorProvider, useCurrentEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import {
@@ -15,20 +17,39 @@ import {
   IconCode,
   IconHeading,
   IconItalic,
+  IconLink,
+  IconLinkMinus,
   IconList,
   IconListNumbers,
   IconPageBreak,
   IconPilcrow,
   IconStrikethrough,
+  IconSubscript,
+  IconSuperscript,
 } from '@tabler/icons-react'
+import { useCallback } from 'react'
 import editorStyles from './Editor.module.css'
 
 const MenuBar = () => {
   const { editor } = useCurrentEditor()
 
-  if (!editor) {
-    return null
-  }
+  const setLink = useCallback(() => {
+    if (!editor) { return null }
+
+    const previousUrl = editor.getAttributes('link').href
+    // eslint-disable-next-line no-alert
+    const url = window.prompt('URL', previousUrl)
+
+    if (url === null) { return }
+    if (url === '') {
+      editor.chain().focus().extendMarkRange('link').unsetLink().run()
+      return
+    }
+
+    editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
+  }, [editor])
+
+  if (!editor) { return null }
 
   return (
       <Group gap="xs" justify="flex-start">
@@ -81,6 +102,38 @@ const MenuBar = () => {
             className={cx(editorStyles.icon, { [editorStyles.isActive]: editor.isActive('strike') })}
           >
             <IconStrikethrough stroke={editor.isActive('strike') ? 3 : 1.5} />
+          </ActionIcon>
+        </Tooltip>
+        <Tooltip label="Subscript">
+          <ActionIcon
+            onClick={() => editor.chain().focus().toggleSubscript().run()}
+            disabled={
+              !editor.can()
+                .chain()
+                .focus()
+                .toggleSubscript()
+                .run()
+            }
+            aria-label="Toggle subscript"
+            className={cx(editorStyles.icon, { [editorStyles.isActive]: editor.isActive('subscript') })}
+          >
+            <IconSubscript stroke={editor.isActive('subscript') ? 3 : 1.5} />
+          </ActionIcon>
+        </Tooltip>
+        <Tooltip label="Superscript">
+          <ActionIcon
+            onClick={() => editor.chain().focus().toggleSuperscript().run()}
+            disabled={
+              !editor.can()
+                .chain()
+                .focus()
+                .toggleSuperscript()
+                .run()
+            }
+            aria-label="Toggle superscript"
+            className={cx(editorStyles.icon, { [editorStyles.isActive]: editor.isActive('superscript') })}
+          >
+            <IconSuperscript stroke={editor.isActive('superscript') ? 3 : 1.5} />
           </ActionIcon>
         </Tooltip>
         {/*<Tooltip label="">
@@ -181,6 +234,23 @@ const MenuBar = () => {
         </Tooltip>
       </ActionIcon.Group>
       <ActionIcon.Group>
+        <Tooltip label="Add/edit link">
+          <ActionIcon
+            onClick={setLink}
+            aria-label="Add or edit link"
+            className={cx(editorStyles.icon, { [editorStyles.isActive]: editor.isActive('link') })}>
+            <IconLink stroke={1.5} />
+          </ActionIcon>
+        </Tooltip>
+        <Tooltip label="Remove link">
+          <ActionIcon
+            onClick={() => editor.chain().focus().unsetLink().run()}
+            disabled={!editor.isActive('link')}
+            aria-label="Remove link"
+            className={editorStyles.icon}>
+            <IconLinkMinus stroke={1.5} />
+          </ActionIcon>
+        </Tooltip>
         <Tooltip label="Add a horizontal rule">
           <ActionIcon
             onClick={() => editor.chain().focus().setHorizontalRule().run()}
@@ -239,6 +309,9 @@ const MenuBar = () => {
 }
 
 const extensions = [
+  Link.configure({
+    defaultProtocol: 'https',
+  }),
   StarterKit.configure({
     bulletList: {
       keepMarks: true,
@@ -249,6 +322,8 @@ const extensions = [
       keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
     },
   }),
+  Subscript,
+  Superscript,
 ]
 
 interface IEditor {

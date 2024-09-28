@@ -4999,6 +4999,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tiptap/extension-link@npm:^2.7.4":
+  version: 2.7.4
+  resolution: "@tiptap/extension-link@npm:2.7.4"
+  dependencies:
+    linkifyjs: "npm:^4.1.0"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+    "@tiptap/pm": ^2.7.0
+  checksum: 10c0/043741757b0285cbd0b129d7b69fac250bc59fe9e4896490f8435291c980dbf87f0bd8fcd0ab94a87bc4d31ca3f81de9ed33c43363e5539719019434f2603b37
+  languageName: node
+  linkType: hard
+
 "@tiptap/extension-list-item@npm:^2.3.0":
   version: 2.3.0
   resolution: "@tiptap/extension-list-item@npm:2.3.0"
@@ -5032,6 +5044,24 @@ __metadata:
   peerDependencies:
     "@tiptap/core": ^2.0.0
   checksum: 10c0/27925db4ba30f7b9772c405f87abe42b5f48dc1e05b46467c9292383b6f8e9de0dfd4be2c7400fd72a9782b461054c2784cfb228aee9043f696414513987b951
+  languageName: node
+  linkType: hard
+
+"@tiptap/extension-subscript@npm:^2.7.4":
+  version: 2.7.4
+  resolution: "@tiptap/extension-subscript@npm:2.7.4"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+  checksum: 10c0/0606c314ae6447933afb4e2057929eb74855c54dc0aa3994f9343f407501383edfab238e6282dec29651579c793a45860e633efdfa9321a9006b550a68ae924f
+  languageName: node
+  linkType: hard
+
+"@tiptap/extension-superscript@npm:^2.7.4":
+  version: 2.7.4
+  resolution: "@tiptap/extension-superscript@npm:2.7.4"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+  checksum: 10c0/998db59a218b3fdca2eb6282d48564647bcbf94a8e5d05fc85232cfb305f4d706b39d2ebb91d242b2e02a7b716988ddde2e2203c344ed9ce58bbbbd1b696ecdd
   languageName: node
   linkType: hard
 
@@ -8246,6 +8276,9 @@ __metadata:
     "@testing-library/dom": "npm:^10.1.0"
     "@testing-library/react": "npm:^16.0.0"
     "@tiptap/core": "npm:^2.3.0"
+    "@tiptap/extension-link": "npm:^2.7.4"
+    "@tiptap/extension-subscript": "npm:^2.7.4"
+    "@tiptap/extension-superscript": "npm:^2.7.4"
     "@tiptap/pm": "npm:^2.3.0"
     "@tiptap/react": "npm:^2.3.0"
     "@tiptap/starter-kit": "npm:^2.3.0"
@@ -12316,6 +12349,13 @@ __metadata:
   dependencies:
     uc.micro: "npm:^2.0.0"
   checksum: 10c0/ff4abbcdfa2003472fc3eb4b8e60905ec97718e11e33cca52059919a4c80cc0e0c2a14d23e23d8c00e5402bc5a885cdba8ca053a11483ab3cc8b3c7a52f88e2d
+  languageName: node
+  linkType: hard
+
+"linkifyjs@npm:^4.1.0":
+  version: 4.1.3
+  resolution: "linkifyjs@npm:4.1.3"
+  checksum: 10c0/9fb71da06ee710b5587c8b61ff9a0e45303d448f61fab135e44652cff95c09c1abe276158a72384cff6f35a2371d1cec33dfaa7e5280b71dbb142b43d210c75a
   languageName: node
   linkType: hard
 
