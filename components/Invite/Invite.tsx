@@ -47,6 +47,7 @@ export default function Invite({ debateId }: { debateId: number }) {
       </Skeleton>
       <Skeleton mb={6} height="55" visible={isLoading || !user || !user.sub}>
         <Alert
+          id="alert_invite_link"
           variant="light"
           color={theme.colors?.purple?.[6] || 'purple'}
           radius="lg"

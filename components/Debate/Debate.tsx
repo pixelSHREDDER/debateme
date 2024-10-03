@@ -65,6 +65,7 @@ export default function Debate({ debate, updateDebate }: IDebate) {
       )
       return (
         <Alert
+          id="alert_debate_cooldown"
           variant="light"
           color={theme.colors?.purple?.[6] || 'purple'}
           radius="lg"
@@ -76,6 +77,7 @@ export default function Debate({ debate, updateDebate }: IDebate) {
     if (!isItYourTurn) {
       return (
         <Alert
+          id="alert_debate_opponents_turn"
           variant="light"
           color={theme.colors?.purple?.[6] || 'purple'}
           radius="lg"

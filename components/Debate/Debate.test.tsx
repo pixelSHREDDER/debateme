@@ -1,5 +1,5 @@
 import * as auth0Hooks from '@auth0/nextjs-auth0/client'
-import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
+import { afterAll, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import ProviderWrapper from '@/tests/helpers/ProviderWrapper'
 import { createDebates } from '@/mocks/debates'
@@ -12,8 +12,12 @@ const users: auth0Hooks.UserProfile[] = getUsers()
 describe('Debate component', () => {
   const useUserSpy = vi.spyOn(auth0Hooks, 'useUser')
 
+  beforeAll(() => {
+    const date = new Date('2024-04-13T12:25:02Z')
+    vi.setSystemTime(date)
+  })
+
   beforeEach(() => {
-    vi.useFakeTimers()
     useUserSpy.mockReturnValue({
       checkSession: vi.fn(),
       isLoading: false,
@@ -21,7 +25,7 @@ describe('Debate component', () => {
     })
   })
 
-  afterEach(() => {
+  afterAll(() => {
     vi.useRealTimers()
   })
 

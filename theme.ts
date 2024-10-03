@@ -29,9 +29,21 @@ const purple: MantineColorsTuple = [
   '#5f2aa0',
   '#52228d',
 ]
+const customGray: MantineColorsTuple = [
+  '#f0f3fd',
+  '#e0e3ee',
+  '#bfc4d9',
+  '#9ca4c5',
+  '#7e88b3',
+  '#6b77a9',
+  '#616ea5',
+  '#515d91',
+  '#475283',
+  '#3a4775',
+]
 
 export const theme = createTheme({
   primaryColor: 'marble',
-  colors: { marble, purple },
-  fontFamily: alegreya.style.fontFamily,
+  colors: { marble, purple, gray: customGray },
+  fontFamily: `${alegreya.style.fontFamily}, sans-serif`,
 })

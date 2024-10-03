@@ -4,35 +4,79 @@ exports[`New Turn component > New Turn > renders correctly 1`] = `
 <form
   data-testid="new-turn-form"
 >
-  <input
-    id="debateId"
-    name="debateId"
-    type="hidden"
-    value="1"
-  />
-  <input
-    id="userSub"
-    name="userSub"
-    type="hidden"
-    value="auth0|1234567890abcdefghij1234"
-  />
-  <input
-    id="bodyString"
-    name="bodyString"
-    type="hidden"
-  />
-  <label
-    for="body"
+  <fieldset
+    class="m_ef274e49 m_e9408a47 mantine-Fieldset-root"
+    data-variant="filled"
+    radius="lg"
+    style="--fieldset-radius: var(--mantine-radius-lg); margin-inline: 0rem;"
   >
-    Text
-  </label>
-  <p
-    aria-live="polite"
-  />
-  <button
-    type="submit"
-  >
-    Finish Your Turn
-  </button>
+    <legend
+      class="m_90794832 mantine-Fieldset-legend"
+    >
+      It's your turn!
+    </legend>
+    <input
+      id="debateId"
+      name="debateId"
+      type="hidden"
+      value="1"
+    />
+    <input
+      id="userSub"
+      name="userSub"
+      type="hidden"
+      value="auth0|1234567890abcdefghij1234"
+    />
+    <input
+      id="bodyString"
+      name="bodyString"
+      type="hidden"
+    />
+    <div
+      class="m_8bffd616 mantine-Flex-root __m__-r1"
+      style="gap: calc(1.25rem * var(--mantine-scale)); align-items: center; justify-content: flex-start;"
+    >
+      <aside
+        aria-describedby="alert_quotes_:r3:-body"
+        class="_quotes_e6219c m_66836ed3 mantine-Alert-root"
+        data-variant="outline"
+        id="alert_quotes_:r3:"
+        role="alert"
+        style="--alert-radius: var(--mantine-radius-md); --alert-bg: transparent; --alert-color: #9562d2; --alert-bd: calc(0.0625rem * var(--mantine-scale)) solid #9562d2; font-style: italic; width: auto; max-width: 75%;"
+      >
+        <div
+          class="m_a5d60502 mantine-Alert-wrapper"
+        >
+          <div
+            class="m_667c2793 mantine-Alert-body"
+          >
+            <div
+              class="m_7fa78076 mantine-Alert-message"
+              data-variant="outline"
+              id="alert_quotes_:r3:-body"
+            >
+              “Don’t be a dick.” ― Unknown
+            </div>
+          </div>
+        </div>
+      </aside>
+      <button
+        class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+        data-variant="filled"
+        style="--button-radius: var(--mantine-radius-md); --button-bg: var(--mantine-color-marble-filled); --button-hover: var(--mantine-color-marble-filled-hover); --button-color: var(--mantine-color-white); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; flex-shrink: 0;"
+        type="submit"
+      >
+        <span
+          class="m_80f1301b mantine-Button-inner"
+        >
+          <span
+            class="m_811560b9 mantine-Button-label"
+          >
+            Finish Your Turn
+          </span>
+        </span>
+      </button>
+    </div>
+  </fieldset>
 </form>
 `;

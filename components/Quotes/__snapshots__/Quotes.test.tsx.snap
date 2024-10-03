@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Quotes component > renders correctly 1`] = `
+<aside
+  aria-describedby="alert_quotes_:r0:-body"
+  class="_quotes_e6219c m_66836ed3 mantine-Alert-root"
+  data-variant="outline"
+  id="alert_quotes_:r0:"
+  role="alert"
+  style="--alert-radius: var(--mantine-radius-md); --alert-bg: transparent; --alert-color: #9562d2; --alert-bd: calc(0.0625rem * var(--mantine-scale)) solid #9562d2; font-style: italic; width: auto; max-width: 75%;"
+>
+  <div
+    class="m_a5d60502 mantine-Alert-wrapper"
+  >
+    <div
+      class="m_667c2793 mantine-Alert-body"
+    >
+      <div
+        class="m_7fa78076 mantine-Alert-message"
+        data-variant="outline"
+        id="alert_quotes_:r0:-body"
+      >
+        “Don’t be a dick.” ― Unknown
+      </div>
+    </div>
+  </div>
+</aside>
+`;

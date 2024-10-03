@@ -1,13 +1,10 @@
 import { MantineProvider, ColorSchemeScript } from '@mantine/core'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import { UserProvider } from '@auth0/nextjs-auth0/client'
 import '@mantine/core/styles.css'
 import './globals.css'
 import TopBar from '@/components/TopBar/TopBar'
 import { theme } from '../theme'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -25,7 +22,7 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <UserProvider>
-        <body className={inter.className}>
+        <body>
           <MantineProvider theme={theme}>
             <TopBar />
             {children}

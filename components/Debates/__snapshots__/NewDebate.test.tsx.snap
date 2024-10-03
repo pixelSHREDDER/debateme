@@ -1,0 +1,201 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`New Debate component > New Debate > renders correctly 1`] = `
+<form
+  data-testid="new-debate-form"
+>
+  <fieldset
+    class="m_ef274e49 m_e9408a47 mantine-Fieldset-root"
+    data-variant="filled"
+    radius="lg"
+    style="--fieldset-radius: var(--mantine-radius-lg); margin-inline: 0rem;"
+  >
+    <div
+      class="m_46b77525 mantine-InputWrapper-root mantine-TextInput-root"
+    >
+      <div
+        class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
+        data-variant="default"
+      >
+        <input
+          aria-invalid="false"
+          class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
+          data-variant="default"
+          id="creatorSub"
+          name="creatorSub"
+          type="hidden"
+          value="auth0|1234567890abcdefghij1234"
+        />
+      </div>
+    </div>
+    <div
+      class="m_46b77525 mantine-InputWrapper-root mantine-TextInput-root"
+    >
+      <label
+        class="m_8fdc1311 mantine-InputWrapper-label mantine-TextInput-label"
+        data-required="true"
+        for="topic"
+        id="topic-label"
+      >
+        Topic
+        <span
+          aria-hidden="true"
+          class="m_78a94662 mantine-InputWrapper-required mantine-TextInput-required"
+        >
+           *
+        </span>
+      </label>
+      <div
+        class="m_6c018570 mantine-Input-wrapper mantine-TextInput-wrapper"
+        data-variant="default"
+      >
+        <input
+          aria-invalid="false"
+          class="m_8fb7ebe7 mantine-Input-input mantine-TextInput-input"
+          data-variant="default"
+          id="topic"
+          name="topic"
+          required=""
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      class="m_46b77525 mantine-InputWrapper-root mantine-NativeSelect-root"
+      style="max-width: max(50%, 200px);"
+    >
+      <label
+        class="m_8fdc1311 mantine-InputWrapper-label mantine-NativeSelect-label"
+        data-required="true"
+        for="cooldownMins"
+        id="cooldownMins-label"
+      >
+        Cooldown period between turns
+        <span
+          aria-hidden="true"
+          class="m_78a94662 mantine-InputWrapper-required mantine-NativeSelect-required"
+        >
+           *
+        </span>
+      </label>
+      <div
+        class="m_6c018570 mantine-Input-wrapper mantine-NativeSelect-wrapper"
+        data-pointer="true"
+        data-variant="default"
+        data-with-right-section="true"
+        style="--input-right-section-pointer-events: none;"
+      >
+        <select
+          aria-invalid="false"
+          class="m_8fb7ebe7 mantine-Input-input mantine-NativeSelect-input"
+          data-variant="default"
+          id="cooldownMins"
+          name="cooldownMins"
+          required=""
+        >
+          <option
+            value="180"
+          >
+            3 hours
+          </option>
+          <option
+            value="120"
+          >
+            2 hours
+          </option>
+          <option
+            value="60"
+          >
+            1 hour
+          </option>
+          <option
+            value="10"
+          >
+            10 minutes
+          </option>
+          <option
+            selected=""
+            value="5"
+          >
+            5 minutes
+          </option>
+          <option
+            value="1"
+          >
+            1 minute
+          </option>
+          <option
+            value="0"
+          >
+            No cooldown
+          </option>
+        </select>
+        <div
+          class="m_82577fc2 mantine-Input-section mantine-NativeSelect-section"
+          data-position="right"
+        >
+          <svg
+            class="m_2943220b mantine-ComboboxChevron-chevron"
+            data-combobox-chevron="true"
+            fill="none"
+            viewBox="0 0 15 15"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
+              fill="currentColor"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div
+      class="m_8bffd616 mantine-Flex-root __m__-rg"
+      style="gap: calc(1.25rem * var(--mantine-scale)); align-items: center; justify-content: flex-start;"
+    >
+      <aside
+        aria-describedby="alert_quotes_:ri:-body"
+        class="_quotes_e6219c m_66836ed3 mantine-Alert-root"
+        data-variant="outline"
+        id="alert_quotes_:ri:"
+        role="alert"
+        style="--alert-radius: var(--mantine-radius-md); --alert-bg: transparent; --alert-color: #9562d2; --alert-bd: calc(0.0625rem * var(--mantine-scale)) solid #9562d2; font-style: italic; width: auto; max-width: 75%;"
+      >
+        <div
+          class="m_a5d60502 mantine-Alert-wrapper"
+        >
+          <div
+            class="m_667c2793 mantine-Alert-body"
+          >
+            <div
+              class="m_7fa78076 mantine-Alert-message"
+              data-variant="outline"
+              id="alert_quotes_:ri:-body"
+            >
+              “Don’t be a dick.” ― Unknown
+            </div>
+          </div>
+        </div>
+      </aside>
+      <button
+        class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+        data-variant="filled"
+        style="--button-radius: var(--mantine-radius-md); --button-bg: var(--mantine-color-marble-filled); --button-hover: var(--mantine-color-marble-filled-hover); --button-color: var(--mantine-color-white); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; flex-shrink: 0;"
+        type="submit"
+      >
+        <span
+          class="m_80f1301b mantine-Button-inner"
+        >
+          <span
+            class="m_811560b9 mantine-Button-label"
+          >
+            Start Debating!
+          </span>
+        </span>
+      </button>
+    </div>
+  </fieldset>
+</form>
+`;

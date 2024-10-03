@@ -7,7 +7,7 @@ export default function Debates() {
       <h1>Debates</h1>
       <h2>Your Debates</h2>
       <DebateList />
-      <h2>Create New Debate</h2>
+      <h2>Start a New Debate</h2>
       <NewDebate />
     </>
   )

@@ -28,4 +28,6 @@ beforeAll(() => {
     useFormState: () => [{ message: '' }, vi.fn()],
     useFormStatus: () => [false],
   }))
+
+  vi.mock('@/components/Quotes/QuotesText.ts')
 })

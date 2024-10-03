@@ -9,9 +9,9 @@ export const createTurns: () => TTurn[] = () => {
     {
       id: 1,
       body: `
-          <h1>Didn't melt fairer keepsakes since Fellowship elsewhere.</h1>
+          <h3>Didn't melt fairer keepsakes since Fellowship elsewhere.</h3>
           <p>Woodlands payment <a href="#">Osgiliath</a> tightening. Barad-dur follow belly comforts tender tough bell? Many that live deserve death. Some that die deserve life. Outwitted teatime grasp defeated before stones reflection corset seen animals Saruman's call?</p>
-          <h2>Tad survive ensnare joy mistake courtesy Bagshot Row.</h2>
+          <h4>Tad survive ensnare joy mistake courtesy Bagshot Row.</h4>
           <p>Ligulas step drops both? You shall not pass! Tender respectable success Valar impressive unfriendly bloom scraped? Branch hey-diddle-diddle pony trouble'll sleeping during jump Narsil.</p>
           <h3>North valor overflowing sort Iáve mister kingly money?</h3>
           <p>Curse you and all the halflings! Deserted anytime Lake-town burned caves balls. Smoked lthilien forbids Thrain?</p>
@@ -149,11 +149,11 @@ export const createTurns: () => TTurn[] = () => {
       {
         id: 2,
         body: `
-            <h1>Didn't melt fairer keepsakes since Fellowship elsewhere.</h1>
+            <p>Didn't melt fairer keepsakes since Fellowship elsewhere.</p>
             <p>Woodlands payment <a href="#">Osgiliath</a> tightening. Barad-dur follow belly comforts tender tough bell? Many that live deserve death. Some that die deserve life. Outwitted teatime grasp defeated before stones reflection corset seen animals Saruman's call?</p>
-            <h2>Tad survive ensnare joy mistake courtesy Bagshot Row.</h2>
+            <p>Tad survive ensnare joy mistake courtesy Bagshot Row.</p>
             <p>Ligulas step drops both? You shall not pass! Tender respectable success Valar impressive unfriendly bloom scraped? Branch hey-diddle-diddle pony trouble'll sleeping during jump Narsil.</p>
-            <h3>North valor overflowing sort Iáve mister kingly money?</h3>
+            <p>North valor overflowing sort Iáve mister kingly money?</p>
             <p>Curse you and all the halflings! Deserted anytime Lake-town burned caves balls. Smoked lthilien forbids Thrain?</p>
             <ul>
               <li>Adamant.</li>
@@ -169,7 +169,6 @@ export const createTurns: () => TTurn[] = () => {
               <li>Portents close Havens endured irons hundreds handle refused sister?</li>
               <li>Harbor Grubbs fellas riddles afar!</li>
             </ul>
-            <h3>Narsil enjoying shattered bigger leaderless retrieve dreamed dwarf.</h3>
             <p>Ravens wonder wanted runs me crawl gaining lots faster! Khazad-dum surprise baby season ranks. I bid you all a very fond farewell.</p>
             <ol>
               <li>Narsil.</li>
@@ -185,87 +184,12 @@ export const createTurns: () => TTurn[] = () => {
               <li>Diversion almost notion furs between fierce laboring Nazgûl ceaselessly parent.</li>
               <li>Agree ruling um wasteland Bagshot Row expect sleep.</li>
             </ol>
-            <h3>Ere answering track forests shards roof!</h3>
             <p>Delay freezes Gollum. Let the Ring-bearer decide. Bagshot Row chokes pole pauses immediately orders taught éored musing three-day? Disease rune repel source fire Goblinses already?</p>
-            <table>
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Dangers</th>
-                  <th>Playing</th>
-                  <th>Window</th>
-                  <th>Meaning</th>
-                  <th>Pace</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Current</td>
-                  <td>living</td>
-                  <td>odds</td>
-                  <td>charged</td>
-                  <td>heads</td>
-                  <td>felt</td>
-                </tr>
-                <tr>
-                  <td>Inn</td>
-                  <td>climbing</td>
-                  <td>destroying</td>
-                  <td>overhead</td>
-                  <td>roll</td>
-                  <td>mud</td>
-                </tr>
-                <tr>
-                  <td>Breath</td>
-                  <td>relevant</td>
-                  <td>éored</td>
-                  <td>hinges</td>
-                  <td>year</td>
-                  <td>signed</td>
-                </tr>
-                <tr>
-                  <td>Accept</td>
-                  <td>threads</td>
-                  <td>name</td>
-                  <td>fitted</td>
-                  <td>precious</td>
-                  <td>attacked</td>
-                </tr>
-                <tr>
-                  <td>Chief</td>
-                  <td>sails</td>
-                  <td>first-born</td>
-                  <td>pottery</td>
-                  <td>lever</td>
-                  <td>antagonize</td>
-                </tr>
-                <tr>
-                  <td>Unoccupied</td>
-                  <td>victorious</td>
-                  <td>means</td>
-                  <td>lovely</td>
-                  <td>humble</td>
-                  <td>force</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td>kinsmen</td>
-                  <td>give</td>
-                  <td>walking</td>
-                  <td>thousand</td>
-                  <td>manners</td>
-                  <td>burning</td>
-                </tr>
-              </tfoot>
-            </table>
-            <h4>Afraid smithy Fellowship debt carven hooks.</h4>
             <p>What about second breakfast? Nags runt near Lindir lock discover level? Andûril breathe waited flatten union.</p>
             <blockquote>
               <p>You shall be the Fellowship of the Ring.</p>
               <footer>—Númenor, <cite>sweeter burned verse</cite></footer>
             </blockquote>
-            <h5>Should Shirelings extraordinary spends poison's willing enchantment.</h5>
             <p>I think we should get off the road. Penalty sight splintered Misty Mountain mithril? Unrest lasts rode league bears absence Bracegirdle athletic contract nice parent slowed?</p>
             <pre>Pardon Concerning Hobbits rune goblins? Twitching figure including rightful Thorin's level! Worth tubers threats Hornburg deadliest? Unfold thumping shh wants Homely!</pre>
             <h6>Improve drops absolutely tight deceit potent Treebeard startled!</h6>

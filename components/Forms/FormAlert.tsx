@@ -1,7 +1,10 @@
 import { Alert } from '@mantine/core'
 import {
+  IconHeartBroken,
   IconInfoCircle,
+  IconThumbUp,
 } from '@tabler/icons-react'
+import { useId } from 'react'
 
 const enum AlertType {
   Success,
@@ -18,16 +21,18 @@ interface IFormAlert {
 const colors = ['green', 'yellow', 'red']
 
 export default function FormAlert(props: IFormAlert) {
+  const id = useId()
+
   function getIcon() {
     if (props.type === AlertType.Success) {
-      return <IconInfoCircle />
+      return <IconThumbUp />
     }
 
     if (props.type === AlertType.Warning) {
       return <IconInfoCircle />
     }
 
-    return <IconInfoCircle />
+    return <IconHeartBroken />
   }
 
   function getMessage() {
@@ -41,6 +46,7 @@ export default function FormAlert(props: IFormAlert) {
 
   return (
     <Alert
+      id={`alert_form_alert_${id}`}
       aria-live="polite"
       variant="light"
       color={colors[props.type]}
