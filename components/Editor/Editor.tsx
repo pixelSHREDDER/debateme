@@ -6,6 +6,7 @@ import './editor.scss'
 import Link from '@tiptap/extension-link'
 import Subscript from '@tiptap/extension-subscript'
 import Superscript from '@tiptap/extension-superscript'
+import TextStyle from '@tiptap/extension-text-style'
 import { EditorProvider, useCurrentEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import {
@@ -15,19 +16,21 @@ import {
   IconBlockquote,
   IconBold,
   IconCode,
-  IconHeading,
   IconItalic,
   IconLink,
   IconLinkMinus,
   IconList,
   IconListNumbers,
   IconPageBreak,
-  IconPilcrow,
   IconStrikethrough,
   IconSubscript,
   IconSuperscript,
+  IconTextDecrease,
+  IconTextIncrease,
+  IconTextSize,
 } from '@tabler/icons-react'
 import { useCallback } from 'react'
+import { FontSize } from './fontSizeExtension'
 import editorStyles from './Editor.module.css'
 
 const MenuBar = () => {
@@ -168,34 +171,40 @@ const MenuBar = () => {
         </ActionIcon>*/}
       </ActionIcon.Group>
       <ActionIcon.Group>
-        <Tooltip label="Normal text">
+        <Tooltip label="Small text">
           <ActionIcon
-            onClick={() => editor.chain().focus().setParagraph().run()}
-            aria-label="Toggle normal text"
-            className={cx(editorStyles.icon, { [editorStyles.isActive]: editor.isActive('paragraph') })}
-          >
-            <IconPilcrow stroke={editor.isActive('paragraph') ? 3 : 1.5} />
-          </ActionIcon>
-        </Tooltip>
-        <Tooltip label="Heading">
-          <ActionIcon
-            onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-            aria-label="Toggle heading"
-            className={cx(editorStyles.icon, { [editorStyles.isActive]: editor.isActive('heading', { level: 3 }) })}
-          >
-            <IconHeading stroke={editor.isActive('heading', { level: 3 }) ? 3 : 1.5} />
-          </ActionIcon>
-        </Tooltip>
-        <Tooltip label="Subheading">
-          <ActionIcon
-            onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-            aria-label="Toggle subheading"
+            // @ts-ignore: Unreachable code error
+            onClick={() => editor.chain().focus().setFontSize(0.6).run()}
+            aria-label="Toggle small text"
             pt={4}
-            className={cx(editorStyles.icon, { [editorStyles.isActive]: editor.isActive('heading', { level: 4 }) })}
+            className={cx(editorStyles.icon, { [editorStyles.isActive]: editor.isActive('textStyle', { fontSize: '0.6rem' }) })}
           >
-            <IconHeading stroke={editor.isActive('heading', { level: 4 }) ? 3 : 1.5} size={16} />
+            <IconTextDecrease stroke={editor.isActive('textStyle', { fontSize: '0.6rem' }) ? 3 : 1.5} size={18} />
           </ActionIcon>
         </Tooltip>
+        <Tooltip label="Normal text size">
+          <ActionIcon
+            // @ts-ignore: Unreachable code error
+            onClick={() => editor.chain().focus().setParagraph().unsetFontSize().run()}
+            aria-label="Reset text size"
+            pt={3}
+            className={editorStyles.icon}
+          >
+            <IconTextSize stroke={1.5} size={20} />
+          </ActionIcon>
+        </Tooltip>
+        <Tooltip label="Big text">
+          <ActionIcon
+            // @ts-ignore: Unreachable code error
+            onClick={() => editor.chain().focus().setFontSize(2).run()}
+            aria-label="Toggle big text"
+            className={cx(editorStyles.icon, { [editorStyles.isActive]: editor.isActive('textStyle', { fontSize: '2rem' }) })}
+          >
+            <IconTextIncrease stroke={editor.isActive('textStyle', { fontSize: '2rem' }) ? 3 : 1.5} size={30} />
+          </ActionIcon>
+        </Tooltip>
+      </ActionIcon.Group>
+      <ActionIcon.Group>
         <Tooltip label="Bullet list">
           <ActionIcon
             onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -309,6 +318,7 @@ const MenuBar = () => {
 }
 
 const extensions = [
+  FontSize,
   Link.configure({
     defaultProtocol: 'https',
   }),
@@ -324,6 +334,7 @@ const extensions = [
   }),
   Subscript,
   Superscript,
+  TextStyle,
 ]
 
 interface IEditor {
