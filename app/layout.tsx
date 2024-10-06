@@ -3,8 +3,8 @@ import type { Metadata } from 'next'
 import { UserProvider } from '@auth0/nextjs-auth0/client'
 import '@mantine/core/styles.css'
 import './globals.css'
-import TopBar from '@/components/TopBar/TopBar'
 import { theme } from '../theme'
+import AppShell from '@/components/AppShell/AppShell'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -24,8 +24,9 @@ export default function RootLayout({
       <UserProvider>
         <body>
           <MantineProvider theme={theme}>
-            <TopBar />
-            {children}
+            <AppShell>
+              {children}
+            </AppShell>
           </MantineProvider>
         </body>
       </UserProvider>

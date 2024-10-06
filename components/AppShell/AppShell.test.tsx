@@ -1,11 +1,16 @@
 import { describe, expect, test } from 'vitest'
 import { render } from '@testing-library/react'
 import ProviderWrapper from '@/tests/helpers/ProviderWrapper'
-import TopBar from './TopBar'
+import AppShell from './AppShell'
+import React from 'react'
 
-describe('Top Bar component', () => {
+describe('App Shell component', () => {
   test('renders correctly', () => {
-    const { container } = render(<TopBar />, { wrapper: ProviderWrapper })
+    const { container } = render(
+      <AppShell>
+        <p>test main content</p>
+      </AppShell>,
+      { wrapper: ProviderWrapper })
     expect(container).toMatchSnapshot()
   })
 })
