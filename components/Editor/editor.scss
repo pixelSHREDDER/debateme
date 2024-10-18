@@ -63,4 +63,67 @@
   box-shadow: 3px 4px 6px inset light-dark(rgba(0,0,0,0.3), rgba(255,255,255,0.3));
   margin-block: 1em;
   padding-inline: 1em;
+
+  .lt {
+    border-bottom: 2px solid #e86a69;
+    transition: background 0.25s ease-in-out;
+
+    &:hover {
+      background: rgba($color: #e86a69, $alpha: 0.2);
+    }
+
+    &-style {
+      border-bottom: 2px solid #9d8eff;
+
+      &:hover {
+        background: rgba($color: #9d8eff, $alpha: 0.2) !important;
+      }
+    }
+
+    &-typographical,
+    &-grammar {
+      border-bottom: 2px solid #eeb55c;
+
+      &:hover {
+        background: rgba($color: #eeb55c, $alpha: 0.2) !important;
+      }
+    }
+
+    &-misspelling {
+      border-bottom: 2px solid #e86a69;
+
+      &:hover {
+        background: rgba($color: #e86a69, $alpha: 0.2) !important;
+      }
+    }
+  }
+
+  &-focused {
+    outline: none !important;
+  }
+}
+
+.bubble-menu {
+  background-color: var(--mantine-color-body);
+  border: 1px solid var(--gray-1);
+  border-radius: 0.7rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  padding: 0.2rem;
+
+  button {
+    background-color: unset;
+
+    &:hover {
+      background-color: var(--gray-3);
+    }
+
+    &.is-active {
+      background-color: var(--purple);
+
+      &:hover {
+        background-color: var(--purple-contrast);
+      }
+    }
+  }
 }

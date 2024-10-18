@@ -4883,6 +4883,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tiptap/extension-bubble-menu@npm:^2.8.0":
+  version: 2.8.0
+  resolution: "@tiptap/extension-bubble-menu@npm:2.8.0"
+  dependencies:
+    tippy.js: "npm:^6.3.7"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+    "@tiptap/pm": ^2.7.0
+  checksum: 10c0/8c05bf1a1ea3a72c290e69f64b5e165e1af740a5b1434d8da2ab457def27793ece75680f5ab7c6c5f264d69be75a2f42c104acb07f4338fd55a70028cd8a4ad1
+  languageName: node
+  linkType: hard
+
 "@tiptap/extension-bullet-list@npm:^2.3.0":
   version: 2.3.0
   resolution: "@tiptap/extension-bullet-list@npm:2.3.0"
@@ -5298,6 +5310,15 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10c0/e3d476bb6b3a54a8934a97fe6ee4bd13e2e5eb29073929a4be76a52466602ffaea420b20774ffe8503f9fa24f3ae34817e95e7f625689fb0d1c10404f5b2889c
+  languageName: node
+  linkType: hard
+
+"@types/dexie@npm:1.3.1":
+  version: 1.3.1
+  resolution: "@types/dexie@npm:1.3.1"
+  dependencies:
+    dexie: "npm:*"
+  checksum: 10c0/89dbcbef973468afa1402cab9a88bb8ce6e70e229ee15bb6a2b78623cfeff3a80065cb2955994412121527187f51926066b5f8d537cb6bbd76aa1d745cfa7ea4
   languageName: node
   linkType: hard
 
@@ -8285,6 +8306,7 @@ __metadata:
     "@testing-library/dom": "npm:^10.1.0"
     "@testing-library/react": "npm:^16.0.0"
     "@tiptap/core": "npm:^2.3.0"
+    "@tiptap/extension-bubble-menu": "npm:^2.8.0"
     "@tiptap/extension-link": "npm:^2.7.4"
     "@tiptap/extension-subscript": "npm:^2.7.4"
     "@tiptap/extension-superscript": "npm:^2.7.4"
@@ -8292,6 +8314,7 @@ __metadata:
     "@tiptap/pm": "npm:^2.3.0"
     "@tiptap/react": "npm:^2.3.0"
     "@tiptap/starter-kit": "npm:^2.3.0"
+    "@types/dexie": "npm:1.3.1"
     "@types/node": "npm:^20.12.8"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
@@ -8303,6 +8326,8 @@ __metadata:
     "@vitest/ui": "npm:^1.6.0"
     autoprefixer: "npm:^10.0.1"
     babel-loader: "npm:^9.1.3"
+    dexie: "npm:^4.0.8"
+    dexie-react-hooks: "npm:^1.1.7"
     eslint: "npm:^8"
     eslint-config-airbnb: "npm:19.0.4"
     eslint-config-airbnb-typescript: "npm:^18.0.0"
@@ -8614,6 +8639,24 @@ __metadata:
   version: 1.1.0
   resolution: "detect-node-es@npm:1.1.0"
   checksum: 10c0/e562f00de23f10c27d7119e1af0e7388407eb4b06596a25f6d79a360094a109ff285de317f02b090faae093d314cf6e73ac3214f8a5bb3a0def5bece94557fbe
+  languageName: node
+  linkType: hard
+
+"dexie-react-hooks@npm:^1.1.7":
+  version: 1.1.7
+  resolution: "dexie-react-hooks@npm:1.1.7"
+  peerDependencies:
+    "@types/react": ">=16"
+    dexie: ^3.2 || ^4.0.1-alpha
+    react: ">=16"
+  checksum: 10c0/3ff38e715a52bff9132b483963246ea5372a282d9257c8c2bf8891c522fa0d761d1e362bb352eb63386f49ea9a55c52e1bcc5cce2019deb1eceba40d8a88631d
+  languageName: node
+  linkType: hard
+
+"dexie@npm:*, dexie@npm:^4.0.8":
+  version: 4.0.8
+  resolution: "dexie@npm:4.0.8"
+  checksum: 10c0/d35a817d986c334a2de5f1a0d5ef373b3d9464de7b520f9af50c00ea2f974386632a3f949add83ba1fce9e929908d96db19726377f641f4768c137a554969a2d
   languageName: node
   linkType: hard
 
