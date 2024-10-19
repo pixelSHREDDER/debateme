@@ -7,8 +7,8 @@ import { useCallback, useEffect } from 'react'
 
 export default function JoinDebatePage() {
   const searchParams = useSearchParams()
-  const inviteId = searchParams.get('id')
-  const redirectToInviteUrl = useCallback(async () => {
+
+  const redirectToInviteUrl = useCallback(async (inviteId: string) => {
     if (inviteId === null) { return }
 
     try {
@@ -16,9 +16,12 @@ export default function JoinDebatePage() {
       await removeInvite(inviteId)
       redirect(`/debate/${debateId}`)
     } catch (e: any) {
-      return e
+      throw new Error(e.message)
     }
-  }, [inviteId])
+  }, [])
 
-  useEffect(() => { if (inviteId) { redirectToInviteUrl } }, [inviteId, redirectToInviteUrl])
+  useEffect(() => {
+    const inviteId = searchParams.get('id')
+    if (inviteId) redirectToInviteUrl(inviteId)
+  }, [redirectToInviteUrl, searchParams])
 }

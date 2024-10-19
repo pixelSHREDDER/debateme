@@ -8,10 +8,10 @@ export default async function getInviteDebateId(inviteId: string) {
   try {
     inviteData = await prisma.invite.findUniqueOrThrow({
       where: { id: inviteId },
-      select: { debateId: true }
+      select: { debateId: true },
     })
   } catch (error: any) {
-    return error
+    throw new Error(error.message)
   }
 
   return inviteData?.debateId

@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 'use client'
 
 import {
@@ -11,10 +13,12 @@ import {
   Anchor,
 } from '@mantine/core'
 import React from 'react'
-import classes from './HeroSection.module.css'
 import { theme } from '@/theme'
+import classes from '@/components/LandingPage/HeroSection/HeroSection.module.css'
+import { useUser } from '@auth0/nextjs-auth0/client'
 
 export default function HeroSection() {
+  const { user } = useUser()
   return (
     <section className={classes.hero}>
       <Overlay
@@ -32,7 +36,12 @@ export default function HeroSection() {
               Say goodbye to hot-take tweets, crowded comments, and chaotic social media posts. Start having real, meaningful, productive conversations about what you care about, with the people you care about.
             </Text>
             <Group mt={30} mb={30} justify="space-between">
-              <Button radius="xl" size="md" className={classes.control}>
+              <Button
+                component="a"
+                href={user ? '/debate' : '/api/auth/login'}
+                radius="xl"
+                size="md"
+                className={classes.control}>
                 Get started
               </Button>
               {/*<Button variant="default" radius="xl" size="md" className={classes.control}>

@@ -10,11 +10,11 @@ import {
   Image,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import classes from './AppShell.module.css'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { useState } from 'react'
-import { ColorSchemeToggle } from '../ColorSchemeToggle/ColorSchemeToggle'
 import { usePathname } from 'next/navigation'
+import { ColorSchemeToggle } from '@/components/ColorSchemeToggle/ColorSchemeToggle'
+import classes from '@/components/AppShell/AppShell.module.css'
 
 const links = [
   { link: '/', label: 'Home', logOutHide: false },
@@ -32,7 +32,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     <Anchor<'a'>
       href={link.link}
       key={link.label}
-      className={cx(classes.link, {[classes.headerLink]: !!isHeader})}
+      className={cx(classes.link, { [classes.headerLink]: !!isHeader })}
       data-active={active === link.link || undefined}
       onClick={() => setActive(link.link)}
     >
@@ -46,25 +46,43 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     if (user) {
       return (
         <>
-          <Anchor<'a'> href="/user/profile" className={classes.user}>Hi, {user.name}!</Anchor><Anchor<'a'> href="/api/auth/logout" className={classes.link}>Logout</Anchor>
+          {/*<Anchor
+            component="a"
+            href="/user/profile"
+            className={classes.user}>*/}
+            Hi, {user.name}!
+          {/*</Anchor>*/}
+          <Anchor
+            component="a"
+            href="/api/auth/logout"
+            className={classes.link}>
+            Log Out
+          </Anchor>
         </>
       )
     }
-    return <Anchor<'a'> href="/api/auth/login" className={classes.link}>Login</Anchor>
+    return (
+      <Anchor
+        component="a"
+        href="/api/auth/login"
+        className={classes.link}>
+        Log In
+      </Anchor>
+    )
   }
 
   return (
     <MantineAppShell
       header={{ height: 60 }}
       navbar={{ width: 300, breakpoint: 'sm', collapsed: { desktop: true, mobile: !opened } }}
-      padding={pathname === '/' ? 0 : "md"}
+      padding={pathname === '/' ? 0 : 'md'}
     >
       <MantineAppShell.Header className={classes.header}>
         <Group h="100%" justify="space-between" w="100%" px="md" className={classes.container}>
           <Image
             height={28}
             src="/debate-me-logo.svg"
-					  alt="Debate.me logo" />
+            alt="Debate.me logo" />
           <Group gap={5} visibleFrom="sm">
             {items(true)}
           </Group>

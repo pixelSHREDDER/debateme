@@ -12,12 +12,13 @@ import FormAlert from '../Forms/FormAlert'
 export default function Invite({ debateId }: { debateId: number }) {
   const { user, error, isLoading } = useUser()
   const [inviteLink, setInviteLink] = useState('')
+  const [inviteLinkError, setInviteLinkError] = useState<Error | null>(null)
 
   const getInviteLink = useCallback(async () => {
     try {
       const inviteId = await getInviteId(debateId)
-      setInviteLink(`/join?id=${inviteId}`)
-    } catch (e: any) { return e }
+      setInviteLink(`${process.env.NEXT_PUBLIC_SITE_URL}/debate/join?id=${inviteId}`)
+    } catch (e: any) { setInviteLinkError(e) }
   }, [debateId])
 
   useEffect(() => {
@@ -27,12 +28,16 @@ export default function Invite({ debateId }: { debateId: number }) {
     getInviteLink()
   }, [getInviteLink, user])
 
-  if (error) {
+  if (error || inviteLinkError) {
     return (
       <>
         <h2>Invite Your Opponent to Join this Debate</h2>
         <FormAlert
-          message={error.message || '....but we do not know what. Try reloading and check again.'}
+          message={
+            error?.message ||
+            inviteLinkError?.message ||
+            '....but we do not know what. Try reloading and check again.'
+          }
           title="Something went wrong"
           type={2} />
       </>
