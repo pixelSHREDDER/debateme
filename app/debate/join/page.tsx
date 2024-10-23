@@ -1,27 +1,20 @@
-'use client'
-
 import getInviteDebateId from '@/actions/get-invite-debate-id'
-import removeInvite from '@/actions/remove-invite'
-import { redirect, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect } from 'react'
+import JoinDebate from '@/components/Invite/JoinDebate'
 
-export default function JoinDebatePage() {
-  const searchParams = useSearchParams()
+export default async function JoinDebatePage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined }
+}) {
+  let debateId: number
+  if (!searchParams.id) {
+    throw new Error('No invite ID specified')
+  }
+  try {
+    debateId = await getInviteDebateId(searchParams.id)
+  } catch (e: any) {
+    throw new Error(e.message)
+  }
 
-  const redirectToInviteUrl = useCallback(async (inviteId: string) => {
-    if (inviteId === null) { return }
-
-    try {
-      const debateId = await getInviteDebateId(inviteId)
-      await removeInvite(inviteId)
-      redirect(`/debate/${debateId}`)
-    } catch (e: any) {
-      throw new Error(e.message)
-    }
-  }, [])
-
-  useEffect(() => {
-    const inviteId = searchParams.get('id')
-    if (inviteId) redirectToInviteUrl(inviteId)
-  }, [redirectToInviteUrl, searchParams])
+  return <JoinDebate debateId={debateId} inviteId={searchParams.id} />
 }

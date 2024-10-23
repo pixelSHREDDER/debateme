@@ -11,12 +11,12 @@ export default async function getUserDebates(userSub: string) {
       where: { sub: userSub },
       include: {
         debatesCreated: true,
-        debatesOpposed: true
-      }
+        debatesOpposed: true,
+      },
     })
     revalidatePath('/')
   } catch (error: any) {
-    throw new Error(error)
+    throw new Error(`Failed to find user and debates: ${error.message}`)
   }
 
   return userData

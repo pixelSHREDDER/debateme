@@ -13,7 +13,7 @@ export default async function addTurn(
   const schema = z.object({
     body: z.string().min(1),
     debateId: z.string().min(1),
-    userSub: z.string().min(1)
+    userSub: z.string().min(1),
   })
   const parse = schema.safeParse({
     body: formData.get('bodyString'),
@@ -21,10 +21,10 @@ export default async function addTurn(
     userSub: formData.get('userSub'),
   })
   if (!parse.success) {
-    return { message: `Please fix the following errors: ${parse.error.errors.map(error => error.message)}`}
+    return { message: `Please fix the following errors: ${parse.error.errors.map(error => error.message)}` }
   }
 
-  const data = parse.data
+  const { data } = parse
 
   try {
     await prisma.turn.create({
@@ -32,20 +32,20 @@ export default async function addTurn(
         body: data.body,
         debate: {
           connect: {
-            id: parseInt(data.debateId),
+            id: parseInt(data.debateId, 10),
           },
         },
         user: {
           connect: {
             sub: data.userSub,
           },
-        }
+        },
       },
     })
 
     revalidatePath(`/debate/${data.debateId}`)
     return { message: `Created turn for debate ${data.debateId}` }
-  } catch (e: any) {
-    return { message: `Failed to create turn: ${e.message}` }
+  } catch (error: any) {
+    throw new Error(`Failed to create turn: ${error.message}`)
   }
 }

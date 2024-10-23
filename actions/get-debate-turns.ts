@@ -12,14 +12,14 @@ export default async function getDebateTurns(debateId: number, userSub: string) 
         AND: {
           OR: [
             { creatorSub: userSub },
-            { opponentSub: userSub }
-          ]
-        }
+            { opponentSub: userSub },
+          ],
+        },
       },
-      include: { turn: true }
+      include: { turn: true },
     })
   } catch (error: any) {
-    return error
+    throw new Error(`Failed to find debate with turns: ${error.message}`)
   }
 
   return debateData

@@ -9,7 +9,13 @@ const initialState = {
   message: '',
 }
 
-export default function JoinDebate({ debateId }: { debateId: number }) {
+export default function JoinDebate({
+  debateId,
+  inviteId,
+}: {
+  debateId: number,
+  inviteId: string,
+}) {
   const { user, error, isLoading } = useUser()
   const [state, formAction] = useFormState(joinDebate, initialState)
 
@@ -28,6 +34,11 @@ export default function JoinDebate({ debateId }: { debateId: number }) {
             id="debateId"
             name="debateId"
             value={debateId} />
+          <input
+            type="hidden"
+            id="inviteId"
+            name="inviteId"
+            value={inviteId} />
             <input
               type="hidden"
               id="opponentSub"

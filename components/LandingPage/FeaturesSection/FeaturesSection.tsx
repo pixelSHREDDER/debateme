@@ -25,13 +25,13 @@ const mockdata = [
   {
     title: 'Get to the heart of the matter',
     description:
-      'Use robust typing tools built to facilitate long-form conversations, with features preview-free links, quoting, lists, and more.',
+      'Use robust typing tools built to facilitate long-form conversations: quoting, lists, preview-free links, and more.',
     icon: IconBubble,
   },
   {
     title: 'Improve your debating & critical thinking',
     description:
-      'Logical fallacy checking helps you create sound arguments, avoid common pitfalls, and keep the conversation productive.',
+      'Debate Coaching scans for logical fallacies and other common pitfalls, to help you create sound arguments and keep the conversation productive.',
     icon: IconPodium,
   },
 ];

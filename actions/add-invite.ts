@@ -10,10 +10,10 @@ export default async function addInvite(debateId: number) {
           connect: {
             id: debateId,
           },
-        }
+        },
       },
     })
   } catch (error: any) {
-    throw new Error(error)
+    throw new Error(`Failed to create invite: ${error.message}`)
   }
 }

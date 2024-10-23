@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache'
 import postgres from 'postgres'
 import { z } from 'zod'
 
-let sql = postgres(process.env.DATABASE_URL || process.env.POSTGRES_URL!, {
+const sql = postgres(process.env.DATABASE_URL || process.env.POSTGRES_URL!, {
   ssl: 'allow',
 })
 
@@ -29,7 +29,7 @@ export default async function deleteTurnFromDebate(
 
     revalidatePath('/')
     return { message: `Deleted turn ${data.id}` }
-  } catch (e) {
-    return { message: 'Failed to delete turn' }
+  } catch (error: any) {
+    throw new Error(`Failed to delete turn: ${error.message}`)
   }
 }

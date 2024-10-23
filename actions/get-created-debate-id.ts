@@ -9,10 +9,10 @@ export default async function getCreatedDebateId(creatorSub: string) {
     debateData = await prisma.debate.findFirst({
       where: { creatorSub },
       select: { id: true },
-      orderBy: [{ createdAt: 'desc' }]
+      orderBy: [{ createdAt: 'desc' }],
     })
   } catch (error: any) {
-    throw new Error(error)
+    throw new Error(`Failed to find newly created debate id: ${error.message}`)
   }
 
   return debateData?.id

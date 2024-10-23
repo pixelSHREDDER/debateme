@@ -8,6 +8,6 @@ export default async function removeInvite(inviteId: string) {
       where: { id: inviteId },
     })
   } catch (error: any) {
-    throw new Error(error)
+    throw new Error(`Failed to delete invite: ${error.message}`)
   }
 }

@@ -11,7 +11,7 @@ export default async function getInviteId(debateId: number) {
       select: { id: true },
     })
   } catch (error: any) {
-    throw new Error(error.message)
+    throw new Error(`Failed to find invite by id: ${error.message}`)
   }
 
   return inviteData.id

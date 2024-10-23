@@ -7,9 +7,8 @@ import Turns from '@/components/Turn/Turns'
 import { useEffect, useMemo } from 'react'
 import { theme } from '@/theme'
 import { Alert, Skeleton } from '@mantine/core'
-import JoinDebate from '../Invite/JoinDebate'
-import Invite from '../Invite/Invite'
-import FormAlert from '../Forms/FormAlert'
+import Invite from '@/components/Invite/Invite'
+import FormAlert from '@/components/Forms/FormAlert'
 
 interface IDebate {
   debate: TDebate | null,
@@ -142,7 +141,10 @@ export default function Debate({ debate, updateDebate }: IDebate) {
   if (debate.opponentSub === null) {
     return (debate.creatorSub === user.sub) ?
     <Invite debateId={debate.id} /> :
-    <JoinDebate debateId={debate.id} />
+    <FormAlert
+      message="You need to use the invite link to join this debate."
+      title="Something went wrong"
+      type={2} />
   }
 
   return (

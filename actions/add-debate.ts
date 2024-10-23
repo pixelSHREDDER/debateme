@@ -16,7 +16,7 @@ export default async function addDebate(
   const schema = z.object({
     topic: z.string().min(1),
     cooldownMins: z.coerce.number().min(0).default(60),
-    creatorSub: z.string().min(1)
+    creatorSub: z.string().min(1),
   })
   const parse = schema.safeParse({
     topic: formData.get('topic'),
@@ -25,10 +25,10 @@ export default async function addDebate(
   })
 
   if (!parse.success) {
-    return { message: `Please fix the following errors: ${parse.error.errors.map(error => error.message)}`}
+    return { message: `Please fix the following errors: ${parse.error.errors.map(error => error.message)}` }
   }
 
-  const data = parse.data
+  const { data } = parse
   let debateId
 
   try {
@@ -40,26 +40,26 @@ export default async function addDebate(
           connect: {
             sub: data.creatorSub,
           },
-        }
+        },
       },
     })
     revalidatePath('/debate')
-  } catch (e: any) {
-    return { message: `Failed to create debate: ${e.message}` }
+  } catch (error: any) {
+    throw new Error(`Failed to create debate: ${error.message}`)
   }
 
   try {
     debateId = await getCreatedDebateId(data.creatorSub)
-  } catch (e: any) {
-    return { message: `Failed to find newly created debate: ${e.message}` }
+  } catch (error: any) {
+    throw new Error(`Failed to find newly created debate: ${error.message}`)
   }
 
   try {
-    if (!!debateId) {
+    if (typeof debateId === 'number') {
       await addInvite(debateId)
     }
-  } catch (e: any) {
-    return { message: `Failed to create invite for newly created debate: ${e.message}` }
+  } catch (error: any) {
+    throw new Error(`Failed to create invite for newly created debate: ${error.message}`)
   }
 
   redirect(`/debate/${debateId}`)

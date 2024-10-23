@@ -33,7 +33,7 @@ export default function HeroSection() {
               The debate-focused <span className={classes.highlight}>cure</span> for the common comment thread
             </Title>
             <Text c={theme.colors?.purple?.[2] || 'dark'} mt="md">
-              Say goodbye to hot-take tweets, crowded comments, and chaotic social media posts. Start having real, meaningful, productive conversations about what you care about, with the people you care about.
+              Say goodbye to crowded comments, mean tweets, and social media hot takes. Start having real, meaningful, productive conversations about what you care about, with the people you care about.
             </Text>
             <Group mt={30} mb={30} justify="space-between">
               <Button
