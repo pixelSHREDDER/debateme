@@ -18,6 +18,7 @@ model Debate {
   creator      User     @relation("debate_creator", fields: [creatorSub], references: [sub])
   invite       Invite?  @relation("debate_invite_id")
   opponent     User?    @relation("debate_opponent", fields: [opponentSub], references: [sub])
+  status       DebateStatus @default(Unknown)
   turn         Turn[]
 }
 
@@ -46,4 +47,13 @@ model User {
   debatesCreated Debate[] @relation("debate_creator")
   debatesOpposed Debate[] @relation("debate_opponent")
   turn           Turn[]
+}
+
+enum DebateStatus {
+  Unknown
+  NoOpponent
+  CreatorTurn
+  OpponentTurn
+  CreatorCooldown
+  OpponentCooldown
 }

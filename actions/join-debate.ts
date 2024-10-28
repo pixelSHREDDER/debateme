@@ -4,6 +4,7 @@ import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
+import { DebateStatus } from '@prisma/client'
 import removeInvite from './remove-invite'
 
 export default async function joinDebate(
@@ -35,6 +36,7 @@ export default async function joinDebate(
         id: data.debateId,
       },
       data: {
+        status: DebateStatus.CreatorTurn,
         opponent: {
           connect: {
             sub: data.opponentSub,

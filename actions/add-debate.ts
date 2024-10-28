@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import getCreatedDebateId from '@/actions/get-created-debate-id'
+import { DebateStatus } from '@prisma/client'
 import addInvite from './add-invite'
 
 export default async function addDebate(
@@ -36,6 +37,7 @@ export default async function addDebate(
       data: {
         topic: data.topic,
         cooldownMins: data.cooldownMins,
+        status: DebateStatus.NoOpponent,
         creator: {
           connect: {
             sub: data.creatorSub,

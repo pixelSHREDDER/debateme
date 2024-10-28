@@ -3,6 +3,8 @@
 import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
+import { DebateStatus } from '@prisma/client'
+import setDebateStatus from './set-debate-status'
 
 export default async function addTurn(
   prevState: {
@@ -13,11 +15,13 @@ export default async function addTurn(
   const schema = z.object({
     body: z.string().min(1),
     debateId: z.string().min(1),
+    isCreator: z.coerce.boolean(),
     userSub: z.string().min(1),
   })
   const parse = schema.safeParse({
     body: formData.get('bodyString'),
     debateId: formData.get('debateId'),
+    isCreator: formData.get('isCreator'),
     userSub: formData.get('userSub'),
   })
   if (!parse.success) {
@@ -25,6 +29,7 @@ export default async function addTurn(
   }
 
   const { data } = parse
+  const debateIdNum = parseInt(data.debateId, 10)
 
   try {
     await prisma.turn.create({
@@ -32,7 +37,7 @@ export default async function addTurn(
         body: data.body,
         debate: {
           connect: {
-            id: parseInt(data.debateId, 10),
+            id: debateIdNum,
           },
         },
         user: {
@@ -42,6 +47,13 @@ export default async function addTurn(
         },
       },
     })
+
+    await setDebateStatus(
+      debateIdNum,
+      data.isCreator ?
+        DebateStatus.OpponentCooldown :
+        DebateStatus.CreatorCooldown
+    )
 
     revalidatePath(`/debate/${data.debateId}`)
     return { message: `Created turn for debate ${data.debateId}` }

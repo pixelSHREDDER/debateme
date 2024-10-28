@@ -9,6 +9,7 @@ import { theme } from '@/theme'
 import { Alert, Skeleton } from '@mantine/core'
 import Invite from '@/components/Invite/Invite'
 import FormAlert from '@/components/Forms/FormAlert'
+import useUserStatus from '@/hooks/useUserStatus'
 
 interface IDebate {
   debate: TDebate | null,
@@ -17,45 +18,20 @@ interface IDebate {
 
 export default function Debate({ debate, updateDebate }: IDebate) {
   const { user, error, isLoading } = useUser()
-
-  const isCooldownActive = useMemo(() => {
-    if (!debate) {
-      return false
-    }
-
-    const lastTurn = debate.turn?.at(-1)
-
-    if (
-      !debate.turn ||
-      !debate.turn.length ||
-      !lastTurn ||
-      lastTurn.userSub === user?.sub
-    ) {
-      return false
-    }
-
-    return (
-      Date.now() - new Date(lastTurn.createdAt).getTime() < (debate.cooldownMins * 100_000)
-    )
-  }, [debate, user?.sub])
-
-  const isItYourTurn = useMemo(() => {
-    if (!debate || !user) {
-      return false
-    }
-
-    const lastTurn = debate.turn?.at(-1)
-
-    if (!debate.turn || !debate.turn.length || !lastTurn) {
-      return debate.creatorSub === user.sub
-    }
-
-    return (lastTurn.userSub !== user.sub)
-  }, [debate, user])
+  const { isItYourCooldown, isItYourTurn } = useUserStatus()
 
   const renderNewTurn = useMemo(() => {
     if (!debate) { return }
-    if (isCooldownActive) {
+
+    if (
+      user?.sub &&
+      isItYourCooldown(
+        debate.creatorSub,
+        debate.opponentSub,
+        debate.status,
+        user.sub,
+      )
+    ) {
       const lastTurn = debate.turn?.at(-1)
       const turnTime = (
         lastTurn ?
@@ -73,7 +49,16 @@ export default function Debate({ debate, updateDebate }: IDebate) {
         </Alert>
       )
     }
-    if (!isItYourTurn) {
+
+    if (
+      user?.sub &&
+      !isItYourTurn(
+        debate.creatorSub,
+        debate.opponentSub,
+        debate.status,
+        user.sub,
+      )
+    ) {
       return (
         <Alert
           id="alert_debate_opponents_turn"
@@ -87,16 +72,15 @@ export default function Debate({ debate, updateDebate }: IDebate) {
     }
 
     return <NewTurn debate={debate} onSubmit={updateDebate} />
-  }, [debate, isCooldownActive, isItYourTurn, updateDebate])
+  }, [debate, isItYourCooldown, isItYourTurn, updateDebate, user?.sub])
 
   useEffect(() => {
-    if (isLoading) {
-      return
-    }
+    if (isLoading) { return }
+
     if (!!user && !!user.sub) {
       updateDebate()
     } else {
-      // return <signin/register flow>
+      // TODO: redirect to signin/register flow
       console.log('no user')
     }
   }, [isLoading, updateDebate, user])

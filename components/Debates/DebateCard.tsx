@@ -1,16 +1,12 @@
-//'use client'
+'use client'
 
 import cx from 'clsx'
-//import getUserDebates from '@/actions/get-user-debates'
-//import { TUserDebates } from '@/lib/prisma-types'
-//import { useUser } from '@auth0/nextjs-auth0/client'
-//import { Debate } from '@prisma/client'
 import Link from 'next/link'
-//import React, { useEffect, useState } from 'react'
 import { Card, Avatar, Text, Badge, Group, ActionIcon } from '@mantine/core'
-//import { MantineLogo } from '@mantinex/mantine-logo'
-import { IconPencil, IconUserPlus } from '@tabler/icons-react'
+import { IconDots, IconHourglassHigh, IconPencil, IconUserPlus } from '@tabler/icons-react'
 import marble from '@/app/marble.module.css'
+import { DebateStatus } from '@prisma/client'
+import useUserStatus from '@/hooks/useUserStatus'
 import classes from './DebateCard.module.css'
 
 const avatars = [
@@ -19,19 +15,88 @@ const avatars = [
 ]
 
 interface IDebateCard {
-  creatorSub?: string,
+  creatorSub: string,
   id: number,
   opponentSub: string | null,
-  topic: string
+  status: DebateStatus,
+  topic: string,
+  userSub: string,
 }
 
-export default function DebateCard({ /* creatorSub, */ id, opponentSub, topic }: IDebateCard) {
+export default function DebateCard({
+  creatorSub,
+  id,
+  opponentSub,
+  status,
+  topic,
+  userSub,
+}: IDebateCard) {
+  const { isItYourCooldown, isItYourTurn } = useUserStatus()
+
+  const getActionIcon = () => {
+    if (status === DebateStatus.NoOpponent) {
+      return <IconUserPlus size="1.1rem" />
+    }
+
+    if (
+      isItYourCooldown(
+        creatorSub,
+        opponentSub,
+        status,
+        userSub,
+      )
+    ) {
+      return <IconHourglassHigh size="1.1rem" />
+    }
+
+    if (isItYourTurn(
+      creatorSub,
+      opponentSub,
+      status,
+      userSub,
+    )) {
+      return <IconPencil size="1.1rem" />
+    }
+
+    return <IconDots size="1.1rem" />
+  }
+
+  const getStatusText = () => {
+    if (status === DebateStatus.NoOpponent) {
+      return 'Waiting for opponent to join'
+    }
+
+    if (
+      isItYourCooldown(
+        creatorSub,
+        opponentSub,
+        status,
+        userSub,
+      )
+    ) {
+      return 'Unread turn!'
+    }
+
+    if (
+      isItYourTurn(
+        creatorSub,
+        opponentSub,
+        status,
+        userSub,
+      )
+    ) {
+      return "It's your turn!"
+    }
+
+    return "It's your opponent's turn"
+  }
+
   return (
     <Card className={cx(classes.card, marble.marble)} radius="sm">
       <Card.Section p="lg" pb="">
         <Group justify="space-between">
           {/*<MantineLogo type="mark" size="2rem" />*/}
-          <Badge>It&apos;s your turn!</Badge>
+          <Badge>{getStatusText()}</Badge>
         </Group>
 
         <Link className={classes.link} href={`/debate/${id}`}>
@@ -59,10 +124,7 @@ export default function DebateCard({ /* creatorSub, */ id, opponentSub, topic }:
             }
           </Avatar.Group>
           <ActionIcon variant="default" size="lg" radius="md">
-            {opponentSub ?
-              <IconPencil size="1.1rem" /> :
-              <IconUserPlus size="1.1rem" />
-            }
+            {getActionIcon()}
           </ActionIcon>
         </Group>
       </Card.Section>

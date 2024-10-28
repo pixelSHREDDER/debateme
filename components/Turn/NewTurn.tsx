@@ -45,6 +45,11 @@ export default function NewTurn({ debate, onSubmit }: { debate: TDebate, onSubmi
           value={debate.id} />
         <input
           type="hidden"
+          id="isCreator"
+          name="isCreator"
+          value={user.sub === debate.creatorSub ? 1 : 0} />
+        <input
+          type="hidden"
           id="userSub"
           name="userSub"
           value={user.sub} />

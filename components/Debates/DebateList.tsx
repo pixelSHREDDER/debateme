@@ -5,7 +5,6 @@ import { TUserDebates } from '@/lib/prisma-types'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { Container, Grid } from '@mantine/core'
 import { Debate } from '@prisma/client'
-// import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import DebateCard from './DebateCard'
 
@@ -40,18 +39,20 @@ export default function DebateList() {
 
   if (error) { return JSON.stringify(error) }
 
-  if (userData) {
+  if (!!user && !!user.sub && user.sub.length && userData) {
     return debatesData.length ? (
       <section>
         <Container my="md">
           <Grid>
             {debatesData.map((debate: Debate) =>
-              <Grid.Col span={{ base: 12, xs: 4 }} key={debate.id}>
+              <Grid.Col span={{ base: 12, md: 4, sm: 5, xs: 6 }} key={debate.id}>
                 <DebateCard
                   creatorSub={debate.creatorSub}
                   id={debate.id}
                   opponentSub={debate.opponentSub}
+                  status={debate.status}
                   topic={debate.topic}
+                  userSub={user.sub as string}
                 />
               </Grid.Col>
             )}
@@ -61,5 +62,6 @@ export default function DebateList() {
     ) : 'No debates found'
   }
 
+  // TODO: redirect to signin/register flow
   return user ? 'Loading debates....' : 'Please login'
 }
