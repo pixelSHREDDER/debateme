@@ -81,8 +81,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         <Group h="100%" justify="space-between" w="100%" px="md" className={classes.container}>
           <Image
             height={28}
-            src="/debate-me-logo.svg"
-            alt="Debate.me logo" />
+            src="/debate-me-wordmark.svg"
+            alt="Debate.me wordmark" />
           <Group gap={5} visibleFrom="sm">
             {items(true)}
           </Group>

@@ -66,10 +66,10 @@ export default function FeaturesSection() {
       </Title>
 
       <Text c="dimmed" className={classes.description} ta="center" mt="md">
-        Most platforms we use to converse over the internet prioritize engagement above all else. This results in short-form, surface-level conversations at best, and completely toxic discourse at worst. Debate.me takes a different approach.
+        Most platforms we use to converse over the internet prioritize engagement above all else. This results in short-form, surface-level conversations at best, and completely toxic discourse at worst. Debate.me does things differently.
       </Text>
 
-      <SimpleGrid cols={{ base: 1, md: 3 }} spacing="xl" mt={50}>
+      <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="xl" mt={50}>
         {features}
       </SimpleGrid>
     </Container>

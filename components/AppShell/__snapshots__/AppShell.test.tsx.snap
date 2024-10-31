@@ -32,10 +32,10 @@ exports[`App Shell component > renders correctly 1`] = `
         style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap; padding-inline: var(--mantine-spacing-md); width: 100%; height: 100%;"
       >
         <img
-          alt="Debate.me logo"
+          alt="Debate.me wordmark"
           class="m_9e117634 mantine-Image-root"
           height="28"
-          src="/debate-me-logo.svg"
+          src="/debate-me-wordmark.svg"
         />
         <div
           class="m_4081bf90 mantine-Group-root mantine-visible-from-sm"
