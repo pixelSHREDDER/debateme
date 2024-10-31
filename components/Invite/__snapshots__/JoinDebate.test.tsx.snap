@@ -1,0 +1,55 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Join Debate component > Join Debate > renders correctly 1`] = `
+<section
+  data-testid="join-section"
+>
+  <h2>
+    Join this Debate
+  </h2>
+  <p>
+    You have been invited to join this debate. Click below to join.
+  </p>
+  <form
+    data-testid="join-debate-form"
+  >
+    <input
+      id="debateId"
+      name="debateId"
+      type="hidden"
+      value="4"
+    />
+    <input
+      id="inviteId"
+      name="inviteId"
+      type="hidden"
+      value=""
+    />
+    <input
+      id="opponentSub"
+      name="opponentSub"
+      type="hidden"
+      value="auth0|1234567890abcdefghij1234"
+    />
+    <p
+      aria-live="polite"
+    />
+    <button
+      class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+      data-variant="filled"
+      style="--button-radius: var(--mantine-radius-md); --button-bg: var(--mantine-color-marble-filled); --button-hover: var(--mantine-color-marble-filled-hover); --button-color: var(--mantine-color-white); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; flex-shrink: 0;"
+      type="submit"
+    >
+      <span
+        class="m_80f1301b mantine-Button-inner"
+      >
+        <span
+          class="m_811560b9 mantine-Button-label"
+        >
+          Join
+        </span>
+      </span>
+    </button>
+  </form>
+</section>
+`;

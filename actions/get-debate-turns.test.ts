@@ -1,7 +1,8 @@
-import getDebateTurns from './get-debate-turns'
 import prisma from '@/lib/__mocks__/prisma'
 import { expect, test, vi } from 'vitest'
 import { TDebate } from '@/lib/prisma-types'
+import { DebateStatus } from '@prisma/client'
+import getDebateTurns from './get-debate-turns'
 
 vi.mock('@/lib/prisma')
 
@@ -14,6 +15,7 @@ test('getDebateTurns should return an object with the requested debate and its a
     createdAt: createdAtDate,
     creatorSub: '0',
     opponentSub: null,
+    status: DebateStatus.NoOpponent,
     turn: []
   }
   prisma.debate.findUniqueOrThrow.mockResolvedValueOnce(mockDebate)
@@ -26,9 +28,8 @@ test('getDebateTurns should return an object with the requested debate and its a
 })
 
 test('getDebateTurns should return an error when the requested debate cannot be found', async () => {
-  const error = new Error
+  const error = new Error('test error')
   prisma.debate.findUniqueOrThrow.mockImplementationOnce(() => { throw error })
 
-  const response = await getDebateTurns(1, '0')
-  expect(response).toBe(error)
+  await expect(getDebateTurns(1, '0')).rejects.toThrow(/Failed to find debate with turns/)
 })

@@ -1,7 +1,7 @@
 import * as auth0Hooks from '@auth0/nextjs-auth0/client'
 import { afterAll, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import ProviderWrapper from '@/tests/helpers/ProviderWrapper'
+import ProviderWrapper, { InviteIdProviderWrapper } from '@/tests/helpers/ProviderWrapper'
 import { createDebates } from '@/mocks/debates'
 import { getUsers } from '@/mocks/users'
 import Debate from './Debate'
@@ -45,12 +45,12 @@ describe('Debate component', () => {
     expect(screen.getByTestId('invite-section')).toMatchSnapshot()
   })
 
-  test('renders join debate screen correctly', () => {
+  test('shows alert when user attempts to join debate without using invite link', () => {
     render(
       <Debate debate={debates[4]} updateDebate={vi.fn()} />,
       { wrapper: ProviderWrapper },
     )
-    expect(screen.getByTestId('join-section')).toMatchSnapshot()
+    expect(screen.getByTestId('debate-no-invite-link-alert')).not.toBeNull()
   })
 
   test('hides New Turn and renders cooldown message correctly', () => {
@@ -103,6 +103,14 @@ describe('Debate component', () => {
   test('does not render debate if debate is not defined', () => {
     render(
       <Debate debate={undefined as any} updateDebate={vi.fn()} />,
+      { wrapper: ProviderWrapper },
+    )
+    expect(screen.queryByTestId).toBeNull
+  })
+
+  test('does not render debate if invite id is not in the URL', () => {
+    render(
+      <Debate debate={debates[0]} updateDebate={vi.fn()} />,
       { wrapper: ProviderWrapper },
     )
     expect(screen.queryByTestId).toBeNull

@@ -15,6 +15,7 @@ const enum AlertType {
 interface IFormAlert {
   message: string,
   title: string,
+  testid?: string,
   type: AlertType,
 }
 
@@ -46,6 +47,7 @@ export default function FormAlert(props: IFormAlert) {
 
   return (
     <Alert
+      data-testid={props.testid || ''}
       id={`alert_form_alert_${id}`}
       aria-live="polite"
       variant="light"

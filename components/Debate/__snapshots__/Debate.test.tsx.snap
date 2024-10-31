@@ -932,31 +932,90 @@ exports[`Debate component > renders correctly 1`] = `
       </div>
     </li>
   </ul>
-  <div
-    aria-describedby="alert_debate_cooldown-body"
-    class="m_66836ed3 mantine-Alert-root"
-    data-variant="light"
-    id="alert_debate_cooldown"
-    role="alert"
-    style="--alert-radius: var(--mantine-radius-lg); --alert-bg: rgba(125, 62, 201, 0.1); --alert-color: #7d3ec9; --alert-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; margin-block: calc(1.25rem * var(--mantine-scale));"
+  <form
+    data-testid="new-turn-form"
   >
-    <div
-      class="m_a5d60502 mantine-Alert-wrapper"
+    <fieldset
+      class="m_ef274e49 m_e9408a47 mantine-Fieldset-root"
+      data-variant="filled"
+      radius="lg"
+      style="--fieldset-radius: var(--mantine-radius-lg); margin-inline: 0rem;"
     >
-      <div
-        class="m_667c2793 mantine-Alert-body"
+      <legend
+        class="m_90794832 mantine-Fieldset-legend"
       >
-        <div
-          class="m_7fa78076 mantine-Alert-message"
-          data-variant="light"
-          id="alert_debate_cooldown-body"
+        It's your turn!
+      </legend>
+      <input
+        id="debateId"
+        name="debateId"
+        type="hidden"
+        value="1"
+      />
+      <input
+        id="isCreator"
+        name="isCreator"
+        type="hidden"
+        value="1"
+      />
+      <input
+        id="userSub"
+        name="userSub"
+        type="hidden"
+        value="auth0|1234567890abcdefghij1234"
+      />
+      <input
+        id="bodyString"
+        name="bodyString"
+        type="hidden"
+      />
+      <div
+        class="m_8bffd616 mantine-Flex-root __m__-r3"
+        style="gap: calc(1.25rem * var(--mantine-scale)); align-items: center; justify-content: flex-start;"
+      >
+        <aside
+          aria-describedby="alert_quotes_:r5:-body"
+          class="_quotes_e6219c m_66836ed3 mantine-Alert-root"
+          data-variant="outline"
+          id="alert_quotes_:r5:"
+          role="alert"
+          style="--alert-radius: var(--mantine-radius-md); --alert-bg: transparent; --alert-color: #9562d2; --alert-bd: calc(0.0625rem * var(--mantine-scale)) solid #9562d2; font-style: italic; width: auto; max-width: 75%;"
         >
-          The cooldown period is active. 
-          You can start your next turn at 5:25:01 AM. In the meantime, why not read over the previous turns? You never know what you might've missed!
-        </div>
+          <div
+            class="m_a5d60502 mantine-Alert-wrapper"
+          >
+            <div
+              class="m_667c2793 mantine-Alert-body"
+            >
+              <div
+                class="m_7fa78076 mantine-Alert-message"
+                data-variant="outline"
+                id="alert_quotes_:r5:-body"
+              >
+                “Don’t be a dick.” ― Unknown
+              </div>
+            </div>
+          </div>
+        </aside>
+        <button
+          class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+          data-variant="filled"
+          style="--button-radius: var(--mantine-radius-md); --button-bg: var(--mantine-color-marble-filled); --button-hover: var(--mantine-color-marble-filled-hover); --button-color: var(--mantine-color-white); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; flex-shrink: 0;"
+          type="submit"
+        >
+          <span
+            class="m_80f1301b mantine-Button-inner"
+          >
+            <span
+              class="m_811560b9 mantine-Button-label"
+            >
+              Finish Your Turn
+            </span>
+          </span>
+        </button>
       </div>
-    </div>
-  </div>
+    </fieldset>
+  </form>
 </section>
 `;
 
@@ -1011,51 +1070,5 @@ exports[`Debate component > renders invite link screen correctly 1`] = `
     data-visible="true"
     style="--skeleton-height: calc(2.25rem * var(--mantine-scale)); --skeleton-radius: var(--mantine-radius-sm);"
   />
-</section>
-`;
-
-exports[`Debate component > renders join debate screen correctly 1`] = `
-<section
-  data-testid="join-section"
->
-  <h2>
-    Join this Debate
-  </h2>
-  <p>
-    You have been invited to join this debate. Click below to join.
-  </p>
-  <form>
-    <input
-      id="debateId"
-      name="debateId"
-      type="hidden"
-      value="5"
-    />
-    <input
-      id="opponentSub"
-      name="opponentSub"
-      type="hidden"
-      value="auth0|1234567890abcdefghij1234"
-    />
-    <p
-      aria-live="polite"
-    />
-    <button
-      class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
-      data-variant="filled"
-      style="--button-radius: var(--mantine-radius-md); --button-bg: var(--mantine-color-marble-filled); --button-hover: var(--mantine-color-marble-filled-hover); --button-color: var(--mantine-color-white); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; flex-shrink: 0;"
-      type="submit"
-    >
-      <span
-        class="m_80f1301b mantine-Button-inner"
-      >
-        <span
-          class="m_811560b9 mantine-Button-label"
-        >
-          Join
-        </span>
-      </span>
-    </button>
-  </form>
 </section>
 `;

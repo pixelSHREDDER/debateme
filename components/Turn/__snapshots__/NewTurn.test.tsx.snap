@@ -22,6 +22,12 @@ exports[`New Turn component > New Turn > renders correctly 1`] = `
       value="1"
     />
     <input
+      id="isCreator"
+      name="isCreator"
+      type="hidden"
+      value="1"
+    />
+    <input
       id="userSub"
       name="userSub"
       type="hidden"

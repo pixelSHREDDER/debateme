@@ -98,6 +98,7 @@ export default function Debate({ debate, updateDebate }: IDebate) {
     console.error(error)
     return (
       <FormAlert
+        testid="debate-error-alert"
         message={error.message || '....but we do not know what. Try reloading and check again.'}
         title="Something went wrong"
         type={2} />
@@ -107,6 +108,7 @@ export default function Debate({ debate, updateDebate }: IDebate) {
   if (!user) {
     return (
       <FormAlert
+        testid="debate-no-user-alert"
         message="Try logging in again."
         title="Something went wrong"
         type={2} />
@@ -116,6 +118,7 @@ export default function Debate({ debate, updateDebate }: IDebate) {
   if (!debate) {
     return (
       <FormAlert
+        testid="debate-not-found-alert"
         message="Sorry, we couldn't find that debate."
         title="Something went wrong"
         type={2} />
@@ -126,6 +129,7 @@ export default function Debate({ debate, updateDebate }: IDebate) {
     return (debate.creatorSub === user.sub) ?
     <Invite debateId={debate.id} /> :
     <FormAlert
+      testid="debate-no-invite-link-alert"
       message="You need to use the invite link to join this debate."
       title="Something went wrong"
       type={2} />

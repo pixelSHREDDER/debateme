@@ -28,7 +28,7 @@ export default function JoinDebate({
       <section data-testid="join-section">
           <h2>Join this Debate</h2>
           <p>You have been invited to join this debate. Click below to join.</p>
-          <form action={formAction}>
+          <form action={formAction} data-testid="join-debate-form">
           <input
             type="hidden"
             id="debateId"
