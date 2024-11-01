@@ -455,10 +455,10 @@ exports[`Debate component > hides New Turn and renders cooldown message correctl
   <div
     aria-describedby="alert_debate_cooldown-body"
     class="m_66836ed3 mantine-Alert-root"
-    data-variant="light"
+    data-variant="outline"
     id="alert_debate_cooldown"
     role="alert"
-    style="--alert-radius: var(--mantine-radius-lg); --alert-bg: rgba(125, 62, 201, 0.1); --alert-color: #7d3ec9; --alert-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent; margin-block: calc(1.25rem * var(--mantine-scale));"
+    style="--alert-radius: var(--mantine-radius-lg); --alert-bg: transparent; --alert-color: #bfc4d9; --alert-bd: calc(0.0625rem * var(--mantine-scale)) solid #bfc4d9; margin-block: calc(1.25rem * var(--mantine-scale)); background: rgb(240, 243, 253);"
   >
     <div
       class="m_a5d60502 mantine-Alert-wrapper"
@@ -468,7 +468,7 @@ exports[`Debate component > hides New Turn and renders cooldown message correctl
       >
         <div
           class="m_7fa78076 mantine-Alert-message"
-          data-variant="light"
+          data-variant="outline"
           id="alert_debate_cooldown-body"
         >
           The cooldown period is active. 

@@ -78,14 +78,21 @@ exports[`New Debate component > New Debate > renders correctly 1`] = `
            *
         </span>
       </label>
+      <p
+        class="m_fe47ce59 mantine-InputWrapper-description mantine-NativeSelect-description"
+        id="cooldownMins-description"
+      >
+        How long will you need to respond to what your opponent says, rather than react to it?
+      </p>
       <div
         class="m_6c018570 mantine-Input-wrapper mantine-NativeSelect-wrapper"
         data-pointer="true"
         data-variant="default"
         data-with-right-section="true"
-        style="--input-right-section-pointer-events: none;"
+        style="--input-margin-top: calc(var(--mantine-spacing-xs) / 2); --input-right-section-pointer-events: none;"
       >
         <select
+          aria-describedby="cooldownMins-description"
           aria-invalid="false"
           class="m_8fb7ebe7 mantine-Input-input mantine-NativeSelect-input"
           data-variant="default"
@@ -152,14 +159,14 @@ exports[`New Debate component > New Debate > renders correctly 1`] = `
       </div>
     </div>
     <div
-      class="m_8bffd616 mantine-Flex-root __m__-rg"
+      class="m_8bffd616 mantine-Flex-root __m__-rh"
       style="gap: calc(1.25rem * var(--mantine-scale)); align-items: center; justify-content: flex-start;"
     >
       <aside
-        aria-describedby="alert_quotes_:ri:-body"
+        aria-describedby="alert_quotes_:rj:-body"
         class="_quotes_e6219c m_66836ed3 mantine-Alert-root"
         data-variant="outline"
-        id="alert_quotes_:ri:"
+        id="alert_quotes_:rj:"
         role="alert"
         style="--alert-radius: var(--mantine-radius-md); --alert-bg: transparent; --alert-color: #9562d2; --alert-bd: calc(0.0625rem * var(--mantine-scale)) solid #9562d2; font-style: italic; width: auto; max-width: 75%;"
       >
@@ -172,7 +179,7 @@ exports[`New Debate component > New Debate > renders correctly 1`] = `
             <div
               class="m_7fa78076 mantine-Alert-message"
               data-variant="outline"
-              id="alert_quotes_:ri:-body"
+              id="alert_quotes_:rj:-body"
             >
               “Don’t be a dick.” ― Unknown
             </div>

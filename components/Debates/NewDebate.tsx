@@ -34,6 +34,7 @@ export default function NewDebate() {
           withAsterisk />
         <NativeSelect
           label="Cooldown period between turns"
+          description="How long will you need to respond to what your opponent says, rather than react to it?"
           id="cooldownMins"
           name="cooldownMins"
           defaultValue="5"

@@ -41,8 +41,9 @@ export default function Debate({ debate, updateDebate }: IDebate) {
       return (
         <Alert
           id="alert_debate_cooldown"
-          variant="light"
-          color={theme.colors?.purple?.[6] || 'purple'}
+          variant="outline"
+          bg={theme.colors?.gray?.[0] || 'gray'}
+          color={theme.colors?.gray?.[2] || 'gray'}
           radius="lg"
           my={20}>
             The cooldown period is active. {turnTime}
@@ -60,14 +61,28 @@ export default function Debate({ debate, updateDebate }: IDebate) {
       )
     ) {
       return (
-        <Alert
-          id="alert_debate_opponents_turn"
-          variant="light"
-          color={theme.colors?.purple?.[6] || 'purple'}
-          radius="lg"
-          my={20}>
-            It&apos;s your opponent&apos;s turn, please wait....
+        <>
+          <Alert
+            darkHidden
+            id="alert_debate_opponents_turn"
+            variant="outline"
+            bg={theme.colors?.gray?.[0] || 'gray'}
+            color={theme.colors?.gray?.[2] || 'gray'}
+            radius="lg"
+            my={20}>
+            It&apos;s your opponent&apos;s turn now. Check back shortly!
+          </Alert>
+          <Alert
+            lightHidden
+            id="alert_debate_opponents_turn"
+            variant="outline"
+            bg={'dark'}
+            color={theme.colors?.gray?.[6] || 'gray'}
+            radius="lg"
+            my={20}>
+            It&apos;s your opponent&apos;s turn now. Check back shortly!
         </Alert>
+      </>
       )
     }
 

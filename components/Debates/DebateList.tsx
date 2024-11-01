@@ -3,7 +3,7 @@
 import getUserDebates from '@/actions/get-user-debates'
 import { TUserDebates } from '@/lib/prisma-types'
 import { useUser } from '@auth0/nextjs-auth0/client'
-import { Container, Grid } from '@mantine/core'
+import { Container, Grid, Skeleton } from '@mantine/core'
 import { Debate } from '@prisma/client'
 import React, { useEffect, useState } from 'react'
 import DebateCard from './DebateCard'
@@ -35,9 +35,27 @@ export default function DebateList() {
     refreshData()
   }, [user])
 
-  if (isLoading) { return 'loading user...' }
-
   if (error) { return JSON.stringify(error) }
+
+  if (isLoading || (!!user && userData === null)) {
+    return (
+      <section>
+        <Container my="md">
+          <Grid>
+              <Grid.Col span={{ base: 12, md: 4, sm: 5, xs: 6 }}>
+              <Skeleton height={212} />
+              </Grid.Col>
+              <Grid.Col span={{ base: 12, md: 4, sm: 5, xs: 6 }}>
+              <Skeleton height={212} />
+              </Grid.Col>
+              <Grid.Col span={{ base: 12, md: 4, sm: 5, xs: 6 }}>
+              <Skeleton height={212} />
+              </Grid.Col>
+          </Grid>
+        </Container>
+      </section>
+    )
+  }
 
   if (!!user && !!user.sub && user.sub.length && userData) {
     return debatesData.length ? (
@@ -63,5 +81,5 @@ export default function DebateList() {
   }
 
   // TODO: redirect to signin/register flow
-  return user ? 'Loading debates....' : 'Please login'
+  return 'Please login'
 }
