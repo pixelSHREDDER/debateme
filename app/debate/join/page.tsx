@@ -1,20 +1,23 @@
 import getInviteDebateId from '@/actions/get-invite-debate-id'
 import JoinDebate from '@/components/Invite/JoinDebate'
+import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 
-export default async function JoinDebatePage({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | undefined }
-}) {
+export default withPageAuthRequired(async ({ searchParams }) => {
+  const inviteId = searchParams?.id?.toString() || null
   let debateId: number
-  if (!searchParams.id) {
+
+  if (!inviteId) {
     throw new Error('No invite ID specified')
   }
   try {
-    debateId = await getInviteDebateId(searchParams.id)
+    debateId = await getInviteDebateId(inviteId)
   } catch (e: any) {
     throw new Error(e.message)
   }
 
-  return <JoinDebate debateId={debateId} inviteId={searchParams.id} />
-}
+  return <JoinDebate debateId={debateId} inviteId={inviteId} />
+}, {
+  returnTo({ searchParams }) {
+    return `/debate/join?id=${searchParams?.id?.toString()}`
+  }
+})
