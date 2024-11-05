@@ -1,6 +1,6 @@
 import getInviteDebateId from '@/actions/get-invite-debate-id'
 import JoinDebate from '@/components/Invite/JoinDebate'
-import { withPageAuthRequired } from '@auth0/nextjs-auth0'
+import { AppRouterPageRouteOpts, withPageAuthRequired } from '@auth0/nextjs-auth0'
 
 export default withPageAuthRequired(async ({ searchParams }) => {
   const inviteId = searchParams?.id?.toString() || null
@@ -17,7 +17,7 @@ export default withPageAuthRequired(async ({ searchParams }) => {
 
   return <JoinDebate debateId={debateId} inviteId={inviteId} />
 }, {
-  returnTo({ searchParams }) {
+  returnTo({ searchParams }: AppRouterPageRouteOpts) {
     return `/debate/join?id=${searchParams?.id?.toString()}`
   }
 })
