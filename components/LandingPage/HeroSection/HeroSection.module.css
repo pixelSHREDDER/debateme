@@ -22,8 +22,6 @@
   }
 
   @media (max-width: $mantine-breakpoint-xs) {
-    height: 88vh;
-    height: 88svh;
     padding-bottom: 0;
   }
 }
@@ -57,9 +55,11 @@
   }
 }
 
-.control {
-  @media (max-width: $mantine-breakpoint-xs) {
-    flex: 1;
+.controls {
+  flex-direction: column;
+
+  @media (min-width: $mantine-breakpoint-sm) {
+    flex-direction: row;
   }
 }
 

@@ -41,7 +41,7 @@ export default function DebateList() {
     return (
       <section>
         <Container my="md">
-          <Grid>
+          <Grid gutter={30}>
               <Grid.Col span={{ base: 12, md: 4, sm: 5, xs: 6 }}>
               <Skeleton height={212} />
               </Grid.Col>
@@ -61,7 +61,7 @@ export default function DebateList() {
     return debatesData.length ? (
       <section>
         <Container my="md">
-          <Grid>
+          <Grid gutter={30}>
             {debatesData.map((debate: Debate) =>
               <Grid.Col span={{ base: 12, md: 4, sm: 5, xs: 6 }} key={debate.id}>
                 <DebateCard
@@ -70,7 +70,7 @@ export default function DebateList() {
                   opponentSub={debate.opponentSub}
                   status={debate.status}
                   topic={debate.topic}
-                  userSub={user.sub as string}
+                  userSub={user.sub || ''}
                 />
               </Grid.Col>
             )}

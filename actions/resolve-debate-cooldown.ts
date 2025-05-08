@@ -31,9 +31,9 @@ export default async function resolveDebateCooldown(debate: TDebate) {
     }
 
     if (lastTurn.userSub === debate.creatorSub) {
-      await setDebateStatus(debate.id, DebateStatus.CreatorTurn)
-    } else if (lastTurn.userSub === debate.opponentSub) {
       await setDebateStatus(debate.id, DebateStatus.OpponentTurn)
+    } else if (lastTurn.userSub === debate.opponentSub) {
+      await setDebateStatus(debate.id, DebateStatus.CreatorTurn)
     } else {
       throw new Error('Unable to determine current status')
     }

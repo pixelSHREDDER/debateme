@@ -6,11 +6,11 @@ import {
   Container,
   Title,
   Button,
-  Group,
   Text,
   Overlay,
   Badge,
   Anchor,
+  Flex,
 } from '@mantine/core'
 import React from 'react'
 import { theme } from '@/theme'
@@ -35,7 +35,7 @@ export default function HeroSection() {
             <Text c={theme.colors?.purple?.[2] || 'dark'} mt="md">
               Say goodbye to crowded comments, mean tweets, and social media hot takes. Start having real, meaningful, productive conversations about what you care about, with the people you care about.
             </Text>
-            <Group mt={30} mb={30} justify="space-between">
+            <Flex mt={30} mb={30} justify="space-between" gap="sm" className={classes.controls}>
               <Button
                 component="a"
                 href={user ? '/debate' : '/api/auth/login'}
@@ -48,7 +48,7 @@ export default function HeroSection() {
                 Learn more
               </Button>*/}
               <Badge variant="transparent" size="xs">Art by <Anchor<'a'> size="xs" href="https://unsplash.com/@kylejglenn?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Kyle Glenn</Anchor> | <Anchor<'a'> size="xs" href="https://unsplash.com/photos/books-over-green-trolley-bin-gcw_WWu_uBQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</Anchor></Badge>
-            </Group>
+            </Flex>
           </div>
         </div>
       </Container>

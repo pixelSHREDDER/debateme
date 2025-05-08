@@ -8,20 +8,21 @@ import extensions from '@/components/Editor/DefaultExtensions'
 
 interface IEditor {
   id: string,
+  onProofread: Function,
   onUpdate: Function,
   required: string,
   testid: string,
 }
 
 export default function Editor(
-  { id, onUpdate, required, testid }: IEditor,
+  { id, onProofread, onUpdate, required, testid }: IEditor,
   { children }: { children: React.ReactNode }
 ) {
   return (
     <EditorProvider
       editorProps={{ attributes: { id, required, testid } }}
       slotBefore={<MenuBar />}
-      slotAfter={<Suggestions />}
+      slotAfter={<Suggestions onProofread={onProofread} />}
       extensions={extensions}
       content=""
       onUpdate={e => onUpdate(e.editor.getHTML())}

@@ -11,6 +11,7 @@ const extensions = [
     language: 'en-US', // it can detect language automatically or you can write your own language like 'en-US'
     apiUrl: `${process.env.NEXT_PUBLIC_LANGUAGETOOL_SERVER_URL}/v2/check`, // For testing purposes, you can use [Public API](https://dev.languagetool.org/public-http-api), but keep an eye on the rules that they've written there
     automaticMode: false, // if true, it will start proofreading immediately otherwise only when you execute `proofread` command of the extension.
+    documentId: '1',
   }),
   Link.configure({
     defaultProtocol: 'https',

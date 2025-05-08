@@ -82,11 +82,16 @@ export interface Category {
   name: string
 }
 
+export interface Url {
+  value: string
+}
+
 export interface Rule {
   id: string
   description: string
   issueType: string
-  category: Category
+  category: Category,
+  urls: Url[]
 }
 
 export interface Match {
