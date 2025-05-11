@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+
 'use client'
 
 import { Button, Text } from '@mantine/core'

@@ -9,7 +9,7 @@ import { theme } from '../theme'
 export const metadata: Metadata = {
   title: 'Debate.me',
   description: 'The debate-focused cure for the common comment thread',
-  manifest: "/site.webmanifest",
+  manifest: '/site.webmanifest',
 }
 
 export default function RootLayout({

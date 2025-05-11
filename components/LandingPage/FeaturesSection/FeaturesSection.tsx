@@ -9,11 +9,11 @@ import {
   SimpleGrid,
   Container,
   rem,
-} from '@mantine/core';
-import { IconHeartHandshake, IconPodium, IconBubble } from '@tabler/icons-react';
-import classes from './FeaturesSection.module.css';
-import React from 'react';
-import { theme } from '@/theme';
+} from '@mantine/core'
+import { IconHeartHandshake, IconPodium, IconBubble } from '@tabler/icons-react'
+import React from 'react'
+import { theme } from '@/theme'
+import classes from './FeaturesSection.module.css'
 
 const mockdata = [
   {
@@ -34,7 +34,7 @@ const mockdata = [
       'Debate Coaching scans for logical fallacies and other common pitfalls, to help you create sound arguments and keep the conversation productive.',
     icon: IconPodium,
   },
-];
+]
 
 export default function FeaturesSection() {
   const features = mockdata.map((feature) => (
@@ -51,7 +51,7 @@ export default function FeaturesSection() {
         {feature.description}
       </Text>
     </Card>
-  ));
+  ))
 
   return (
     <Container component="section" size="lg" py="xl">
@@ -73,5 +73,5 @@ export default function FeaturesSection() {
         {features}
       </SimpleGrid>
     </Container>
-  );
+  )
 }

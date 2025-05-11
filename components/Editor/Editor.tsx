@@ -2,9 +2,9 @@
 
 import '@/components/Editor/editor.scss'
 import { EditorProvider } from '@tiptap/react'
-import Suggestions from '@/components/Editor/Suggestions'
 import MenuBar from '@/components/Editor/MenuBar'
 import extensions from '@/components/Editor/DefaultExtensions'
+import { FallacyDetector } from './FallacyDetector/FallacyDetector'
 
 interface IEditor {
   id: string,
@@ -22,7 +22,7 @@ export default function Editor(
     <EditorProvider
       editorProps={{ attributes: { id, required, testid } }}
       slotBefore={<MenuBar />}
-      slotAfter={<Suggestions onProofread={onProofread} />}
+      slotAfter={<FallacyDetector onProofread={onProofread} />}
       extensions={extensions}
       content=""
       onUpdate={e => onUpdate(e.editor.getHTML())}

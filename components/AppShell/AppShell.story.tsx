@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
-import AppShell from './AppShell'
 import React from 'react'
+import AppShell from './AppShell'
 
 const meta: Meta<typeof AppShell> = {
   title: 'App Shell',

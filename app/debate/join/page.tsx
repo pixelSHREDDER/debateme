@@ -19,5 +19,5 @@ export default withPageAuthRequired(async ({ searchParams }) => {
 }, {
   returnTo({ searchParams }: AppRouterPageRouteOpts) {
     return `/debate/join?id=${searchParams?.id?.toString()}`
-  }
+  },
 })

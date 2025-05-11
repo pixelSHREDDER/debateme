@@ -76,13 +76,13 @@ export default function Debate({ debate, updateDebate }: IDebate) {
             lightHidden
             id="alert_debate_opponents_turn"
             variant="outline"
-            bg={'dark'}
+            bg="dark"
             color={theme.colors?.gray?.[6] || 'gray'}
             radius="lg"
             my={20}>
             It&apos;s your opponent&apos;s turn now. Check back shortly!
-        </Alert>
-      </>
+          </Alert>
+        </>
       )
     }
 

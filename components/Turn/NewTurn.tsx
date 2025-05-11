@@ -12,7 +12,7 @@ import { Button, Fieldset, Flex, Modal, Stack, Text } from '@mantine/core'
 import Quotes from '@/components/Quotes/Quotes'
 import { useDisclosure } from '@mantine/hooks'
 
-const SUBMIT_WARNING = 'Remember: turns can\'t be edited, and you can\'t submit another turn until your opponent finishes theirs.';
+const SUBMIT_WARNING = 'Remember: turns can\'t be edited, and you can\'t submit another turn until your opponent finishes theirs.'
 
 const initialState = {
   message: '',
