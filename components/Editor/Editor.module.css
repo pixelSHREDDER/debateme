@@ -1,6 +1,7 @@
 .icon {
   border: 2px groove light-dark(var(--mantine-primary-color-4), var(--mantine-primary-color-6));
 }
+
 .isActive {
   border: 3px inset light-dark(var(--mantine-primary-color-4), var(--mantine-primary-color-3));
   background-color: light-dark(var(--mantine-primary-color-9), var(--mantine-primary-color-6))

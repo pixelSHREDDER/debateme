@@ -15,7 +15,7 @@ type Story = StoryObj<typeof Turn>
 
 export const YourTurn: Story = {
   args: {
-    children: <div dangerouslySetInnerHTML={{ __html: turns[0].body || '' }} />,
+    body: turns[0].body || '',
     createdAt: turns[0].createdAt,
     isOpponent: false,
   },
@@ -23,7 +23,7 @@ export const YourTurn: Story = {
 
 export const OpponentsTurn: Story = {
   args: {
-    children: <div dangerouslySetInnerHTML={{ __html: turns[1].body || '' }} />,
+    body: turns[1].body || '',
     createdAt: turns[1].createdAt,
     isOpponent: true,
   },

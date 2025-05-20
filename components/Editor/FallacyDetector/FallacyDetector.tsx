@@ -7,35 +7,82 @@ import {
   Flex,
   Modal,
   Stack,
+  CloseButton,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { getFallacyById, LogicalFallacy } from './fallacies'
 import { DetectedFallacy, detectTextFallacies } from './detectTextFallacies'
 
-export interface PopupData extends LogicalFallacy {
+const FOUND_FALLACY_PREFIXES = [
+  'Careful!',
+  'Watch out!',
+  'Whoa now!',
+  'Easy there.',
+  '*blows whistle* Time out!!',
+  'Hang on.',
+  'Whoops!',
+]
+
+const ANSWER_PREFIXES = [
+  'Try this:',
+  'Hm.. How about:',
+  'What about:',
+  'Hm....',
+  'Lemme think....',
+  'Good question!',
+  'That&apos;s a good question....',
+]
+
+enum ModalContentType {
+  Description = 'description',
+  Rebuttal = 'rebuttal',
+  Recommendation = 'recommendation',
+}
+
+export interface IPopupData extends LogicalFallacy {
   originalText: string
   instanceKey: string
 }
 
-export function FallacyDetector({ onProofread }: { onProofread: Function }) {
+export interface IFallacyDetector {
+  isReadOnly?: boolean,
+  onProofread?: Function,
+}
+
+export function FallacyDetector({ isReadOnly = false, onProofread }: IFallacyDetector) {
   // TODO: Should we stores all detected fallacies from the last proofread?
   /*const [
     currentDetectedFallacies,
     setCurrentDetectedFallacies,
   ] = useState<Map<string, DetectedFallacyType>>(new Map())*/
   const [ignoredFallacyKeys, setIgnoredFallacyKeys] = useState<Set<string>>(new Set())
-  const [popupData, setPopupData] = useState<PopupData | null>(null)
+  const [popupData, setPopupData] = useState<IPopupData | null>(null)
   const { editor } = useCurrentEditor()
-  const buttonLabel = useRef<string>('Continue')
+  const buttonLabel = useRef<string>(isReadOnly ? 'Ask Coach' : 'Continue')
   const modalContent = useRef<string>('')
+  const foundFallacyPrefix = useRef<string>(
+    FOUND_FALLACY_PREFIXES[Math.floor(Math.random() * FOUND_FALLACY_PREFIXES.length)]
+  )
+  const answerPrefix = useRef<string>(
+    ANSWER_PREFIXES[Math.floor(Math.random() * ANSWER_PREFIXES.length)]
+  )
+  const popupOpen = useRef<boolean>(false)
   const [opened, { open, close }] = useDisclosure(false)
 
-const onOpenModal = ((isRecommendation: boolean) => {
-  modalContent.current = isRecommendation ?
-  (popupData?.recommendation || '') :
-  `${popupData?.description}<br/>For example:<br/>${popupData?.example}`
-  open()
-})
+  const onOpenModal = ((contentType: ModalContentType) => {
+    const content = popupData ? popupData[contentType] : ''
+    if (contentType === ModalContentType.Description) {
+      modalContent.current = `${content}<br/>For example:<br/>${popupData?.example}`
+    } else {
+      modalContent.current = `${answerPrefix.current} ${content}`
+    }
+    open()
+  })
+
+  const onClosePopup = () => {
+    popupOpen.current = false
+    setPopupData(null)
+  }
 
   const clearAllFallacyMarks = useCallback(() => {
     if (!editor) return
@@ -77,18 +124,28 @@ const onOpenModal = ((isRecommendation: boolean) => {
 
     //setCurrentDetectedFallacies(newFallaciesMap)
     applyFallacyMarks(foundFallacies)
-    buttonLabel.current = 'Proofread again'
-    onProofread()
-  }, [editor, clearAllFallacyMarks, applyFallacyMarks, onProofread])
+    buttonLabel.current = isReadOnly ? 'Ask again' : 'Proofread again'
+    onProofread && onProofread()
+  }, [editor, clearAllFallacyMarks, applyFallacyMarks, isReadOnly, onProofread])
 
   useEffect(() => {
     if (!editor) return
 
+    //const editorDom = isReadOnly ? editor.view.dom.parentElement : editor.view.dom
     const editorDom = editor.view.dom
 
+    if (!editorDom) return
+
+    const getFallacySpan = (target: HTMLElement) => {
+      const selector = 'span.fallacy-underline[data-fallacy-id][data-instance-key]'
+      return target.matches(selector) ? target : target.closest(selector)
+    }
+
     const handleClick = (event: MouseEvent) => {
+      popupOpen.current = false
       const target = event.target as HTMLElement
-      const fallacySpan = target.closest('span.fallacy-underline[data-fallacy-id][data-instance-key]')
+      const fallacySpan = getFallacySpan(target)
+      //const fallacySpan = target.closest('span.fallacy-underline[data-fallacy-id][data-instance-key].active')
 
       if (fallacySpan) {
         const fallacyId = fallacySpan.getAttribute('data-fallacy-id')
@@ -98,6 +155,7 @@ const onOpenModal = ((isRecommendation: boolean) => {
         if (fallacyId && originalText && instanceKey && !ignoredFallacyKeys.has(instanceKey)) {
           const fallacyDetails = getFallacyById(fallacyId)
           if (fallacyDetails) {
+            popupOpen.current = true
             setPopupData({
               ...fallacyDetails,
               originalText,
@@ -109,10 +167,23 @@ const onOpenModal = ((isRecommendation: boolean) => {
     }
 
     editorDom.addEventListener('click', handleClick)
+    /*editorDom.addEventListener('mousedown', () => {
+        if (!editor.view.editable) {
+          editorDom.setAttribute('contenteditable', 'true')
+          editorDom.focus()
+          return false
+        }
+      })
+      editorDom.addEventListener('mouseup', () => {
+        if (!editor.view.editable) {
+          editorDom.setAttribute('contenteditable', 'false')
+        }
+        return false
+      })*/
     return () => {
       editorDom.removeEventListener('click', handleClick)
     }
-  }, [editor, ignoredFallacyKeys])
+  }, [editor, ignoredFallacyKeys, isReadOnly])
 
   const handleIgnoreFallacy = () => {
     if (popupData && editor) {
@@ -130,16 +201,34 @@ const onOpenModal = ((isRecommendation: boolean) => {
 
   return editor ? (
     <>
-      <Button onClick={handleProofread} mb={20}>{buttonLabel.current}</Button>
-      <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
+      <Flex justify={isReadOnly ? 'flex-end' : 'flex-start'}>
+      <Button onClick={handleProofread} mb={isReadOnly ? 0 : 20}>{buttonLabel.current}</Button>
+      </Flex>
+      <BubbleMenu
+        editor={editor}
+        tippyOptions={{ duration: 100 }}
+        updateDelay={0}
+        shouldShow={() => isReadOnly ? !!popupOpen.current : true}
+        /*shouldShow={(e: any) => {
+          //const { editor, state } = e
+          const { selection } = e.state
+          const hasHighlight = editor.isActive('highlight')
+          return hasHighlight && !selection.empty
+        }}*/>
       {popupData &&
         <Paper shadow="xl" p="xs" withBorder>
-          <Text>
-            {popupData ? `Careful! This may be an example of the ${popupData.name}.` : 'unknown fallacy.'}
-          </Text>
-          <Button variant="transparent" onClick={() => onOpenModal(false)}>What&apos;s that?</Button>
-          {popupData?.recommendation &&
-            <Button variant="transparent" onClick={() => onOpenModal(true)}>What should I do?</Button>
+          <Flex justify="space-between" gap="xs">
+            <Text>
+              {popupData ? `${foundFallacyPrefix.current} This may be an example of the ${popupData.name} Fallacy.` : 'unknown fallacy.'}
+            </Text>
+            <CloseButton onClick={onClosePopup} />
+          </Flex>
+          <Button variant="transparent" onClick={() => onOpenModal(ModalContentType.Description)}>What&apos;s that?</Button>
+          {isReadOnly && popupData?.rebuttal &&
+            <Button variant="transparent" onClick={() => onOpenModal(ModalContentType.Rebuttal)}>What should I do?</Button>
+          }
+          {!isReadOnly && popupData?.recommendation &&
+            <Button variant="transparent" onClick={() => onOpenModal(ModalContentType.Recommendation)}>What should I do?</Button>
           }
           <Flex align="center" gap="xs" my="xs">
             <Button
@@ -156,7 +245,7 @@ const onOpenModal = ((isRecommendation: boolean) => {
         </Paper>
       }
       </BubbleMenu>
-      <Modal zIndex={9999} opened={opened} onClose={close} centered title={popupData?.name}>
+      <Modal zIndex={9999} opened={opened} onClose={close} centered title={`${popupData?.name} Fallacy`}>
         <Stack>
           <Text dangerouslySetInnerHTML={{ __html: modalContent.current }} />
           <Flex gap="sm">

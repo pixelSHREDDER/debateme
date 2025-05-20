@@ -11,6 +11,7 @@ import FormAlert from '@/components/Forms/FormAlert'
 import { Button, Fieldset, Flex, Modal, Stack, Text } from '@mantine/core'
 import Quotes from '@/components/Quotes/Quotes'
 import { useDisclosure } from '@mantine/hooks'
+import useCustomMarks from '@/hooks/useCustomMarks'
 
 const SUBMIT_WARNING = 'Remember: turns can\'t be edited, and you can\'t submit another turn until your opponent finishes theirs.'
 
@@ -24,15 +25,16 @@ export default function NewTurn({ debate, onSubmit }: { debate: TDebate, onSubmi
   const bodyRef = useRef<HTMLInputElement>(null)
   const { user } = useUser()
   const [opened, { open, close }] = useDisclosure(false)
+  const { stripCustomMarks } = useCustomMarks()
 
-  const onUpdate = (newBody: string) => {
-    if (bodyRef.current) bodyRef.current.value = newBody
+  const onUpdate = (editorHtml?: string) => {
+    if (!!editorHtml && bodyRef.current) bodyRef.current.value = stripCustomMarks(editorHtml)
   }
 
   const onProofread = () => { if (!isProofread) setIsProofread(true) }
 
-  const onTurnSubmit = async (payload: FormData) => {
-    await formAction(payload)
+  const onTurnSubmit = (payload: FormData) => {
+    formAction(payload)
     if (onSubmit) {
       onSubmit()
     }
@@ -43,7 +45,7 @@ export default function NewTurn({ debate, onSubmit }: { debate: TDebate, onSubmi
   }
 
   return (
-    <form action={onTurnSubmit} data-testid="new-turn-form">
+    <form action={onTurnSubmit} id="new-turn-form" data-testid="new-turn-form">
       <Fieldset mt={30} mx={0} radius="lg" variant="filled" legend="It's your turn!">
         <input
           type="hidden"
@@ -66,7 +68,13 @@ export default function NewTurn({ debate, onSubmit }: { debate: TDebate, onSubmi
           id="bodyString"
           name="bodyString" />
         {/*<InputLabel htmlFor="body">New turn text</InputLabel>*/}
-        <Editor id="body" onUpdate={onUpdate} required="true" onProofread={onProofread} testid="new-turn-editor"></Editor>
+        <Editor
+          id="body"
+          onProofread={onProofread}
+          onUpdate={onUpdate}
+          required="true"
+          testid="new-turn-editor">
+        </Editor>
         {state?.message &&
           <FormAlert
             message={state.message}
@@ -84,7 +92,7 @@ export default function NewTurn({ debate, onSubmit }: { debate: TDebate, onSubmi
         <Stack>
           <Text>{SUBMIT_WARNING}</Text>
           <Flex gap="sm">
-            <FormSubmitButton label="I'm All Done" />
+            <FormSubmitButton form="new-turn-form" label="I'm All Done" />
             <Button variant="outline" onClick={close}>Not Yet</Button>
           </Flex>
         </Stack>

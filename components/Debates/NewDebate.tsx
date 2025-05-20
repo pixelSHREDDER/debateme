@@ -17,7 +17,7 @@ export default function NewDebate() {
   const { user } = useUser()
 
   return user && user.sub ?
-    <form action={formAction} data-testid="new-debate-form">
+    <form action={formAction} data-testid="new-debate-form" id="new-debate-form">
       <Fieldset mx={0} radius="lg" variant="filled">
         <TextInput
           type="hidden"
@@ -57,7 +57,7 @@ export default function NewDebate() {
         }
         <Flex align="center" gap={20} justify="flex-start">
           <Quotes />
-          <FormSubmitButton label="Start Debating!" />
+          <FormSubmitButton form="new-debate-form" label="Start Debating!" />
         </Flex>
       </Fieldset>
     </form> :

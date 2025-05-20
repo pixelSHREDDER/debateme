@@ -98,6 +98,12 @@
     }
   }
 
+  &[contenteditable=false] {
+    min-height: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
   &-focused {
     outline: none !important;
   }
@@ -128,6 +134,8 @@
   }
 }
 .fallacy-underline {
+  user-select: none;
+  -webkit-user-select: none;
   text-decoration: underline;
   text-decoration-color: #FAB005;
   text-decoration-style: wavy;

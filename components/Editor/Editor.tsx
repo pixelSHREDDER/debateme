@@ -18,6 +18,8 @@ export default function Editor(
   { id, onProofread, onUpdate, required, testid }: IEditor,
   { children }: { children: React.ReactNode }
 ) {
+  const handleUpdate = ({ editor }: { editor: any }) => !!editor && onUpdate(editor.getHTML())
+
   return (
     <EditorProvider
       editorProps={{ attributes: { id, required, testid } }}
@@ -25,7 +27,7 @@ export default function Editor(
       slotAfter={<FallacyDetector onProofread={onProofread} />}
       extensions={extensions}
       content=""
-      onUpdate={e => onUpdate(e.editor.getHTML())}
+      onUpdate={e => handleUpdate(e)}
       >
       {children}
     </EditorProvider>

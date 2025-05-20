@@ -47,6 +47,15 @@ export const FallacyMark = Mark.create<FallacyMarkOptions>({
   parseHTML() { return [{ tag: 'span[data-fallacy-id]' }] },
   renderHTML({ HTMLAttributes }) {
     return ['span', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, { class: 'fallacy-underline' }), 0]
+    /*const elem = document.createElement('span')
+
+    Object.entries(
+      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, { class: 'fallacy-underline' })
+    ).forEach(([attr, val]) => elem.setAttribute(attr, val))
+
+    elem.addEventListener('click', () => elem.classList.toggle('active'))
+
+    return elem*/
   },
   addCommands() {
     return {
@@ -81,4 +90,22 @@ export const FallacyMark = Mark.create<FallacyMarkOptions>({
       },
     }
   },
+  /*addInputRules() {
+  },
+  addProseMirrorPlugins() {
+    return [
+      {
+        props: {
+          handleClickOn: (view, pos, node, nodePos, event) => {
+            const mark = view.state.doc.resolve(pos).marks().find(m => m.type.name === 'highlight')
+            if (mark && mark.attrs.popupContent) {
+              alert(`Popup: ${mark.attrs.popupContent}`)
+              return true
+            }
+            return false
+          },
+        },
+      },
+    ]
+  },*/
 })

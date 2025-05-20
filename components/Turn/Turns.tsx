@@ -12,11 +12,10 @@ export default function Turns({ debate }: { debate: TDebate }) {
         {turns.map((turn: TTurn) => (
           <Turn
             key={turn.id}
+            body={turn.body}
             createdAt={turn.createdAt}
+            id={turn.id}
             isOpponent={turn.userSub === debate.opponentSub}>
-            {turn.body &&
-              <div dangerouslySetInnerHTML={{ __html: turn.body }} />
-            }
           </Turn>
         ))}
       </ul>

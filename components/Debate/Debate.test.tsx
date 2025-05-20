@@ -1,7 +1,7 @@
 import * as auth0Hooks from '@auth0/nextjs-auth0/client'
 import { afterAll, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import ProviderWrapper, { InviteIdProviderWrapper } from '@/tests/helpers/ProviderWrapper'
+import ProviderWrapper from '@/tests/helpers/ProviderWrapper'
 import { createDebates } from '@/mocks/debates'
 import { getUsers } from '@/mocks/users'
 import Debate from './Debate'

@@ -3,6 +3,7 @@
   margin-inline: min(40px, 3rem) 0;
   border-radius: var(--mantine-radius-lg) var(--mantine-radius-sm);
   box-shadow: 3px 5px 4px light-dark(rgba(0,0,0,0.6), rgba(255,255,255,0.3));
+  overflow: visible;
 
   mark {
     background-color: light-dark(rgba(255, 255, 0, 1), rgba(255, 255, 0, 0.6));

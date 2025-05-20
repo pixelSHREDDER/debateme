@@ -28,7 +28,7 @@ export default function JoinDebate({
       <section data-testid="join-section">
           <h2>Join this Debate</h2>
           <p>You have been invited to join this debate. Click below to join.</p>
-          <form action={formAction} data-testid="join-debate-form">
+          <form action={formAction} data-testid="join-debate-form" id="join-debate-form">
           <input
             type="hidden"
             id="debateId"
@@ -47,7 +47,7 @@ export default function JoinDebate({
             <p aria-live="polite">
               {state?.message}
             </p>
-            <FormSubmitButton label="Join" />
+            <FormSubmitButton form="join-debate-form" label="Join" />
           </form>
       </section>
     )
