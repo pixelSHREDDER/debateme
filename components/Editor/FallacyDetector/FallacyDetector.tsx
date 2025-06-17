@@ -49,7 +49,9 @@ export interface IFallacyDetector {
   onProofread?: Function,
 }
 
-export function FallacyDetector({ isReadOnly = false, onProofread }: IFallacyDetector) {
+export const FallacyDetector = React.forwardRef<{
+  triggerProofread:() => void;
+}, IFallacyDetector>(({ isReadOnly = false, onProofread }, ref) => {
   // TODO: Should we stores all detected fallacies from the last proofread?
   /*const [
     currentDetectedFallacies,
@@ -128,6 +130,10 @@ export function FallacyDetector({ isReadOnly = false, onProofread }: IFallacyDet
     onProofread && onProofread()
   }, [editor, clearAllFallacyMarks, applyFallacyMarks, isReadOnly, onProofread])
 
+  React.useImperativeHandle(ref, () => ({
+    triggerProofread: handleProofread,
+  }))
+
   useEffect(() => {
     if (!editor) return
 
@@ -201,9 +207,11 @@ export function FallacyDetector({ isReadOnly = false, onProofread }: IFallacyDet
 
   return editor ? (
     <>
-      <Flex justify={isReadOnly ? 'flex-end' : 'flex-start'}>
-      <Button onClick={handleProofread} mb={isReadOnly ? 0 : 20}>{buttonLabel.current}</Button>
-      </Flex>
+      {!isReadOnly && (
+        <Flex justify="flex-start">
+          <Button onClick={handleProofread} mb={20}>{buttonLabel.current}</Button>
+        </Flex>
+      )}
       <BubbleMenu
         editor={editor}
         tippyOptions={{ duration: 100 }}
@@ -255,4 +263,6 @@ export function FallacyDetector({ isReadOnly = false, onProofread }: IFallacyDet
       </Modal>
     </>
   ) : ''
-}
+})
+
+FallacyDetector.displayName = 'FallacyDetector'

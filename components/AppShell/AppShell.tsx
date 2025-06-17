@@ -84,7 +84,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             src="/debate-me-wordmark.svg"
             alt="Debate.me wordmark" />
           <Group gap={5} visibleFrom="sm">
-            {items(true)}
+            {!user && items(true)}
           </Group>
           <Group justify="right" visibleFrom="sm">
             <ColorSchemeToggle />
