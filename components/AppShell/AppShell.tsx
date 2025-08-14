@@ -15,6 +15,7 @@ import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { ColorSchemeToggle } from '@/components/ColorSchemeToggle/ColorSchemeToggle'
 import classes from '@/components/AppShell/AppShell.module.css'
+import marble from '@/app/marble.module.css'
 
 const links = [
   { link: '/', label: 'Home', logOutHide: false },
@@ -78,7 +79,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       padding={pathname === '/' ? 0 : 'md'}
     >
       <MantineAppShell.Header className={classes.header}>
-        <Group h="100%" justify="space-between" w="100%" px="md" className={classes.container}>
+        <Group h="100%" justify="space-between" w="100%" px="md" className={cx(classes.container, marble.marble)}>
           <Image
             height={28}
             src="/debate-me-wordmark.svg"
