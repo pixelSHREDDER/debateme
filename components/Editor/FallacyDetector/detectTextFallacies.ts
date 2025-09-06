@@ -1,12 +1,7 @@
+import { FallacyType } from './constants'
 import { logicalFallaciesData } from './fallacies'
-
-export interface DetectedFallacy {
-  id: string
-  from: number
-  to: number
-  text: string
-  key: string
-}
+import { rorschachTermsData } from './rorschachs'
+import { DetectedFallacy } from './types'
 
 export const detectTextFallacies = (text: string): DetectedFallacy[] => {
   const detected: DetectedFallacy[] = []
@@ -22,7 +17,30 @@ export const detectTextFallacies = (text: string): DetectedFallacy[] => {
 
       if (!detected.some(d => d.key === key)) {
         detected.push({
+          type: FallacyType.Logical,
           id: fallacy.id,
+          from,
+          to,
+          text: match[0],
+          key,
+        })
+      }
+    }
+  })
+
+  rorschachTermsData.forEach(term => {
+    const regex = new RegExp(term.pattern, 'gi')
+    const match = regex.exec(text)
+
+    if (match !== null) {
+      const from = match.index
+      const to = from + match[0].length
+      const key = `${from}-${to}-${term.id}`
+
+      if (!detected.some(d => d.key === key)) {
+        detected.push({
+          type: FallacyType.Rorschach,
+          id: term.id,
           from,
           to,
           text: match[0],

@@ -7,11 +7,13 @@ declare module '@tiptap/core' {
         fallacyId: string,
         originalText: string,
         instanceKey: string,
+        popupType: string,
       }) => ReturnType;
       toggleFallacyMark: (attributes: {
         fallacyId: string,
         originalText: string,
         instanceKey: string,
+        popupType: string,
       }) => ReturnType;
       unsetFallacyMark: (instanceKey?: string) => ReturnType
     };
@@ -41,6 +43,11 @@ export const FallacyMark = Mark.create<FallacyMarkOptions>({
         default: null,
         parseHTML: element => element.getAttribute('data-instance-key'),
         renderHTML: attributes => !attributes.instanceKey ? {} : { 'data-instance-key': attributes.instanceKey },
+      },
+      popupType: {
+        default: null,
+        parseHTML: element => element.getAttribute('data-popup-type'),
+        renderHTML: attributes => !attributes.popupType ? {} : { 'data-popup-type': attributes.popupType },
       },
     }
   },

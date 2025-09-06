@@ -1,14 +1,6 @@
 /* eslint-disable no-useless-escape */
-export interface LogicalFallacy {
-  id: string
-  name: string
-  description: string
-  example: string
-  pattern: string
-  rebuttal: string
-  recommendation: string
-  url: string
-}
+
+import { LogicalFallacy } from './types'
 
 export const logicalFallaciesData: LogicalFallacy[] = [
   {

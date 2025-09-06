@@ -13,10 +13,10 @@ export default function useUserStatus() {
 
     return (
       (userSub === creatorSub) &&
-      (status === DebateStatus.CreatorCooldown)
+      (status === DebateStatus.OpponentCooldown)
     ) || (
       (userSub === opponentSub) &&
-      (status === DebateStatus.OpponentCooldown)
+      (status === DebateStatus.CreatorCooldown)
     )
   }
 

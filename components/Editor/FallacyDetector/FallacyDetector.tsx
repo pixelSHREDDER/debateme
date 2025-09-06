@@ -3,46 +3,18 @@ import { BubbleMenu, useCurrentEditor } from '@tiptap/react'
 import {
   Button,
   Text,
-  Paper,
   Flex,
   Modal,
   Stack,
-  CloseButton,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { getFallacyById, LogicalFallacy } from './fallacies'
-import { DetectedFallacy, detectTextFallacies } from './detectTextFallacies'
-
-const FOUND_FALLACY_PREFIXES = [
-  'Careful!',
-  'Watch out!',
-  'Whoa now!',
-  'Easy there.',
-  '*blows whistle* Time out!!',
-  'Hang on.',
-  'Whoops!',
-]
-
-const ANSWER_PREFIXES = [
-  'Try this:',
-  'Hm.. How about:',
-  'What about:',
-  'Hm....',
-  'Lemme think....',
-  'Good question!',
-  'That&apos;s a good question....',
-]
-
-enum ModalContentType {
-  Description = 'description',
-  Rebuttal = 'rebuttal',
-  Recommendation = 'recommendation',
-}
-
-export interface IPopupData extends LogicalFallacy {
-  originalText: string
-  instanceKey: string
-}
+import { getFallacyById } from './fallacies'
+import { detectTextFallacies } from './detectTextFallacies'
+import { BubbleMenuLogical } from './BubbleMenuLogical'
+import { BubbleMenuRorschach } from './BubbleMenuRorschach'
+import { ANSWER_PREFIXES, FallacyType, LogicalModalContentType, RORSCHACH_MEANINGS_PREFIX, RORSCHACH_RECOMMENDATION_PREFIX, RorschachModalContentType } from './constants'
+import { ILogicalPopupData, IRorschachPopupData, DetectedFallacy } from './types'
+import { getRorschachTermById } from './rorschachs'
 
 export interface IFallacyDetector {
   isReadOnly?: boolean,
@@ -58,36 +30,57 @@ export const FallacyDetector = React.forwardRef<{
     setCurrentDetectedFallacies,
   ] = useState<Map<string, DetectedFallacyType>>(new Map())*/
   const [ignoredFallacyKeys, setIgnoredFallacyKeys] = useState<Set<string>>(new Set())
-  const [popupData, setPopupData] = useState<IPopupData | null>(null)
+  const [logicalPopupData, setLogicalPopupData] = useState<ILogicalPopupData | null>(null)
+  const [rorschachPopupData, setRorscachPopupData] = useState<IRorschachPopupData | null>(null)
   const { editor } = useCurrentEditor()
   const buttonLabel = useRef<string>(isReadOnly ? 'Ask Coach' : 'Continue')
   const modalContent = useRef<string>('')
-  const foundFallacyPrefix = useRef<string>(
-    FOUND_FALLACY_PREFIXES[Math.floor(Math.random() * FOUND_FALLACY_PREFIXES.length)]
-  )
+  const modalTitle = useRef<string>('')
   const answerPrefix = useRef<string>(
     ANSWER_PREFIXES[Math.floor(Math.random() * ANSWER_PREFIXES.length)]
   )
-  const popupOpen = useRef<boolean>(false)
+  const popupOpen = useRef<FallacyType | null>(null)
   const [opened, { open, close }] = useDisclosure(false)
 
-  const onOpenModal = ((contentType: ModalContentType) => {
-    const content = popupData ? popupData[contentType] : ''
-    if (contentType === ModalContentType.Description) {
-      modalContent.current = `${content}<br/>For example:<br/>${popupData?.example}`
+  const onOpenLogicalModal = ((contentType: LogicalModalContentType) => {
+    const content = logicalPopupData?.[contentType as keyof typeof logicalPopupData] || ''
+    if (contentType === LogicalModalContentType.Description) {
+      modalContent.current = `${content}<br/>For example:<br/>${logicalPopupData?.example}`
+      modalTitle.current = `${logicalPopupData?.name} Fallacy`
     } else {
       modalContent.current = `${answerPrefix.current} ${content}`
+      modalTitle.current = 'What Should I Do?'
     }
     open()
   })
 
+  const onOpenRorschachModal = ((contentType: RorschachModalContentType) => {
+    const content = rorschachPopupData?.[contentType as keyof typeof rorschachPopupData] || ''
+    if (contentType === RorschachModalContentType.Meanings) {
+      modalContent.current = `${RORSCHACH_MEANINGS_PREFIX}"${rorschachPopupData?.term}":<ul>${rorschachPopupData?.meanings.map((m: string) => `<li>${m}</li>`).join('')}</ul>`
+      modalTitle.current = 'What\'s a Rorschach Term? (ROAR-shack)'
+    } else {
+      modalContent.current = `${answerPrefix.current} ${RORSCHACH_RECOMMENDATION_PREFIX} ${content}`
+      modalTitle.current = 'What Should I Do?'
+    }
+    open()
+  })
+
+  const closeCurrentPopup = useCallback((popupType: FallacyType | null) => {
+    if (popupType === FallacyType.Logical) {
+      setLogicalPopupData(null)
+    } else if (popupType === FallacyType.Rorschach) {
+      setRorscachPopupData(null)
+    }
+  }, [])
+
   const onClosePopup = () => {
-    popupOpen.current = false
-    setPopupData(null)
+    closeCurrentPopup(popupOpen.current)
+    popupOpen.current = null
   }
 
   const clearAllFallacyMarks = useCallback(() => {
-    if (!editor) return
+    if (!editor) { return }
     const { tr, doc } = editor.state
     // TODO: Typing broken so removing all marks, fine for now but could be issue if other marks added
     //editor.view.dispatch(tr.removeMark(0, doc.content.size, FallacyMark))
@@ -95,7 +88,7 @@ export const FallacyDetector = React.forwardRef<{
   }, [editor])
 
   const applyFallacyMarks = useCallback((fallaciesToApply: DetectedFallacy[]) => {
-    if (!editor) return
+    if (!editor) { return }
     fallaciesToApply.forEach(fallacy => {
       if (!ignoredFallacyKeys.has(fallacy.key)) {
         editor.chain()
@@ -104,6 +97,7 @@ export const FallacyDetector = React.forwardRef<{
           fallacyId: fallacy.id,
           originalText: fallacy.text,
           instanceKey: fallacy.key,
+          popupType: fallacy.type,
         })
         .run()
       }
@@ -112,12 +106,12 @@ export const FallacyDetector = React.forwardRef<{
   }, [editor, ignoredFallacyKeys])
 
   const handleProofread = useCallback(() => {
-    if (!editor) return
+    if (!editor) { return }
     const currentText = editor.getText()
 
     clearAllFallacyMarks()
     setIgnoredFallacyKeys(new Set())
-    setPopupData(null)
+    closeCurrentPopup(popupOpen.current)
 
     const foundFallacies = detectTextFallacies(currentText)
     // TODO: Part of saved fallacies logic
@@ -128,19 +122,18 @@ export const FallacyDetector = React.forwardRef<{
     applyFallacyMarks(foundFallacies)
     buttonLabel.current = isReadOnly ? 'Ask again' : 'Proofread again'
     onProofread && onProofread()
-  }, [editor, clearAllFallacyMarks, applyFallacyMarks, isReadOnly, onProofread])
+  }, [editor, clearAllFallacyMarks, closeCurrentPopup, applyFallacyMarks, isReadOnly, onProofread])
 
   React.useImperativeHandle(ref, () => ({
     triggerProofread: handleProofread,
   }))
 
   useEffect(() => {
-    if (!editor) return
+    if (!editor) { return }
 
-    //const editorDom = isReadOnly ? editor.view.dom.parentElement : editor.view.dom
     const editorDom = editor.view.dom
 
-    if (!editorDom) return
+    if (!editorDom) { return }
 
     const getFallacySpan = (target: HTMLElement) => {
       const selector = 'span.fallacy-underline[data-fallacy-id][data-instance-key]'
@@ -148,24 +141,45 @@ export const FallacyDetector = React.forwardRef<{
     }
 
     const handleClick = (event: MouseEvent) => {
-      popupOpen.current = false
+      popupOpen.current = null
       const target = event.target as HTMLElement
       const fallacySpan = getFallacySpan(target)
-      //const fallacySpan = target.closest('span.fallacy-underline[data-fallacy-id][data-instance-key].active')
 
       if (fallacySpan) {
         const fallacyId = fallacySpan.getAttribute('data-fallacy-id')
         const originalText = fallacySpan.getAttribute('data-original-text')
         const instanceKey = fallacySpan.getAttribute('data-instance-key')
+        const popupType = fallacySpan.getAttribute('data-popup-type')
 
-        if (fallacyId && originalText && instanceKey && !ignoredFallacyKeys.has(instanceKey)) {
-          const fallacyDetails = getFallacyById(fallacyId)
-          if (fallacyDetails) {
-            popupOpen.current = true
-            setPopupData({
+        if (
+          fallacyId && originalText && instanceKey && popupType && popupType.length > 0 &&
+          !ignoredFallacyKeys.has(instanceKey)
+        ) {
+          const fallacyType = popupType as keyof typeof FallacyType
+
+          if (fallacyType === FallacyType.Logical) {
+            const fallacyDetails = getFallacyById(fallacyId)
+
+            if (!fallacyDetails) { return }
+
+            popupOpen.current = fallacyType as FallacyType
+            setLogicalPopupData({
               ...fallacyDetails,
               originalText,
               instanceKey,
+              popupType: FallacyType.Logical,
+            })
+          } else if (fallacyType === FallacyType.Rorschach) {
+            const fallacyDetails = getRorschachTermById(fallacyId)
+
+            if (!fallacyDetails) { return }
+
+            popupOpen.current = fallacyType as FallacyType
+            setRorscachPopupData({
+              ...fallacyDetails,
+              originalText,
+              instanceKey,
+              popupType: FallacyType.Rorschach,
             })
           }
         }
@@ -173,35 +187,32 @@ export const FallacyDetector = React.forwardRef<{
     }
 
     editorDom.addEventListener('click', handleClick)
-    /*editorDom.addEventListener('mousedown', () => {
-        if (!editor.view.editable) {
-          editorDom.setAttribute('contenteditable', 'true')
-          editorDom.focus()
-          return false
-        }
-      })
-      editorDom.addEventListener('mouseup', () => {
-        if (!editor.view.editable) {
-          editorDom.setAttribute('contenteditable', 'false')
-        }
-        return false
-      })*/
-    return () => {
-      editorDom.removeEventListener('click', handleClick)
-    }
+
+    return () => editorDom.removeEventListener('click', handleClick)
   }, [editor, ignoredFallacyKeys, isReadOnly])
 
-  const handleIgnoreFallacy = () => {
-    if (popupData && editor) {
-      setIgnoredFallacyKeys(prev => new Set(prev).add(popupData.instanceKey))
+  const handleIgnore = () => {
+    if (!editor) { return }
+    if (popupOpen.current === FallacyType.Logical && logicalPopupData) {
+      setIgnoredFallacyKeys(prev => new Set(prev).add(logicalPopupData.instanceKey))
       // TODO: solve need for this try-catch workaround
       try {
-        editor.commands.unsetFallacyMark(popupData.instanceKey)
+        editor.commands.unsetFallacyMark(logicalPopupData.instanceKey)
       } catch (e: any) {
-        setPopupData(null)
+        closeCurrentPopup(popupOpen.current)
         return
       }
-      setPopupData(null)
+      closeCurrentPopup(popupOpen.current)
+    } else if (popupOpen.current === FallacyType.Rorschach && rorschachPopupData) {
+      setIgnoredFallacyKeys(prev => new Set(prev).add(rorschachPopupData.instanceKey))
+      // TODO: solve need for this try-catch workaround
+      try {
+        editor.commands.unsetFallacyMark(rorschachPopupData.instanceKey)
+      } catch (e: any) {
+        closeCurrentPopup(popupOpen.current)
+        return
+      }
+      closeCurrentPopup(popupOpen.current)
     }
   }
 
@@ -216,44 +227,27 @@ export const FallacyDetector = React.forwardRef<{
         editor={editor}
         tippyOptions={{ duration: 100 }}
         updateDelay={0}
-        shouldShow={() => isReadOnly ? !!popupOpen.current : true}
-        /*shouldShow={(e: any) => {
-          //const { editor, state } = e
-          const { selection } = e.state
-          const hasHighlight = editor.isActive('highlight')
-          return hasHighlight && !selection.empty
-        }}*/>
-      {popupData &&
-        <Paper shadow="xl" p="xs" withBorder>
-          <Flex justify="space-between" gap="xs">
-            <Text>
-              {popupData ? `${foundFallacyPrefix.current} This may be an example of the ${popupData.name} Fallacy.` : 'unknown fallacy.'}
-            </Text>
-            <CloseButton onClick={onClosePopup} />
-          </Flex>
-          <Button variant="transparent" onClick={() => onOpenModal(ModalContentType.Description)}>What&apos;s that?</Button>
-          {isReadOnly && popupData?.rebuttal &&
-            <Button variant="transparent" onClick={() => onOpenModal(ModalContentType.Rebuttal)}>What should I do?</Button>
-          }
-          {!isReadOnly && popupData?.recommendation &&
-            <Button variant="transparent" onClick={() => onOpenModal(ModalContentType.Recommendation)}>What should I do?</Button>
-          }
-          <Flex align="center" gap="xs" my="xs">
-            <Button
-              onClick={handleIgnoreFallacy}
-              size="xs"
-              className="suggestion"
-            >
-              Ignore
-            </Button>
-            {popupData.url &&
-              <Text size="sm"><a href={popupData.url} target="_blank">Learn more</a></Text>
-            }
-          </Flex>
-        </Paper>
-      }
+        shouldShow={() => isReadOnly ? !!popupOpen.current : true}>
+        {!!logicalPopupData &&
+          <BubbleMenuLogical
+            closePopup={onClosePopup}
+            ignoreFallacy={handleIgnore}
+            isReadOnly={isReadOnly}
+            openModal={onOpenLogicalModal}
+            popupData={logicalPopupData}
+          />
+        }
+        {!!rorschachPopupData &&
+          <BubbleMenuRorschach
+            closePopup={onClosePopup}
+            ignoreTerm={handleIgnore}
+            isReadOnly={isReadOnly}
+            openModal={onOpenRorschachModal}
+            popupData={rorschachPopupData}
+          />
+        }
       </BubbleMenu>
-      <Modal zIndex={9999} opened={opened} onClose={close} centered title={`${popupData?.name} Fallacy`}>
+      <Modal zIndex={9999} opened={opened} onClose={close} centered title={modalTitle.current}>
         <Stack>
           <Text dangerouslySetInnerHTML={{ __html: modalContent.current }} />
           <Flex gap="sm">
