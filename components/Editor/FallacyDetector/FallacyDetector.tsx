@@ -155,7 +155,12 @@ export const FallacyDetector = React.forwardRef<{
           fallacyId && originalText && instanceKey && popupType && popupType.length > 0 &&
           !ignoredFallacyKeys.has(instanceKey)
         ) {
+          const fallacyElement = document.querySelector(`span.fallacy-underline[data-fallacy-id="${fallacyId}"][data-instance-key="${instanceKey}"]`)
           const fallacyType = popupType as keyof typeof FallacyType
+
+          if (fallacyElement && fallacyElement instanceof HTMLElement) {
+            fallacyElement.parentElement?.click()
+          }
 
           if (fallacyType === FallacyType.Logical) {
             const fallacyDetails = getFallacyById(fallacyId)
@@ -225,9 +230,9 @@ export const FallacyDetector = React.forwardRef<{
       )}
       <BubbleMenu
         editor={editor}
-        tippyOptions={{ duration: 100 }}
-        updateDelay={0}
-        shouldShow={() => isReadOnly ? !!popupOpen.current : true}>
+        tippyOptions={{ duration: 1000 }}
+        updateDelay={1000}
+        shouldShow={() => true}>
         {!!logicalPopupData &&
           <BubbleMenuLogical
             closePopup={onClosePopup}

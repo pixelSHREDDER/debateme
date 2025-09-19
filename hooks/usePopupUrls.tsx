@@ -11,15 +11,15 @@ export const usePopupUrls = (urls?: string[]): React.ReactNode[] =>
 
     if (urls.length === 1) {
       output.push(
-        <a href={urls[0]} target="_blank" rel="noreferrer noopener">here</a>
+        <a key={0} href={urls[0]} target="_blank" rel="noreferrer noopener">here</a>
       )
     } else if (urls.length === 2) {
       output.push(
-        <a href={urls[0]} target="_blank" rel="noreferrer noopener">here</a>
+        <a key={0} href={urls[0]} target="_blank" rel="noreferrer noopener">here</a>
       )
       output.push(' or ')
       output.push(
-        <a href={urls[1]} target="_blank" rel="noreferrer noopener">here</a>
+        <a key={1} href={urls[1]} target="_blank" rel="noreferrer noopener">here</a>
       )
     } else {
       urls.forEach((url, index) => {
