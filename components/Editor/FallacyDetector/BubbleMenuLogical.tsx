@@ -8,6 +8,7 @@ import {
 } from '@mantine/core'
 import { LogicalModalContentType, FOUND_FALLACY_PREFIXES } from './constants'
 import { ILogicalPopupData } from './types'
+import { usePopupUrls } from '../../../hooks/usePopupUrls'
 
 export interface IBubbleMenuLogicalProps {
   closePopup: () => void
@@ -23,6 +24,7 @@ export const BubbleMenuLogical = (
   const foundFallacyPrefix = useRef<string>(
     FOUND_FALLACY_PREFIXES[Math.floor(Math.random() * FOUND_FALLACY_PREFIXES.length)]
   )
+  const popupUrls = usePopupUrls(popupData?.urls)
 
   return (
     <Paper shadow="xl" p="xs" withBorder>
@@ -47,9 +49,7 @@ export const BubbleMenuLogical = (
         >
           Ignore
         </Button>
-        {popupData?.url &&
-          <Text size="sm"><a href={popupData.url} target="_blank">Learn more</a></Text>
-        }
+        {popupData?.urls && <Text size="sm">{popupUrls}</Text>}
       </Flex>
     </Paper>
   )

@@ -29,7 +29,7 @@ export interface LogicalFallacy {
   pattern: string
   rebuttal: string
   recommendation: string
-  url: string
+  urls: string[]
 }
 
 export interface RorschachTerm {

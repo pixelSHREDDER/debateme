@@ -11,7 +11,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Calmly point out that their attack on your character is irrelevant to the argument's validity. Then, redirect the conversation back to the actual topic and ask them to address your points directly, for example, by saying, \"My personal traits aren't the issue here. Can we get back to discussing the merits of the proposed rule?\"</p>",
     recommendation: "<p>If you're tempted to attack someone personally instead of their idea, remember it weakens your own stance. Focus on the argument's facts and logic, not the person, for a stronger and more respectful discussion.</p>",
     pattern: "(\\b(you're|youre|you|he's|hes|she's|shes|they're|theyre)(\\s+(just|only|so|a(n)?))?.{2,20}\\s+(stupid|idiot|fool|biased|liar|lazy|crazy|ignorant)\\b|\\b(your|his|her|their)\\s+(opinion|argument|point|idea)\\s+is\\s+(worthless|invalid|stupid|silly)\\s+because\\s+(you|he|she|they))",
-    url: 'https://en.wikipedia.org/wiki/Ad_hominem',
+    urls: ['https://en.wikipedia.org/wiki/Ad_hominem', 'https://yourlogicalfallacyis.com/ad-hominem'],
   },
   {
     id: 'straw-man-002',
@@ -22,7 +22,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     recommendation: "<p>Before arguing, ensure you understand your opponent's actual position, not a twisted version. Attacking a misrepresentation (a straw man) is unfair and doesn't lead to productive discussion; address their real points instead.</p>",
     //"pattern": "(so\\s+you(?:'re|r)\\s+(?:saying|arguing|claiming|implying)|so\\s+what\\s+you(?:'re|r)\\s+really\\s+saying\\s+is|if\\s+I\\s+understand\\s+you\\s+correctly,\\s+you\\s+think)\\s+(that\\s+)?(.+)(\\?|\\bthat's ridiculous\\b|\\bthat's absurd\\b)",
     pattern: "(so\\s+you(?:'re|r)\\s+(?:saying|arguing|claiming|implying)|so\\s+what\\s+you(?:'re|r)\\s+really\\s+saying\\s+is|if\\s+I\\s+understand\\s+you\\s+correctly,\\s+you\\s+think)\\s+(that\\s+)?(.+)(\\?)",
-    url: 'https://en.wikipedia.org/wiki/Straw_man',
+    urls: ['https://en.wikipedia.org/wiki/Straw_man', 'https://yourlogicalfallacyis.com/strawman'],
   },
   {
     id: 'appeal-to-ignorance-003',
@@ -32,7 +32,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Point out that a lack of evidence against a claim doesn't automatically make it true (or vice-versa). Emphasize that the burden of proof lies with the person making the positive claim. You could say, \"Just because we haven't disproven X doesn't mean X is true. The person asserting X needs to provide evidence for it.\"</p>",
     recommendation: "<p>Avoid claiming something is true or false just because there's no proof for the other side. Acknowledge when evidence is missing instead of jumping to conclusions based on ignorance.</p>",
     pattern: "(\\b(no\\sone|nobody|nobody\'s|noone|no\\sone\'s)\\s+(has\\s+)?(ever\\s+)?proven\\s+(that\\s+)?.{2,40}\\s+is(n't)?\\s+true\\b|\\bthere's\\s+no\\s+evidence\\s+for\\s+X,\\s+so\\s+X\\s+must\\s+be\\s+false\\b|\\b(since|because)\\s+you\\s+can't\\s+prove\\s+X\\s+is\\s+false,\\s+it\\s+must\\s+be\\s+true\\b)",
-    url: 'https://en.wikipedia.org/wiki/Argument_from_ignorance',
+    urls: ['https://en.wikipedia.org/wiki/Argument_from_ignorance', 'https://yourlogicalfallacyis.com/appeal-to-ignorance'],
   },
   {
     id: 'false-dilemma-004',
@@ -42,7 +42,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Refuse to accept the limited choices offered. Point out that other options exist by suggesting one or more alternatives. You could say, \"Those aren't the only two options. What about considering C, or even D?\"</p>",
     recommendation: "<p>Don't limit an issue to just two extreme choices if more options are available. Presenting a false dilemma can mislead; aim for a fair representation of all reasonable possibilities.</p>",
     pattern: "(\\b(either\\s+you're|it's\\s+either)\\s+.+\\s+or\\s+.+\\b(there\\s+are\\s+no\\s+other\\s+options|it's\\s+that\\s+simple)|\\b(you\\s+must\\s+choose|the\\s+only\\s+choice\\s+is)\\s+A\\s+or\\s+B\\b)",
-    url: 'https://en.wikipedia.org/wiki/False_dilemma',
+    urls: ['https://en.wikipedia.org/wiki/False_dilemma', 'https://yourlogicalfallacyis.com/false-dilemma'],
   },
   {
     id: 'slippery-slope-005',
@@ -52,7 +52,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: '<p>Question the inevitability of the chain of events. Ask for evidence that each step will necessarily lead to the next, or point out that the predicted dire outcome is not a guaranteed consequence of the initial action. You might say, "Is there strong evidence to suggest that A will automatically lead to Z, or are there ways to prevent that?"</p>',
     recommendation: '<p>Avoid arguing that a small action will definitely lead to a terrible outcome unless you have strong evidence for each step in the chain. Exaggerating consequences this way is a slippery slope fallacy.</p>',
     pattern: "(\\bif\\s+we\\s+(allow|let|do)\\s+A,\\s+then\\s+B\\s+will\\s+happen,\\s+and\\s+then\\s+C,\\s+and\\s+eventually\\s+Z\\b|\\b(it's\\s+a\\s+slippery\\s+slope|once\\s+we\\s+start|where\\s+does\\s+it\\s+end)\\b)",
-    url: 'https://en.wikipedia.org/wiki/Slippery_slope',
+    urls: ['https://en.wikipedia.org/wiki/Slippery_slope', 'https://yourlogicalfallacyis.com/slippery-slope'],
   },
   {
     id: 'circular-argument-006',
@@ -62,7 +62,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Point out that the argument isn't providing any new evidence but is simply restating the conclusion as a premise. Ask for external evidence or a reason that isn't just a rephrasing of the claim. For example, \"Your reason for X seems to be X itself. Can you offer an independent reason to believe X?\"</p>",
     recommendation: "<p>Ensure your reasons for a claim provide new information and support, rather than just restating the claim in different words. A circular argument doesn't persuade because it offers no external proof.</p>",
     pattern: "(\\b((is|it\'s)\\s+true\\s+because\\s+.{2,20}\\s+is\\s+true)|(is\\s+true|good|right)\\s+because\\s+the\\s+(bible|scripture|book|law|rules)\\s+(says|say)\\s+so,\\s+and\\s+the\\s+(bible|scripture|book|law|rules)\\s+is\\s+true\\b|\\b(obviously|clearly)\\s+.{2,20},\\s+therefore\\s+.{2,50}\\b)",
-    url: 'https://en.wikipedia.org/wiki/Begging_the_question',
+    urls: ['https://en.wikipedia.org/wiki/Begging_the_question', 'https://yourlogicalfallacyis.com/begging-the-question'],
   },
   {
     id: 'hasty-generalization-007',
@@ -72,7 +72,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: '<p>Question the sufficiency or representativeness of the sample being used to make the generalization. Ask if more evidence is available or point out that the examples given might not be typical. You could say, "Is that small sample really enough to make a judgment about the entire group?"</p>',
     recommendation: '<p>Avoid making sweeping statements about a whole group based on just a few instances. Ensure your conclusions are supported by sufficient and representative evidence to avoid a hasty generalization.</p>',
     pattern: '(\\b(I\\s+saw|I\\s+met|my\\s+friend)\\s+(one|two|a\\s+few)\\s+X\\s+and\\s+they\\s+were\\s+Y,\\s+so\\s+all\\s+X\\s+are\\s+Y\\b|\\b(everyone|all|nobody|always|never)\\s+from\\s+X\\s+is\\s+Y\\b.*based on limited experience)',
-    url: 'https://en.wikipedia.org/wiki/Hasty_generalization',
+    urls: ['https://en.wikipedia.org/wiki/Hasty_generalization', 'https://yourlogicalfallacyis.com/hasty-generalization'],
   },
   {
     id: 'red-herring-008',
@@ -82,7 +82,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Identify the irrelevant topic that has been introduced and gently guide the conversation back to the original point. You might say, \"That's an interesting point, but how does it relate to the original question about X? Can we return to that?\"</p>",
     recommendation: "<p>If you want to make a strong argument, stick to the main topic. Introducing irrelevant information (a red herring) to distract can make it seem like you can't address the actual issue.</p>",
     pattern: "(\\b(that's\\s+not\\s+the\\s+real\\s+issue|what\\s+about|but\\s+let's\\s+talk\\s+about|the\\s+more\\s+important\\s+question\\s+is)\\s+[^\\.\\?]+\\b(when the new topic is irrelevant))",
-    url: 'https://en.wikipedia.org/wiki/Red_herring',
+    urls: ['https://en.wikipedia.org/wiki/Red_herring', 'https://yourlogicalfallacyis.com/red-herring'],
   },
   {
     id: 'tu-quoque-009',
@@ -92,7 +92,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Acknowledge the accusation of hypocrisy if it's true, but then pivot back to the argument's merits. State that your personal actions don't change the validity of the point being made. For instance, \"You're right, I have struggled with that myself. However, that doesn't change the fact that X is still a valid concern/point because...\"</p>",
     recommendation: "<p>Avoid dismissing someone's argument just because they might be acting inconsistently. While you can point out hypocrisy, remember to also address the merits of their actual point (the tu quoque fallacy focuses on the person, not the argument's validity).</p>",
     pattern: "(\\b(you\\s+too|you\\s+also|look\\s+who's\\s+talking|practice\\s+what\\s+you\\s+preach)\\b|\\b(how\\s+can\\s+you\\s+say\\s+X\\s+when\\s+you\\s+do\\s+Y)\\b)",
-    url: 'https://en.wikipedia.org/wiki/Tu_quoque',
+    urls: ['https://en.wikipedia.org/wiki/Tu_quoque', 'https://yourlogicalfallacyis.com/tu-quoque'],
   },
   {
     id: 'post-hoc-010',
@@ -102,7 +102,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: '<p>Point out that correlation does not equal causation. Ask for specific evidence that shows how the first event actually caused the second, beyond just the timing. You might ask, "Just because B happened after A, how do we know A caused B? Could there be other factors involved?"</p>',
     recommendation: "<p>Don't assume that just because B happened after A, A must have caused B. Look for actual evidence of a causal link before making such a claim, otherwise you're committing a false cause fallacy.</p>",
     pattern: '(\\b(after\\s+I\\s+|ever\\s+since)\\s+.{4,50},\\s+Y\\s+happened,\\s+so\\s+X\\s+must\\s+have\\s+caused\\s+Y\\b|\\b(correlation\\s+does\\s+not\\s+imply\\s+causation\\b.*when violated))',
-    url: 'https://en.wikipedia.org/wiki/Post_hoc_ergo_propter_hoc',
+    urls: ['https://en.wikipedia.org/wiki/Post_hoc_ergo_propter_hoc', 'https://yourlogicalfallacyis.com/post-hoc-ergo-propter-hoc'],
   },
   {
     id: 'appeal-to-authority-011',
@@ -112,7 +112,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: '<p>Question the relevance or expertise of the authority being cited. Ask if that person is a recognized expert *on the specific topic* being discussed. You could say, "While X may be an expert in their field, are they an expert on this particular subject?"</p>',
     recommendation: "<p>When citing an authority, ensure they are a genuine expert on the specific topic you're discussing. Appealing to an irrelevant authority doesn't strengthen your argument and can be misleading.</p>",
     pattern: '(\\b(Dr\\.|Professor|Scientist|Expert|Celebrity)\\s+X\\s+says\\s+Y\\s+is\\s+true,\\s+so\\s+it\\s+must\\s+be\\s+true\\b(?!.*\\b(in their field of expertise|on the topic of)\\b))',
-    url: 'https://en.wikipedia.org/wiki/Argument_from_authority',
+    urls: ['https://en.wikipedia.org/wiki/Argument_from_authority', 'https://yourlogicalfallacyis.com/appeal-to-authority'],
   },
   {
     id: 'bandwagon-fallacy-012',
@@ -122,7 +122,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Point out that popularity doesn't equate to truth or correctness. Ask for evidence related to the claim itself, rather than how many people believe it. You could say, \"Many people might believe that, but what is the actual evidence for X?\"</p>",
     recommendation: "<p>Don't assume an idea is correct just because it's popular. Focus on the evidence and reasoning behind the idea itself, rather than how many people support it (joining the bandwagon).</p>",
     pattern: "(\\b(everyone|everyone\'s|everybody|everybody\'s|most\\s+people|the\\s+majority)\\s+(believes|doing|says|agrees)\\b)",
-    url: 'https://en.wikipedia.org/wiki/Argumentum_ad_populum',
+    urls: ['https://en.wikipedia.org/wiki/Argumentum_ad_populum', 'https://yourlogicalfallacyis.com/bandwagon'],
   },
   {
     id: 'appeal-to-emotion-013',
@@ -132,7 +132,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Acknowledge the emotion being appealed to, but then gently steer the conversation back to the facts and logic of the argument. You might say, \"I understand this is an emotional issue, but let's try to look at the facts. What evidence supports this claim?\"</p>",
     recommendation: '<p>While emotions are important, try to support your arguments with facts and logic, not just by trying to make people feel a certain way. Emotional appeals can obscure the real issues.</p>',
     pattern: "(\\b(think\\s+of\\s+the\\s+children|poor\\s+helpless|if\\s+you\\s+don't\\s+agree,\\s+something\\s+terrible\\s+will\\s+happen|you\\s+should\\s+be\\s+ashamed|makes\\s+me\\s+so\\s+angry)\\b(?!.*\\b(followed by logical reasoning)\\b))",
-    url: 'https://en.wikipedia.org/wiki/Appeal_to_emotion',
+    urls: ['https://en.wikipedia.org/wiki/Appeal_to_emotion', 'https://yourlogicalfallacyis.com/appeal-to-emotion'],
   },
   {
     id: 'equivocation-014',
@@ -142,7 +142,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Point out the ambiguous word or phrase and ask for clarification on which meaning is being used. Show how the shift in meaning makes the argument invalid. You could say, \"When you use the word 'X,' are you referring to meaning A or meaning B? Because that changes the argument.\"</p>",
     recommendation: '<p>Be clear and consistent with the meaning of your words, especially if they can have multiple interpretations. Shifting meanings (equivocation) can confuse the issue and make your argument unsound.</p>',
     pattern: "(\\b(X\\s+means\\s+A,\\s+but\\s+also\\s+X\\s+means\\s+B,\\s+therefore\\s+A\\s+is\\s+B\\s+in\\s+a\\s+confusing\\s+way)|\\b(using\\s+a\\s+word\\s+like\\s+'fine'\\s+or\\s+'right'\\s+with\\s+two\\s+different\\s+meanings\\s+in\\s+the\\s+same\\s+argument)\\b)",
-    url: 'https://en.wikipedia.org/wiki/Equivocation',
+    urls: ['https://en.wikipedia.org/wiki/Equivocation', 'https://yourlogicalfallacyis.com/equivocation'],
   },
   {
     id: 'genetic-fallacy-015',
@@ -152,7 +152,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Argue that the origin of an idea or thing is irrelevant to its current validity or quality. Ask the other person to evaluate it based on its present merits. You might say, \"Regardless of where this idea came from, let's look at its current strengths and weaknesses.\"</p>",
     recommendation: '<p>Evaluate ideas and products based on their current features, evidence, and performance, not just on their origin or source. The genetic fallacy unfairly dismisses or accepts things based on their history.</p>',
     pattern: "(\\b(comes|came)\\s+from+(\\s+a|\\s+an)?(\\s+bad|\\s+good|X)\\s+(company|place|source|stock|upgringing),\\s+so\\s+(it|it\'s|they|they\'ve)\\s+(certainly|gotta|must)\\b|\\b(you\\s+only\\s+say\\s+that\\s+because\\s+of\\s+your\\s+upbringing|background)\\b)",
-    url: 'https://en.wikipedia.org/wiki/Genetic_fallacy',
+    urls: ['https://en.wikipedia.org/wiki/Genetic_fallacy', 'https://yourlogicalfallacyis.com/genetic'],
   },
   {
     id: 'no-true-scotsman-016',
@@ -163,7 +163,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     recommendation: '<p>Avoid redefining a group or category just to exclude counterexamples that challenge your generalization. This "No True Scotsman" move makes your claim unfalsifiable and avoids genuine discussion.</p>',
     //"pattern": "(\\b(no\\s+true\\s+X\\s+would\\s+do\\s+Y|a\\s+real\\s+X\\s+wouldn't\\s+Y)\\b(?!.*\\b(unless they had a good reason)\\b))",
     pattern: '(\\b(no\\s+(true|legit|real)\\s+.{2,30}\\s+would\\b))',
-    url: 'https://en.wikipedia.org/wiki/No_True_Scotsman',
+    urls: ['https://en.wikipedia.org/wiki/No_True_Scotsman', 'https://yourlogicalfallacyis.com/no-true-scotsman'],
   },
   {
     id: 'burden-of-proof-017',
@@ -173,7 +173,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: '<p>State clearly that the person making the claim has the responsibility to provide supporting evidence. You are not obligated to disprove their unsubstantiated claim. You might say, "The burden of proof is on the person making the assertion. Can you provide evidence for your claim?"</p>',
     recommendation: '<p>If you make a claim, be prepared to support it with evidence. Shifting the burden of proof to others to disprove your unsubstantiated claim is a fallacy and an unfair tactic in an argument.</p>',
     pattern: "(\\b(I\\s+claim\\s+X,\\s+and\\s+you\\s+have\\s+to\\s+prove\\s+me\\s+wrong|prove\\s+that\\s+X\\s+isn't\\s+true|since\\s+you\\s+can't\\s+disprove\\s+X,\\s+X\\s+is\\s+true)\\b)",
-    url: 'https://en.wikipedia.org/wiki/Burden_of_proof_(philosophy)',
+    urls: ['https://en.wikipedia.org/wiki/Burden_of_proof_(philosophy)', 'https://yourlogicalfallacyis.com/burden-of-proof'],
   },
   {
     id: 'appeal-to-nature-018',
@@ -183,7 +183,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Point out that \"natural\" doesn't always mean \"good\" (e.g., toxins, diseases) and \"unnatural\" doesn't always mean \"bad\" (e.g., medicine, technology). Ask for evidence of its actual benefits or harms beyond its naturalness. You could say, \"Many natural things are harmful, and many unnatural things are beneficial. What specific evidence shows this is good/bad?\"</p>",
     recommendation: "<p>Don't assume something's quality or safety based solely on whether it's labeled \"natural\" or \"unnatural.\" Evaluate things based on evidence of their actual effects and properties.</p>",
     pattern: "(\\b(it's\\s+natural,\\s+so\\s+it\\s+must\\s+be\\s+good|healthy|safe)\\b|\\b(it's\\s+unnatural|artificial|man-made),\\s+so\\s+it\\s+must\\s+be\\s+bad|harmful\\b)",
-    url: 'https://en.wikipedia.org/wiki/Appeal_to_nature',
+    urls: ['https://en.wikipedia.org/wiki/Appeal_to_nature', 'https://yourlogicalfallacyis.com/appeal-to-nature'],
   },
   {
     id: 'anecdotal-fallacy-019',
@@ -193,7 +193,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Acknowledge their personal story but explain that an anecdote isn't sufficient evidence to support a general claim, especially if it contradicts broader statistical evidence. You might say, \"That's an interesting story, but individual experiences can vary. What does the broader evidence or data suggest about this?\"</p>",
     recommendation: '<p>While personal stories can be compelling, avoid using them as the sole proof for a general claim. Look for broader evidence and data rather than relying only on anecdotes, which might not be representative.</p>',
     pattern: '(\\b(my\\s+(grandpa|friend|cousin|experience)|I\\s+know\\s+someone\\s+who)\\s+did\\s+X\\s+and\\s+Y\\s+happened,\\s+so\\s+X\\s+always\\s+leads\\s+to\\s+Y\\b|\\b(this\\s+one\\s+time|I\\s+heard\\s+a\\s+story)\\b(?!.*\\b(as an illustration, not proof)\\b))',
-    url: 'https://en.wikipedia.org/wiki/Anecdotal_evidence',
+    urls: ['https://en.wikipedia.org/wiki/Anecdotal_evidence', 'https://yourlogicalfallacyis.com/anecdotal'],
   },
   {
     id: 'fallacy-fallacy-020',
@@ -203,7 +203,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>If someone dismisses your conclusion entirely because you used a fallacious argument, concede that your original argument was flawed (if it was), but then explain that the conclusion itself might still be true for other, valid reasons. You could say, \"You're right, my previous argument was not sound. However, that doesn't automatically mean the conclusion is false. Here's a better reason to believe X...\"</p>",
     recommendation: "<p>If you spot a fallacy in someone's argument, it means their reasoning is flawed, but it doesn't automatically make their conclusion false. Point out the flawed reasoning, but don't assume the conclusion is wrong without further investigation.</p>",
     pattern: '(\\b(your\\s+argument\\s+for\\s+X\\s+is\\s+fallacious|contains\\s+a\\s+fallacy),\\s+therefore\\s+X\\s+is\\s+false\\b)',
-    url: 'https://en.wikipedia.org/wiki/Argument_from_fallacy',
+    urls: ['https://en.wikipedia.org/wiki/Argument_from_fallacy', 'https://yourlogicalfallacyis.com/the-fallacy'],
   },
   {
     id: 'appeal-to-tradition-021',
@@ -213,7 +213,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Acknowledge the tradition but question if it's still the best approach or if it's relevant today. Suggest that current circumstances or new evidence might warrant a change. You could say, \"While I respect the tradition, are there reasons to believe it's still the most effective/best way, given current knowledge/circumstances?\"</p>",
     recommendation: "<p>Don't assume something is best just because it's traditional. Evaluate practices and ideas on their current merits and effectiveness, not just their age or history.</p>",
     pattern: "(\\b(it's\\s+tradition|we've\\s+always\\s+done\\s+it\\s+this\\s+way|this\\s+is\\s+how\\s+it's\\s+been\\s+for\\s+generations)\\s+so\\s+it\\s+must\\s+be\\s+(right|good|the\\s+best\\s+way)\\b)",
-    url: 'https://en.wikipedia.org/wiki/Appeal_to_tradition',
+    urls: ['https://en.wikipedia.org/wiki/Appeal_to_tradition', 'https://yourlogicalfallacyis.com/appeal-to-tradition'],
   },
   {
     id: 'appeal-to-novelty-022',
@@ -223,7 +223,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Point out that newness doesn't inherently mean better. Ask for specific reasons or evidence that demonstrate the new thing's superiority over older alternatives. You might say, \"Just because it's new doesn't guarantee it's better. What specific advantages does it offer over the existing method/product?\"</p>",
     recommendation: "<p>Avoid assuming something is superior just because it's new. Judge ideas or products on their actual features, performance, and evidence, not merely on their novelty.</p>",
     pattern: "(\\b(it's\\s+new|the\\s+latest|modern|up-to-date)\\s+so\\s+it\\s+must\\s+be\\s+(better|right|superior)\\b)",
-    url: 'https://en.wikipedia.org/wiki/Appeal_to_novelty',
+    urls: ['https://en.wikipedia.org/wiki/Appeal_to_novelty', 'https://yourlogicalfallacyis.com/appeal-to-novelty'],
   },
   {
     id: 'composition-fallacy-023',
@@ -233,7 +233,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Explain that properties of individual parts don't necessarily transfer to the whole. Provide examples where this is not the case or ask them to demonstrate how the properties of the parts combine to create that property in the whole. You could say, \"While each part has that quality, does the whole necessarily have it? For example, each brick is light, but a wall of bricks is heavy.\"</p>",
     recommendation: "<p>Don't assume that the characteristics of individual parts automatically apply to the entire whole. Consider how parts interact to form the whole, which might have different properties.</p>",
     pattern: '(\\b(each\\s+part|every\\s+member)\\s+of\\s+X\\s+has\\s+property\\s+Y,\\s+therefore\\s+X\\s+as\\s+a\\s+whole\\s+has\\s+property\\s+Y\\b)',
-    url: 'https://en.wikipedia.org/wiki/Fallacy_of_composition',
+    urls: ['https://en.wikipedia.org/wiki/Fallacy_of_composition', 'https://yourlogicalfallacyis.com/composition'],
   },
   {
     id: 'division-fallacy-024',
@@ -243,7 +243,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Explain that properties of a whole don't necessarily apply to each individual part. Offer counterexamples or ask for evidence that the specific part in question possesses that property. You might say, \"Just because the team is successful doesn't mean every single player scored a goal. Does this specific part necessarily share that characteristic?\"</p>",
     recommendation: '<p>Avoid assuming that properties of a whole automatically apply to each of its individual parts. Recognize that parts can differ from the overall characteristics of the group or system.</p>',
     pattern: '(\\b(X\\s+as\\s+a\\s+whole\\s+has\\s+property\\s+Y,\\s+therefore\\s+each\\s+part|every\\s+member)\\s+of\\s+X\\s+must\\s+have\\s+property\\s+Y\\b)',
-    url: 'https://en.wikipedia.org/wiki/Fallacy_of_division',
+    urls: ['https://en.wikipedia.org/wiki/Fallacy_of_division', 'https://yourlogicalfallacyis.com/division'],
   },
   {
     id: 'guilt-by-association-025',
@@ -253,7 +253,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Point out that the association is irrelevant to the merit of your argument or character. Emphasize that an idea should be judged on its own, not by who else might support or be connected to it. You could say, \"The fact that X is associated with Y doesn't make X inherently good or bad. Let's discuss X on its own merits.\"</p>",
     recommendation: '<p>Evaluate ideas and people on their own merits, not by who or what they might be associated with. Discrediting by association is often an unfair tactic to avoid addressing the actual point.</p>',
     pattern: '(\\b(X\\s+is\\s+associated\\s+with\\s+Y,\\s+and\\s+Y\\s+is\\s+bad,\\s+therefore\\s+X\\s+is\\s+bad)\\b|\\b(you\\s+agree\\s+with|like\\s+the\\s+same\\s+thing\\s+as)\\s+(someone\\s+bad|a\\s+bad\\s+group)\\b)',
-    url: 'https://en.wikipedia.org/wiki/Association_fallacy',
+    urls: ['https://en.wikipedia.org/wiki/Association_fallacy', 'https://yourlogicalfallacyis.com/guilt-by-association'],
   },
   {
     id: 'poisoning-the-well-026',
@@ -263,7 +263,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>If you can anticipate it, address the 'poison' directly and assert that arguments should be judged on their own merit, not on preconceived biases about the speaker. If it's already happened, you can say, \"I hope everyone will listen to my points with an open mind, rather than focusing on irrelevant information shared earlier. My argument is...\"</p>",
     recommendation: "<p>Avoid using preemptive attacks on someone's character to discredit their future arguments. Focus on the arguments themselves, and be wary if someone tries to bias you against a speaker before they've even presented their case.</p>",
     pattern: "(\\b(before\\s+you\\s+listen\\s+to\\s+X|don't\\s+listen\\s+to\\s+X\\s+because)|(my\\s+opponent\\s+is\\s+a\\s+Y,\\s+so\\s+don't\\s+trust\\s+anything\\s+they\\s+say)\\b(?!.*\\b(with valid reasoning related to credibility on the topic)\\b))",
-    url: 'https://en.wikipedia.org/wiki/Poisoning_the_well',
+    urls: ['https://en.wikipedia.org/wiki/Poisoning_the_well', 'https://yourlogicalfallacyis.com/poisoning-the-well'],
   },
   {
     id: 'moving-the-goalposts-027',
@@ -273,7 +273,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Point out that they are changing the agreed-upon criteria for success or proof after you've met the original standard. Refer back to the initial terms of the discussion. You might say, \"We initially agreed that X would be sufficient. Now you're changing the requirements. Can we stick to what we first discussed?\"</p>",
     recommendation: '<p>Establish clear and fair standards of proof at the beginning of a discussion and stick to them. Continuously changing the requirements (moving the goalposts) is an unfair way to avoid conceding a point.</p>',
     pattern: "(\\b(now\\s+you\\s+need\\s+to|that's\\s+not\\s+enough,\\s+you\\s+also\\s+have\\s+to|but\\s+what\\s+about)\\s+(a\\s+new\\s+or\\s+higher\\s+standard)\\b(?!.*\\b(when the new standard is reasonable and agreed upon)\\b))",
-    url: 'https://en.wikipedia.org/wiki/Moving_the_goalposts',
+    urls: ['https://en.wikipedia.org/wiki/Moving_the_goalposts', 'https://yourlogicalfallacyis.com/moving-the-goalposts'],
   },
   {
     id: 'texas-sharpshooter-028',
@@ -283,7 +283,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: '<p>Point out that they seem to be focusing only on data that supports their claim while ignoring other relevant data that might contradict it. Ask if they have considered the full range of evidence or if they are highlighting a pattern after the fact. You could ask, "Are we looking at all the data here, or just the parts that fit this specific conclusion?"</p>',
     recommendation: '<p>Consider all relevant data and evidence, not just the pieces that support your pre-existing idea. Ignoring contrary evidence or focusing only on convenient patterns leads to the Texas Sharpshooter fallacy.</p>',
     pattern: '(\\b(cherry-picking\\s+data|ignoring\\s+the\\s+differences|focusing\\s+only\\s+on\\s+the\\s+similarities|finding\\s+a\\s+pattern\\s+after\\s+the\\s+fact)\\b)',
-    url: 'https://en.wikipedia.org/wiki/Texas_sharpshooter_fallacy',
+    urls: ['https://en.wikipedia.org/wiki/Texas_sharpshooter_fallacy', 'https://yourlogicalfallacyis.com/texas-sharpshooter'],
   },
   {
     id: 'special-pleading-029',
@@ -293,7 +293,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Ask for a clear justification for why an exception is being made in this specific case and why the usual rules or standards shouldn't apply. Question if the reason for the exception is truly unique and relevant. You might say, \"Why should this situation be treated as an exception to the general rule that applies to others?\"</p>",
     recommendation: '<p>Apply rules and standards consistently. If you claim an exception for a particular case, ensure you have a valid and justifiable reason that distinguishes it, rather than just making a special plea.</p>',
     pattern: "(\\b(the\\s+rules\\s+don't\\s+apply\\s+to\\s+me|my\\s+case\\s+is\\s+different)\\s+because\\s+(I'm\\s+special|just\\s+because)\\b(?!.*\\b(with a valid, distinguishing reason)\\b))",
-    url: 'https://en.wikipedia.org/wiki/Special_pleading',
+    urls: ['https://en.wikipedia.org/wiki/Special_pleading', 'https://yourlogicalfallacyis.com/special-pleading'],
   },
   {
     id: 'loaded-question-030',
@@ -303,7 +303,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Directly address and challenge the hidden assumption in the question before answering the question itself. You can refuse to answer it as phrased. For example, \"That question assumes I was cheating, which I wasn't. Would you like to rephrase your question without that assumption?\"</p>",
     recommendation: "<p>Avoid asking questions that sneak in unproven assumptions. If you're asked a loaded question, point out the unfair assumption within it before attempting to answer the intended query.</p>",
     pattern: '(\\b(have\\s+you\\s+stopped|are\\s+you\\s+still|why\\s+do\\s+you\\s+always)\\s+(.+)(\\?)\\b(?!.*\\b(when the presupposition is already established and accepted)\\b))',
-    url: 'https://en.wikipedia.org/wiki/Loaded_question',
+    urls: ['https://en.wikipedia.org/wiki/Loaded_question', 'https://yourlogicalfallacyis.com/loaded-question'],
   },
   {
     id: 'middle-ground-fallacy-031',
@@ -313,7 +313,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Point out that the middle position isn't necessarily correct just because it's a compromise. Argue that the truth of the matter should be determined by evidence, not by its position relative to other viewpoints. You could say, \"While finding a middle ground can be useful, is this middle position actually supported by the evidence, or are we just splitting the difference?\"</p>",
     recommendation: "<p>Don't assume a compromise is automatically correct. Evaluate each position based on its own evidence and logic, rather than just picking the middle point between two extremes.</p>",
     pattern: '(\\b(the\\s+truth|correct\\s+answer|best\\s+solution)\\s+must\\s+lie\\s+(somewhere\\s+in\\s+the\\s+middle|between\\s+the\\s+two\\s+extremes)\\b)',
-    url: 'https://en.wikipedia.org/wiki/Argument_to_moderation',
+    urls: ['https://en.wikipedia.org/wiki/Argument_to_moderation', 'https://yourlogicalfallacyis.com/middle-ground'],
   },
   {
     id: 'personal-incredulity-032',
@@ -323,7 +323,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Explain that one's personal ability to understand or imagine something doesn't determine its truth or possibility. Offer to explain the concept more clearly or suggest resources for better understanding. You might say, \"Just because something is hard to understand doesn't make it false. Many complex scientific concepts are true even if they seem counterintuitive at first.\"</p>",
     recommendation: "<p>Avoid dismissing an idea simply because you find it hard to grasp. Recognize that complex topics may require effort to understand, and your current level of understanding doesn't determine the truth of the matter.</p>",
     pattern: "(\\b(I\\s+can't\\s+understand|imagine|believe)\\s+how\\s+X\\s+could\\s+be\\s+true,\\s+so\\s+X\\s+must\\s+be\\s+false\\b|\\b(that's\\s+too\\s+complicated|weird\\s+to\\s+be\\s+true)\\b)",
-    url: 'https://en.wikipedia.org/wiki/Argument_from_incredulity',
+    urls: ['https://en.wikipedia.org/wiki/Argument_from_incredulity', 'https://yourlogicalfallacyis.com/personal-incredulity'],
   },
   {
     id: 'appeal-to-wealth-033',
@@ -333,7 +333,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Point out that wealth is not an indicator of correctness or expertise in a particular subject. Ask for evidence related to the argument itself, independent of the person's financial status. You could say, \"A person's wealth doesn't necessarily make their opinion on this topic more valid. What are the actual arguments or evidence supporting their view?\"</p>",
     recommendation: "<p>Don't assume that wealth makes someone's arguments or ideas inherently better or truer. Evaluate claims based on evidence and logic, not on the financial status of the person making them.</p>",
     pattern: "(\\b(he's|she's|they're)\\s+rich|wealthy|successful,\\s+so\\s+(he|she|they)\\s+must\\s+be\\s+(right|smart|correct)\\b|\\b(if\\s+you're\\s+so\\s+smart,\\s+why\\s+aren't\\s+you\\s+rich\\b.*when used to dismiss an argument))",
-    url: 'https://en.wikipedia.org/wiki/Argumentum_ad_crumenam',
+    urls: ['https://en.wikipedia.org/wiki/Argumentum_ad_crumenam'],
   },
   {
     id: 'appeal-to-poverty-034',
@@ -343,7 +343,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Argue that poverty doesn't automatically make someone more virtuous or their arguments more correct. Focus the discussion on the merits of the idea itself, separate from the person's financial situation. You might say, \"While we can respect someone's circumstances, their financial status doesn't inherently validate their ideas. Let's examine the proposal itself.\"</p>",
     recommendation: "<p>Avoid assuming that poverty makes someone's arguments or character inherently better or more virtuous. Judge ideas and people on their merits, evidence, and actions, not their financial standing.</p>",
     pattern: "(\\b(he's|she's|they're)\\s+poor|humble|simple,\\s+so\\s+(he|she|they)\\s+must\\s+be\\s+(right|virtuous|more\\s+correct)\\b)",
-    url: 'https://en.wikipedia.org/wiki/Argumentum_ad_lazarum',
+    urls: ['https://en.wikipedia.org/wiki/Argumentum_ad_lazarum'],
   },
   {
     id: 'affirming-the-consequent-035',
@@ -353,7 +353,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Point out that the truth of the consequent (B) does not logically guarantee the truth of the antecedent (A). Provide alternative explanations or causes for B. You could say, \"Just because the ground is wet doesn't mean it rained. A sprinkler could have caused it. So, B being true doesn't prove A is true.\"</p>",
     recommendation: "<p>Be careful with \"if-then\" statements. If the 'then' part is true, don't automatically assume the 'if' part is true. There might be other causes for the consequence.</p>",
     pattern: '(\\b(if\\s+A\\s+then\\s+B\\.\\s+B\\s+is\\s+true\\.\\s+Therefore,\\s+A\\s+is\\s+true\\.)\\b|\\b(when\\s+it\\s+rains,\\s+the\\s+street\\s+gets\\s+wet\\.\\s+The\\s+street\\s+is\\s+wet,\\s+so\\s+it\\s+must\\s+have\\s+rained\\.)\\b(?!.*\\b(when A is the only cause of B)\\b))',
-    url: 'https://en.wikipedia.org/wiki/Affirming_the_consequent',
+    urls: ['https://en.wikipedia.org/wiki/Affirming_the_consequent'],
   },
   {
     id: 'denying-the-antecedent-036',
@@ -363,7 +363,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Explain that the falsity of the antecedent (A) doesn't logically mean the consequent (B) is also false. B could still be true for other reasons. You could say, \"Even if it's not raining, the ground could still be wet for other reasons, like a sprinkler. So, 'Not A' doesn't prove 'Not B'.\"</p>",
     recommendation: "<p>With \"if-then\" statements, if the 'if' part is false, don't automatically assume the 'then' part is also false. The consequence might still occur due to other factors.</p>",
     pattern: "(\\b(if\\s+A\\s+then\\s+B\\.\\s+Not\\s+A\\.\\s+Therefore,\\s+not\\s+B\\.)\\b|\\b(if\\s+you\\s+study,\\s+you'll\\s+pass\\.\\s+You\\s+didn't\\s+study,\\s+so\\s+you\\s+won't\\s+pass\\.)\\b(?!.*\\b(when A is the only condition for B)\\b))",
-    url: 'https://en.wikipedia.org/wiki/Denying_the_antecedent',
+    urls: ['https://en.wikipedia.org/wiki/Denying_the_antecedent'],
   },
   {
     id: 'argument-by-repetition-037',
@@ -373,7 +373,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Point out that repeating a claim doesn't make it true or provide any evidence for it. Ask for actual evidence or reasoning instead of further repetition. You might say, \"Repeating that statement doesn't make it any more valid. Can you provide some evidence to support it?\"</p>",
     recommendation: "<p>Don't be swayed by how many times you hear a claim. Focus on the evidence and logical reasoning presented, not just the frequency of repetition, when deciding if something is true.</p>",
     pattern: "(\\b(repeating\\s+the\\s+same\\s+point|saying\\s+it\\s+over\\s+and\\s+over)\\s+(doesn't\\s+make\\s+it\\s+true|until\\s+people\\s+believe\\s+it)\\b)",
-    url: 'https://en.wikipedia.org/wiki/Argumentum_ad_nauseam',
+    urls: ['https://en.wikipedia.org/wiki/Argumentum_ad_nauseam'],
   },
   {
     id: 'appeal-to-fear-038',
@@ -383,7 +383,7 @@ export const logicalFallaciesData: LogicalFallacy[] = [
     rebuttal: "<p>Acknowledge the concern but question whether the fear is justified or exaggerated. Ask for evidence that the feared outcome is a likely or direct consequence, and steer the conversation back to a rational discussion of the issue. You could say, \"I understand your concern about potential negative outcomes, but let's look at the likelihood and the evidence. Is this fear based on solid reasoning?\"</p>",
     recommendation: "<p>Be wary of arguments that try to scare you into agreement. While it's important to consider risks, decisions should be based on evidence and reason, not just fear of negative outcomes presented without proof.</p>",
     pattern: "(\\b(if\\s+you\\s+don't\\s+(do|believe)\\s+X,\\s+then\\s+something\\s+terrible|bad\\s+thing)\\s+will\\s+happen\\b|\\b(you\\s+must\\s+agree\\s+or\\s+face\\s+the\\s+consequences)\\b)",
-    url: 'https://en.wikipedia.org/wiki/Appeal_to_fear',
+    urls: ['https://en.wikipedia.org/wiki/Appeal_to_fear'],
   },
 ]
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react'
+import React, { useRef } from 'react'
 import {
   Button,
   Text,
@@ -8,6 +8,7 @@ import {
 } from '@mantine/core'
 import { FOUND_FALLACY_PREFIXES, RorschachModalContentType } from './constants'
 import { IRorschachPopupData } from './types'
+import { usePopupUrls } from '../../../hooks/usePopupUrls'
 
 export interface IBubbleMenuRorschachProps {
   closePopup: () => void
@@ -23,34 +24,7 @@ export const BubbleMenuRorschach = (
   const foundFallacyPrefix = useRef<string>(
     FOUND_FALLACY_PREFIXES[Math.floor(Math.random() * FOUND_FALLACY_PREFIXES.length)]
   )
-  const getPopupUrls = useCallback(() => {
-    const output: React.ReactNode[] = []
-    if (!popupData) {
-      return output
-    }
-    output.push('Click ')
-    if (popupData.urls.length === 1) {
-      output.push(
-        <a href={popupData.urls[0]} target="_blank">here</a>
-      )
-    } else if (popupData.urls.length === 2) {
-      output.push(
-        <a href={popupData.urls[0]} target="_blank">here</a>
-      )
-      output.push(' or ')
-      output.push(
-        <a href={popupData.urls[1]} target="_blank">here</a>
-      )
-    } else {
-      popupData.urls.map((url, index) => (
-        output.push(
-          <a key={index} href={url} target="_blank">{index === popupData.urls.length - 1 ? 'or here' : 'here, '}</a>
-        )
-      ))
-    }
-    output.push(' to learn more.')
-    return output
-  }, [popupData])
+  const popupUrls = usePopupUrls(popupData?.urls)
 
   return (
     <Paper shadow="xl" p="xs" withBorder>
@@ -75,7 +49,7 @@ export const BubbleMenuRorschach = (
         >
           Ignore
         </Button>
-        {popupData?.urls && <Text size="sm">{getPopupUrls()}</Text>}
+        {popupData?.urls && <Text size="sm">{popupUrls}</Text>}
       </Flex>
     </Paper>
   )
