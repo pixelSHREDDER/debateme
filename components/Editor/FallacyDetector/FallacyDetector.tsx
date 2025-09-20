@@ -174,6 +174,7 @@ export const FallacyDetector = React.forwardRef<{
               instanceKey,
               popupType: FallacyType.Logical,
             })
+            setRorscachPopupData(null)
           } else if (fallacyType === FallacyType.Rorschach) {
             const fallacyDetails = getRorschachTermById(fallacyId)
 
@@ -186,6 +187,7 @@ export const FallacyDetector = React.forwardRef<{
               instanceKey,
               popupType: FallacyType.Rorschach,
             })
+            setLogicalPopupData(null)
           }
         }
       }

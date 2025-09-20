@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useMemo, useState, useRef, useEffect } from 'react'
+import React, { useMemo, useState, useRef, useEffect, useCallback } from 'react'
 import '@/components/Editor/editor.scss'
 import { EditorProvider } from '@tiptap/react'
 import MenuBar from '@/components/Editor/MenuBar'
@@ -48,14 +48,14 @@ export default function Editor(
     onUpdate(html)
   }
 
-  const handleSaveDraft = () => {
+  const handleSaveDraft = useCallback(() => {
     if (!draftKey) return
 
     const now = Date.now()
     sessionStorage.setItem(draftKey, latestContentRef.current || '')
     sessionStorage.setItem(`${draftKey}:ts`, String(now))
     setLastSavedAt(now)
-  }
+  }, [draftKey, latestContentRef, setLastSavedAt])
 
   useEffect(() => {
     if (!draftKey) return
