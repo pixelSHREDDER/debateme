@@ -1,14 +1,29 @@
 'use client'
 
 import cx from 'clsx'
-import { Group, ActionIcon, Tooltip } from '@mantine/core'
-import { IconBold, IconItalic, IconStrikethrough, IconSubscript, IconSuperscript, IconTextDecrease, IconTextSize, IconTextIncrease, IconList, IconListNumbers, IconBlockquote, IconCode, IconLink, IconLinkMinus, IconArrowsHorizontal, IconPageBreak, IconArrowBack, IconArrowForward } from '@tabler/icons-react'
+import { Group, ActionIcon, Tooltip, Text } from '@mantine/core'
+import { IconBold, IconItalic, IconStrikethrough, IconSubscript, IconSuperscript, IconTextDecrease, IconTextSize, IconTextIncrease, IconList, IconListNumbers, IconBlockquote, IconCode, IconLink, IconLinkMinus, IconArrowsHorizontal, IconPageBreak, IconArrowBack, IconArrowForward, IconDeviceFloppy } from '@tabler/icons-react'
 import { useCurrentEditor } from '@tiptap/react'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import editorStyles from '@/components/Editor/Editor.module.css'
 
-export default function MenuBar() {
+interface MenuBarProps {
+  onSaveDraft?: () => void
+  lastSavedAt?: number | null
+}
+
+export default function MenuBar({ onSaveDraft, lastSavedAt }: MenuBarProps = {}) {
   const { editor } = useCurrentEditor()
+
+  const savedLabel = useMemo(() => {
+    if (!lastSavedAt) return 'Draft not saved'
+    try {
+      const d = new Date(lastSavedAt)
+      return `Draft saved ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
+    } catch {
+      return 'Draft saved'
+    }
+  }, [lastSavedAt])
 
   const setLink = useCallback(() => {
     if (!editor) { return null }
@@ -29,8 +44,9 @@ export default function MenuBar() {
   if (!editor) { return null }
 
   return (
-    <Group gap="xs" justify="flex-start">
-      <ActionIcon.Group>
+    <Group gap="xs" justify="space-between" w="100%">
+      <Group gap="xs">
+        <ActionIcon.Group>
         <Tooltip label="Bold">
           <ActionIcon
             onClick={() => editor.chain().focus().toggleBold().run()}
@@ -143,8 +159,8 @@ export default function MenuBar() {
         >
           clear nodes
         </ActionIcon>*/}
-      </ActionIcon.Group>
-      <ActionIcon.Group>
+        </ActionIcon.Group>
+        <ActionIcon.Group>
         <Tooltip label="Small text">
           <ActionIcon
             // @ts-ignore: Unreachable code error
@@ -177,7 +193,7 @@ export default function MenuBar() {
             <IconTextIncrease stroke={editor.isActive('textStyle', { fontSize: '2rem' }) ? 3 : 1.5} size={30} />
           </ActionIcon>
         </Tooltip>
-      </ActionIcon.Group>
+        </ActionIcon.Group>
       <ActionIcon.Group>
         <Tooltip label="Bullet list">
           <ActionIcon
@@ -287,6 +303,17 @@ export default function MenuBar() {
           </ActionIcon>
         </Tooltip>
       </ActionIcon.Group>
+      </Group>
+      {!!onSaveDraft && (
+        <Group gap={6} align="center">
+          <Tooltip label="Save draft now">
+            <ActionIcon aria-label="Save draft" onClick={onSaveDraft} variant="light" size="md">
+              <IconDeviceFloppy stroke={1.5} />
+            </ActionIcon>
+          </Tooltip>
+          <Text size="xs" c="dimmed">{savedLabel}</Text>
+        </Group>
+      )}
     </Group>
   )
 }

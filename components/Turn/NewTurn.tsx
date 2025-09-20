@@ -3,7 +3,7 @@
 import addTurn from '@/actions/add-turn'
 import { TDebate } from '@/lib/prisma-types'
 import { useFormState } from 'react-dom'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import Editor from '@/components/Editor/Editor'
 import FormSubmitButton from '@/components/Forms/FormSubmitButton'
@@ -27,6 +27,8 @@ export default function NewTurn({ debate, onSubmit }: { debate: TDebate, onSubmi
   const [opened, { open, close }] = useDisclosure(false)
   const { stripCustomMarks } = useCustomMarks()
 
+  const draftKey = `new-turn:${debate.id}:${user?.sub ?? 'anon'}`
+
   const onUpdate = (editorHtml?: string) => {
     if (!!editorHtml && bodyRef.current) bodyRef.current.value = stripCustomMarks(editorHtml)
   }
@@ -39,6 +41,12 @@ export default function NewTurn({ debate, onSubmit }: { debate: TDebate, onSubmi
       onSubmit()
     }
   }
+
+  useEffect(() => {
+    if (state?.message && state.message.startsWith('Created turn')) {
+      sessionStorage.removeItem(draftKey)
+    }
+  }, [state?.message, draftKey])
 
   if (!user || !user.sub) {
     return ''
@@ -72,6 +80,7 @@ export default function NewTurn({ debate, onSubmit }: { debate: TDebate, onSubmi
           id="body"
           onProofread={onProofread}
           onUpdate={onUpdate}
+          draftKey={draftKey}
           required="true"
           testid="new-turn-editor">
         </Editor>
